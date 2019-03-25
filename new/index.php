@@ -1,7 +1,3 @@
-<!-- http://www.johnkyrk.com/photosynthesis.esp.html -->
-<!-- http://flash.astalaweb.net/ -->
-<!-- https://sites.google.com/site/bancoderecursosmultimediales/animaciones -->
-
 <!-- Este es la cabecera de pagina -->
 <?php
 require_once "vistas/structure/header.php";
