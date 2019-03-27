@@ -20,7 +20,7 @@
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">
-                <img src="assets/images/biologia/png/021-laboratory.png" width="45" height="45"
+                <img src="assets/images/biologia/png/021-laboratory.png" width="35" height="35"
                     class="d-inline-block align-top" alt="">
                 Biologia
             </a>
@@ -66,7 +66,8 @@
                         <a class="dropdown-item" href="#">Another action</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
-                </li> -->
+                </li> 
+                -->
 
             </ul>
 
@@ -75,7 +76,7 @@
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">
-                <img src="assets/images/logocol.png" width="50" height="50" class="d-inline-block align-top" alt="">
+                <img src="assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
             </a>
         </nav>
 

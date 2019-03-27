@@ -17,6 +17,9 @@
         <div class="carousel-item">
             <img class="d-block tamanoSlaider" src="assets/images/b1.jpg" alt="Third slide">
         </div>
+        <div class="carousel-item">
+            <img class="d-block tamanoSlaider" src="assets/images/b6.jpg" alt="Third slide">
+        </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
