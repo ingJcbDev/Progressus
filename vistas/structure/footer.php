@@ -1,3 +1,4 @@
+
 <!--footer starts from here-->
 <footer class="footer">
     <div class="container bottom_border">
@@ -6,7 +7,7 @@
                 <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
                 <!--headin5_amrc-->
                 <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                    has been the industry's standard dummy text ever since the 1500s</p>
+                    has been the industrys standard dummy text ever since the 1500s</p>
                 <p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
                 <p><i class="fa fa-phone"></i> +91-9999878398 </p>
                 <p><i class="fa fa fa-envelope"></i> info@example.com </p>
@@ -78,20 +79,34 @@
         <p class="text-center">Copyright @2019 | Designed With by <a href="#">Your Company Name</a></p>
 
     </div>
-
+<?php
+echo'
     <div style="text-align: center;">
-        <a href="https://es-la.facebook.com/"><img src="assets/images/redes/facebook.png" width="35" height="35"></a>
-        <a href="https://twitter.com/?lang=es"><img src="assets/images/redes/gorjeo.png" width="35" height="35"></a>
-        <a href="https://twitter.com/?lang=es"><img src="assets/images/redes/linkedin.png" width="35" height="35"></a>
-        <a href="https://www.instagram.com/?hl=es-la"><img src="assets/images/redes/instagram.png" width="35" height="35"></a>
-        <a href="https://plus.google.com/?hl=es"><img src="assets/images/redes/google-plus.png" width="35" height="35"></a>
+        <a href="https://es-la.facebook.com/"><img src="'.$host.'Progressus/assets/images/redes/facebook.png" width="35" height="35"></a>
+        <a href="https://twitter.com/?lang=es"><img src="'.$host.'Progressus/assets/images/redes/gorjeo.png" width="35" height="35"></a>
+        <a href="https://twitter.com/?lang=es"><img src="'.$host.'Progressus/assets/images/redes/linkedin.png" width="35" height="35"></a>
+        <a href="https://www.instagram.com/?hl=es-la"><img src="'.$host.'Progressus/assets/images/redes/instagram.png" width="35" height="35"></a>
+        <a href="https://plus.google.com/?hl=es"><img src="'.$host.'Progressus/assets/images/redes/google-plus.png" width="35" height="35"></a>
     </div>
-
+    ';
+?>
 </footer>
+<?php
+echo'
+    <!-- jquery and boostrap-->
+    <script src="'.$host.'Progressus/assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="'.$host.'Progressus/assets/js/popper.min.js"></script>
+    <script src="'.$host.'Progressus/assets/js/bootstrap.min.js"></script>
 
-<!-- js -->
-<script src="assets/js/jquery-3.3.1.slim.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+    <!-- DATATABLES -->
 
+    <script src="'.$host.'Progressus/assets/datatables/jquery.dataTables.min.js"></script> 
+    <script src="'.$host.'Progressus/assets/datatables/dataTables.buttons.min.js"></script>
+    <script src="'.$host.'Progressus/assets/datatables/buttons.html5.min.js"></script>
+    <script src="'.$host.'Progressus/assets/datatables/buttons.colVis.min.js"></script>
+    <script src="'.$host.'Progressus/assets/datatables/jszip.min.js"></script>
+    <script src="'.$host.'Progressus/assets/datatables/pdfmake.min.js"></script>
+    <script src="'.$host.'Progressus/assets/datatables/vfs_fonts.js"></script>
+';
+?>
 </html>

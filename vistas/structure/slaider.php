@@ -1,3 +1,6 @@
+<?php
+// echo $host;
+?>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -6,19 +9,19 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block tamanoSlaider" src="assets/images/b5.jpg" alt="First slide">
+            <?php echo' <img class="d-block tamanoSlaider" src="'.$host.'Progressus/assets/images/b1.jpg" alt="First slide">' ?>
         </div>
         <div class="carousel-item">
-            <img class="d-block tamanoSlaider" src="assets/images/b2.jpg" alt="Second slide">
+            <?php echo '<img class="d-block tamanoSlaider" src="'.$host.'Progressus/assets/images/b2.jpg" alt="Second slide">' ?>
         </div>
         <div class="carousel-item">
-            <img class="d-block tamanoSlaider" src="assets/images/b3.jpg" alt="Third slide">
+            <?php echo' <img class="d-block tamanoSlaider" src="'.$host.'Progressus/assets/images/b3.jpg" alt="Third slide">' ?>
         </div>
         <div class="carousel-item">
-            <img class="d-block tamanoSlaider" src="assets/images/b1.jpg" alt="Third slide">
+            <?php echo' <img class="d-block tamanoSlaider" src="'.$host.'Progressus/assets/images/b5.jpg" alt="Third slide">' ?>
         </div>
         <div class="carousel-item">
-            <img class="d-block tamanoSlaider" src="assets/images/b6.jpg" alt="Third slide">
+            <?php echo' <img class="d-block tamanoSlaider" src="'.$host.'Progressus/assets/images/b6.jpg" alt="Third slide">' ?>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
