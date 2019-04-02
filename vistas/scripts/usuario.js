@@ -88,8 +88,59 @@ registrarUsuario = function (){
 
     var ruta = $('#ruta').val();
 
+    // var formData = new FormData($("#registroUsuario")[0]);
 
-    return false;
+    // var response = null;
+    // $.ajax({
+    //     type: "POST",
+    //     url: '../ajax/usuario.php?op=listar',
+    //     async: false,
+    //     success: function (result) {
+    //         response = JSON.parse(result).data;
+    //     }
+    // });
+    var tipo_documento=$('#tipo_documento').val();
+    var num_documento=$('#num_documento').val();
+    var nombre=$('#nombre').val();
+    var direccion=$('#direccion').val();
+    var telefono=$('#telefono').val();
+    var telefono=$('#telefono').val();
+    var email=$('#email').val();
+    var cargo=$('#cargo').val();
+    var login=$('#login').val();
+    var clave=$('#clave').val();
+    var condicion=$('#condicion').val();
+
+    var url = "../ajax/usuario.php?op=insert";
+    $.ajax({                        
+        type: "POST",                 
+        url: url,                   
+        data: {
+            tipo_documento: tipo_documento, 
+            num_documento: num_documento,
+            nombre: nombre,
+            direccion: direccion,
+            telefono: telefono,
+            telefono: telefono,
+            email: email,
+            cargo: cargo,
+            login: login,
+            clave: clave,
+            condicion: condicion
+        },
+        success: function(data)            
+        {
+          //$('#resp').html(data);           
+        }
+      });
+    
+    
+    
+    
+    return true;
+
+
+
     window.location.href = ruta;
 
 

@@ -24,7 +24,21 @@ class UsuarioSql
         // echo"</pre><br> :\n";
         // DIE();
         return $result;
-        // echo json_encode(array('data'=> $result));
+    }
+
+    public function InsertUser()
+    {
+        global $connection;
+        $sql="SELECT * FROM usuario;";
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        // echo"<pre><br> _REQUEST***************:\n";
+        // print_r($result);
+        // echo"</pre><br> :\n";
+        // DIE();
+        return $result;
     }
     
 }
