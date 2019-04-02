@@ -17,7 +17,7 @@
         <!-- bootstrap datatable JS-->
 		<script type='text/javascript' src='assets/dataTablesUi/js/jquery.dataTables.min.js'></script> 
     	<script type='text/javascript' src='assets/dataTablesUi/js/dataTables.jqueryui.min.js'></script> 		
-    	<script type='text/javascript' src='assets/js/validar.js'></script>'; 
+    	<script type='text/javascript' src='assets/js/validar.js'></script>
 		
 	</head>
 
@@ -34,10 +34,15 @@
 				<table id="user_data" class="table display">
 					<thead>
 						<tr>
-							<th>id</th>
-							<th>First Name</th>
-							<th>Last Name</th>
-							<th>imagen</th>
+							<th>idusuario</th>
+							<th>nombre</th>
+							<th>tipo_documento</th>
+							<th>direccion</th>
+							<th>telefono</th>
+							<th>email</th>
+							<th>cargo</th>
+							<th>login</th>
+							<th>condicion</th>
 						</tr>
 					</thead>
 				</table>

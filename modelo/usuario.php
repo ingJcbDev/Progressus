@@ -3,7 +3,8 @@ include_once('../config/db.php');
 
 // echo"<pre><br> _GET:\n";
 // print_r($_GET);
-// echo"</pre><br> :\n";// echo"<pre><br> _POST:\n";
+// echo"</pre><br> :\n";
+// echo"<pre><br> _POST:\n";
 // print_r($_POST);
 // echo"</pre><br> :\n";
 // echo"<pre><br> _REQUEST:\n";
@@ -20,6 +21,7 @@ switch ($_GET["op"]) {
         
         echo json_encode(array('data'=> $result));
     break;
+    
 }
 
 

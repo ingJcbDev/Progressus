@@ -1,33 +1,15 @@
 <?php
-//   echo getcwd() . ""."\n <br>";
-// //   echo __FILE__ . "\n <br>";
-// //   echo RAIZ_APLICACION;
-//   echo "<br>";
-// //  echo  $root = dirname(__FILE__);
-// // echo "<br>";
-// // $root= "Progressus/new";
-// // $root = $_SERVER["DOCUMENT_ROOT"];
-// $root = "xampp/htdocs/Progressus/new/";
-// define('RAIZ_APLICACION', $root);
-// echo RAIZ_APLICACION;
-// echo"<br>";
-// echo getcwd();
-// echo"<br>";
-// echo $_SERVER['SCRIPT_FILENAME'];
-?>
-
-<?php
 // en esta parte se obtiene la ruta absoluta
+$nameProyecto='Progressus/';
 $conflen=strlen('SCRIPT');
 $B=substr(__FILE__,0,strrpos(__FILE__,'/'));
 $A=substr($_SERVER['DOCUMENT_ROOT'], strrpos($_SERVER['DOCUMENT_ROOT'], $_SERVER['PHP_SELF']));
 $C=substr($B,strlen($A));
 $posconf=strlen($C)-$conflen-1;
 $D=substr($C,1,$posconf);
-echo $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
-
+$host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
+echo $host=$host.$nameProyecto;
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -38,18 +20,28 @@ echo $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
     echo'
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="'.$host.'Progressus/assets/images/biologia/png/030-theory.png">
+    <link rel="shortcut icon" href="'.$host.'assets/images/biologia/png/030-theory.png">
     <title>La Biologia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- css -->
-        <link href="'.$host.'Progressus/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="'.$host.'Progressus/assets/css/style.css" rel="stylesheet" type="text/css" />
+        <!-- bootstrap css-->
+        <link rel="stylesheet" type="text/css" href="'.$host.'assets/bootstrap4/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/jquery-ui.css"/>
+        <!-- bootstrap datatable css-->
+        <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/dataTables.jqueryui.min.css"/>
+        <!-- style -->
+        <link rel="stylesheet" href="'.$host.'assets/css/style.css"/>
 
-        <!-- DATATABLES -->
-        <link rel="stylesheet" type="text/css" href="'.$host.'Progressus/assets/datatables/jquery.dataTables.min.css">
-        <link rel="stylesheet" type="text/css"  href="'.$host.'Progressus/assets/datatables/jquery.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="'.$host.'Progressus/assets/datatables/responsive.dataTables.min.css">     
+        <!-- css 
+        <link href="'.$host.'assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="'.$host.'assets/css/style.css" rel="stylesheet" type="text/css" />
+        -->
+
+        <!-- DATATABLES
+        <link rel="stylesheet" type="text/css" href="'.$host.'assets/datatables/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css"  href="'.$host.'assets/datatables/jquery.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="'.$host.'assets/datatables/responsive.dataTables.min.css">   
+        -->  
     '; 
 ?>
 </head>
@@ -62,8 +54,8 @@ echo $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
 
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">
-                <img src="'.$host.'Progressus/assets/images/biologia/png/021-laboratory.png" width="35" height="35"
+            <a class="navbar-brand" href="'.$host.'index.php">
+                <img src="'.$host.'assets/images/biologia/png/021-laboratory.png" width="35" height="35"
                     class="d-inline-block align-top" alt="">
                 Biologia
             </a>
@@ -72,11 +64,11 @@ echo $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="'.$host.'index.php">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="vistas/categoria.php">Categoria</a>
+                    <a class="nav-link" href="'.$host.'vistas/usuario.php">Usuario</a>
                 </li>
                 
                 <!-- 
@@ -119,7 +111,7 @@ echo $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">
-                <img src="'.$host.'Progressus/assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                <img src="'.$host.'assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
             </a>
         </nav>
 

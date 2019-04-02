@@ -1,9 +1,17 @@
+var tabla;
+
 $(document).ready(function () {
+
+    callAllUser();
+});
+
+
+callAllUser = function () {
 
     var response = null;
     $.ajax({
         type: "POST",
-        url: 'modelo/usuario.php?op=listar',
+        url: '../modelo/usuario.php?op=listar',
         async: false,
         success: function (result) {
             response = JSON.parse(result).data;
@@ -13,7 +21,7 @@ $(document).ready(function () {
      //console.log("res-> \n");
      //console.log(response);
 
-    $('#user_data').DataTable({
+    tabla=$('#user_data').DataTable({
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -50,9 +58,17 @@ $(document).ready(function () {
             { "data": "email" },
             { "data": "cargo" },
             { "data": "login" },
-            { "data": "condicion" }
+            {data: null, render: function (data, type, row) {
+                return  data.condicion === '1' ? '<button type="button" class="btn btn-success btn-sm sizeActIn" title="Activo" onclick=\"activarInativar(' + data.idusuario + ')\">Activo</button>' : '<i class="fa fa-user-times fa-4 userRed pointer" aria-hidden="true" title="Inactivo" onclick=\"eventFunction(' + data.idusuario + ')\"></i>';
+            }, className: "center"
+        },            
         ]
     });
+    
+};
 
-
-});
+activarInativar = function (idusuario){
+    alert(idusuario);
+    tabla.ajax.reload();
+    //location.reload();
+}

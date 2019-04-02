@@ -82,31 +82,42 @@
 <?php
 echo'
     <div style="text-align: center;">
-        <a href="https://es-la.facebook.com/"><img src="'.$host.'Progressus/assets/images/redes/facebook.png" width="35" height="35"></a>
-        <a href="https://twitter.com/?lang=es"><img src="'.$host.'Progressus/assets/images/redes/gorjeo.png" width="35" height="35"></a>
-        <a href="https://twitter.com/?lang=es"><img src="'.$host.'Progressus/assets/images/redes/linkedin.png" width="35" height="35"></a>
-        <a href="https://www.instagram.com/?hl=es-la"><img src="'.$host.'Progressus/assets/images/redes/instagram.png" width="35" height="35"></a>
-        <a href="https://plus.google.com/?hl=es"><img src="'.$host.'Progressus/assets/images/redes/google-plus.png" width="35" height="35"></a>
+        <a href="https://es-la.facebook.com/"><img src="'.$host.'assets/images/redes/facebook.png" width="35" height="35"></a>
+        <a href="https://twitter.com/?lang=es"><img src="'.$host.'assets/images/redes/gorjeo.png" width="35" height="35"></a>
+        <a href="https://twitter.com/?lang=es"><img src="'.$host.'assets/images/redes/linkedin.png" width="35" height="35"></a>
+        <a href="https://www.instagram.com/?hl=es-la"><img src="'.$host.'assets/images/redes/instagram.png" width="35" height="35"></a>
+        <a href="https://plus.google.com/?hl=es"><img src="'.$host.'assets/images/redes/google-plus.png" width="35" height="35"></a>
     </div>
     ';
 ?>
 </footer>
 <?php
 echo'
-    <!-- jquery and boostrap-->
-    <script src="'.$host.'Progressus/assets/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="'.$host.'Progressus/assets/js/popper.min.js"></script>
-    <script src="'.$host.'Progressus/assets/js/bootstrap.min.js"></script>
 
-    <!-- DATATABLES -->
+    <!-- bootstrap js-->
+    <script src="'.$host.'assets/bootstrap4/js/jquery-3.3.1.min.js"></script>
+    <script src="'.$host.'assets/bootstrap4/js/popper.min.js"></script>
+    <script src="'.$host.'assets/bootstrap4/js/bootstrap.min.js"></script>
+    <!-- bootstrap datatable JS-->
+    <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.jqueryui.min.js"></script> 		
 
-    <script src="'.$host.'Progressus/assets/datatables/jquery.dataTables.min.js"></script> 
-    <script src="'.$host.'Progressus/assets/datatables/dataTables.buttons.min.js"></script>
-    <script src="'.$host.'Progressus/assets/datatables/buttons.html5.min.js"></script>
-    <script src="'.$host.'Progressus/assets/datatables/buttons.colVis.min.js"></script>
-    <script src="'.$host.'Progressus/assets/datatables/jszip.min.js"></script>
-    <script src="'.$host.'Progressus/assets/datatables/pdfmake.min.js"></script>
-    <script src="'.$host.'Progressus/assets/datatables/vfs_fonts.js"></script>
+
+    <!-- jquery and boostrap
+    <script src="'.$host.'assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="'.$host.'assets/js/popper.min.js"></script>
+    <script src="'.$host.'assets/js/bootstrap.min.js"></script>
+    -->
+    <!-- DATATABLES 
+    <script src="'.$host.'assets/datatables/jquery.dataTables.min.js"></script> 
+    <script src="'.$host.'assets/datatables/dataTables.buttons.min.js"></script>
+    <script src="'.$host.'assets/datatables/buttons.html5.min.js"></script>
+    <script src="'.$host.'assets/datatables/buttons.colVis.min.js"></script>
+    <script src="'.$host.'assets/datatables/jszip.min.js"></script>
+    <script src="'.$host.'assets/datatables/pdfmake.min.js"></script>
+    <script src="'.$host.'assets/datatables/vfs_fonts.js"></script>
+    -->
+
 ';
 ?>
 </html>
