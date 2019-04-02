@@ -8,7 +8,7 @@ $C=substr($B,strlen($A));
 $posconf=strlen($C)-$conflen-1;
 $D=substr($C,1,$posconf);
 $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
-echo $host=$host.$nameProyecto;
+$host=$host.$nameProyecto;
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +29,10 @@ echo $host=$host.$nameProyecto;
         <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/jquery-ui.css"/>
         <!-- bootstrap datatable css-->
         <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/dataTables.jqueryui.min.css"/>
+        <!-- bootstrap icons -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!-- style -->
         <link rel="stylesheet" href="'.$host.'assets/css/style.css"/>
 

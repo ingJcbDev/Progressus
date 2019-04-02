@@ -3,6 +3,7 @@ var tabla;
 $(document).ready(function () {
 
     callAllUser();
+  
 });
 
 
@@ -11,7 +12,7 @@ callAllUser = function () {
     var response = null;
     $.ajax({
         type: "POST",
-        url: '../modelo/usuario.php?op=listar',
+        url: '../ajax/usuario.php?op=listar',
         async: false,
         success: function (result) {
             response = JSON.parse(result).data;
@@ -59,9 +60,14 @@ callAllUser = function () {
             { "data": "cargo" },
             { "data": "login" },
             {data: null, render: function (data, type, row) {
-                return  data.condicion === '1' ? '<button type="button" class="btn btn-success btn-sm sizeActIn" title="Activo" onclick=\"activarInativar(' + data.idusuario + ')\">Activo</button>' : '<i class="fa fa-user-times fa-4 userRed pointer" aria-hidden="true" title="Inactivo" onclick=\"eventFunction(' + data.idusuario + ')\"></i>';
-            }, className: "center"
-        },            
+                return  data.condicion === '1' ? '<i class="fas fa-user-check" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fas fa-user-shield" style="font-size:18px;color:red" title="inactivo"></i>';
+                }, className: "center"
+            }, 
+            {data: null, render: function (data, type, row) {
+                return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"activarInativar(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
+                        <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"activarInativar(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                }, className: "center"
+            }                       
         ]
     });
     
@@ -69,6 +75,25 @@ callAllUser = function () {
 
 activarInativar = function (idusuario){
     alert(idusuario);
-    tabla.ajax.reload();
+    //tabla.ajax.reload();
     //location.reload();
+}
+
+bloquearModal = function (){
+        $("#userModal").modal({backdrop: "static", keyboard: false})
+        $("#userModal").modal("show");  
+}
+
+registrarUsuario = function (){
+
+    var ruta = $('#ruta').val();
+
+
+    return false;
+    window.location.href = ruta;
+
+
+    // var dataString = $('#registroUsuario').serialize();
+    // console.log(dataString);
+    // alert(1);
 }
