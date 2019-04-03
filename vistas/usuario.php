@@ -116,8 +116,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal"><i class='fas fa-window-close' style='font-size:16px;'></i> Cerrar</button>
-                    <!-- <button type="submit" class="btn btn-primary btnEstandar" onclick="registrarUsuario()"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> -->
-                    <input type="submit" class="btn btn-primary btnEstandar">
+                    <button type="submit" class="btn btn-primary btnEstandar"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
+                    <!-- <input type="submit" class="btn btn-primary btnEstandar"> -->
                 </div>
 
                 </form>                    
