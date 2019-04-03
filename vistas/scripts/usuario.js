@@ -2,6 +2,21 @@ var tabla;
 
 $(document).ready(function () {
 
+
+    $(".valEmail").keypress(function (key) {
+//        window.console.log(key.charCode) //para ver el codigo de la letra
+        if ((key.charCode < 97 || key.charCode > 122)//letras mayusculas
+                && (key.charCode < 65 || key.charCode > 90) //letras minusculas
+                && (key.charCode != 45) //retroceso
+                && (key.charCode != 64) //@
+                && (key.charCode != 95) //_
+                && (key.charCode != 46) //.
+                && (key.charCode != 0) //borrar
+                && (key.charCode < 47 || key.charCode > 57) //numeros
+                )
+            return false;
+    });    
+
     callAllUser();
   
 });
@@ -86,80 +101,53 @@ bloquearModal = function (){
 
 registrarUsuario = function (){
 
-
+    
     alert(1);
-
-    return false;
-
-
-
-
-    var ruta = $('#ruta').val();
-
-    // var formData = new FormData($("#registroUsuario")[0]);
-
-    // var response = null;
-    // $.ajax({
-    //     type: "POST",
-    //     url: '../ajax/usuario.php?op=listar',
-    //     async: false,
-    //     success: function (result) {
-    //         response = JSON.parse(result).data;
-    //     }
-    // });
-
+    
+return false;
+    
+    
+    
+    
+    
+    
     var datos = $('#registroUsuario').serialize();
-
-    // console.log(datos);
-    // return false;
-
-    // var tipo_documento=$('#tipo_documento').val();
-    // var num_documento=$('#num_documento').val();
-    // var nombre=$('#nombre').val();
-    // var direccion=$('#direccion').val();
-    // var telefono=$('#telefono').val();
-    // var telefono=$('#telefono').val();
-    // var email=$('#email').val();
-    // var cargo=$('#cargo').val();
-    // var login=$('#login').val();
-    // var clave=$('#clave').val();
-    // var condicion=$('#condicion').val();
-
+    var ruta = $('#ruta').val();
+    var clave=$('#clave').val();
+    var clave1=$('#clave1').val();
+        
+    if(clave != clave1){
+        alert("La contraseña no coinciden");
+        return false;
+    }
+    
     var url = "../ajax/usuario.php?op=insert";
     $.ajax({                        
         type: "POST",                 
         url: url,
         data: datos,                    
-        // data: {
-        //     tipo_documento: tipo_documento, 
-        //     num_documento: num_documento,
-        //     nombre: nombre,
-        //     direccion: direccion,
-        //     telefono: telefono,
-        //     telefono: telefono,
-        //     email: email,
-        //     cargo: cargo,
-        //     login: login,
-        //     clave: clave,
-        //     condicion: condicion
-        // },
-        success: function(data)            
-        {
-          //$('#resp').html(data);           
-        }
-      });
+            success: function(data)            
+            {
+                //$('#resp').html(data);           
+            }
+    });
+                
+    window.location.href = ruta; 
+    return true;
+}
+
+cleanModal = function (){
+    $('#tipo_documento').val("");
+    $('#num_documento').val("");
+    $('#nombre').val("");
+    $('#direccion').val("");
+    $('#telefono').val("");
+    $('#telefono').val("");
+    $('#email').val("");
+    $('#cargo').val("");
+    $('#login').val("");
+    $('#clave').val("");
+    $('#clave1').val("");
     
-    
-    
-    
-    //return true;
-
-
-
-    //window.location.href = ruta; 
-
-
-    // var dataString = $('#registroUsuario').serialize();
-    // console.log(dataString);
-    // alert(1);
+    return true;
 }

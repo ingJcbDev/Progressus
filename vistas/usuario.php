@@ -82,7 +82,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="email">Correo</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required>
+                            <input type="email" class="form-control valEmail" id="email" name="email" placeholder="Correo" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -106,6 +106,12 @@
                             <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" required>
                         </div>
                         <div class="form-group col-md-6">
+                            <label for="clave">Confirmacion Contraseña</label>
+                            <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Confirmacion Contraseña" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
                             <label for="condicion">Estado</label>
                             <select id="condicion" name="condicion" class="form-control" required>
                                 <option selected value="1">Activo</option>
@@ -115,17 +121,12 @@
                     </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal"><i class='fas fa-window-close' style='font-size:16px;'></i> Cerrar</button>
+                    <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal" onclick="cleanModal();"><i class='fas fa-window-close' style='font-size:16px;'></i> Cerrar</button>
                     <button type="submit" class="btn btn-primary btnEstandar"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
-                    <!-- <input type="submit" class="btn btn-primary btnEstandar"> -->
                 </div>
 
                 </form>                    
                 <!-- fin formulario -->
-<form action="/action_page.php">
-  Username: <input type="text" name="usrname" required>
-  <input type="submit">
-</form>                
                 </div>
             </div>
         </div>
