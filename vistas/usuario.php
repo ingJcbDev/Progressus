@@ -46,14 +46,14 @@
                 </div>
                 <div class="modal-body">
                 <!-- inicio formulario -->
-                <form id="registroUsuario" action="/usuario.php">
-<?php                
-    echo '<input id="ruta" type="hidden" value="'.$host.'vistas/usuario.php">';
-?>                    
+                <form id="registroUsuario" name="registroUsuario" method="POST">
+                    <?php                
+                        echo '<input id="ruta" type="hidden" value="'.$host.'vistas/usuario.php">';
+                    ?>                    
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="tipo_documento">Tipo Documento</label>
-                            <select id="tipo_documento" class="form-control" required>
+                            <select id="tipo_documento" name="tipo_documento" class="form-control" required>
                                 <option selected value="">--Seleccionar--</option>
                                 <option value="CC">CC</option>
                                 <option value="TI">TI</option>
@@ -62,33 +62,33 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="num_documento">No. Documento</label>
-                            <input type="text" class="form-control" id="num_documento" placeholder="No. Documento" required>
+                            <input type="text" class="form-control" id="num_documento" name="num_documento" placeholder="No. Documento" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="direccion">Direccion</label>
-                            <input type="text" class="form-control" id="direccion" placeholder="Direccion" required>
+                            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="telefono">Telefono</label>
-                            <input type="text" class="form-control" id="telefono" placeholder="Telefono" required>
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="email">Correo</label>
-                            <input type="email" class="form-control" id="email" placeholder="Correo" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="cargo">Cargo</label>
-                            <select id="cargo" class="form-control" required>
+                            <select id="cargo" name="cargo" class="form-control" required>
                                 <option selected value="">--Seleccionar--</option>
                                 <option value="root">Root</option>
                                 <option value="profesor">Profesor</option>
@@ -97,17 +97,17 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="login">Login</label>
-                            <input type="text" class="form-control" id="login" placeholder="Login" required>
+                            <input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="clave">Contraseña</label>
-                            <input type="password" class="form-control" id="clave" placeholder="Contraseña" required>
+                            <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="condicion">Estado</label>
-                            <select id="condicion" class="form-control" required>
+                            <select id="condicion" name="condicion" class="form-control" required>
                                 <option selected value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select> 

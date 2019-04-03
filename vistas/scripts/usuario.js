@@ -99,35 +99,42 @@ registrarUsuario = function (){
     //         response = JSON.parse(result).data;
     //     }
     // });
-    var tipo_documento=$('#tipo_documento').val();
-    var num_documento=$('#num_documento').val();
-    var nombre=$('#nombre').val();
-    var direccion=$('#direccion').val();
-    var telefono=$('#telefono').val();
-    var telefono=$('#telefono').val();
-    var email=$('#email').val();
-    var cargo=$('#cargo').val();
-    var login=$('#login').val();
-    var clave=$('#clave').val();
-    var condicion=$('#condicion').val();
+
+    var datos = $('#registroUsuario').serialize();
+
+    // console.log(datos);
+    // return false;
+
+    // var tipo_documento=$('#tipo_documento').val();
+    // var num_documento=$('#num_documento').val();
+    // var nombre=$('#nombre').val();
+    // var direccion=$('#direccion').val();
+    // var telefono=$('#telefono').val();
+    // var telefono=$('#telefono').val();
+    // var email=$('#email').val();
+    // var cargo=$('#cargo').val();
+    // var login=$('#login').val();
+    // var clave=$('#clave').val();
+    // var condicion=$('#condicion').val();
 
     var url = "../ajax/usuario.php?op=insert";
     $.ajax({                        
         type: "POST",                 
-        url: url,                   
-        data: {
-            tipo_documento: tipo_documento, 
-            num_documento: num_documento,
-            nombre: nombre,
-            direccion: direccion,
-            telefono: telefono,
-            telefono: telefono,
-            email: email,
-            cargo: cargo,
-            login: login,
-            clave: clave,
-            condicion: condicion
-        },
+        url: url,
+        data: datos,                    
+        // data: {
+        //     tipo_documento: tipo_documento, 
+        //     num_documento: num_documento,
+        //     nombre: nombre,
+        //     direccion: direccion,
+        //     telefono: telefono,
+        //     telefono: telefono,
+        //     email: email,
+        //     cargo: cargo,
+        //     login: login,
+        //     clave: clave,
+        //     condicion: condicion
+        // },
         success: function(data)            
         {
           //$('#resp').html(data);           
@@ -141,7 +148,7 @@ registrarUsuario = function (){
 
 
 
-    window.location.href = ruta;
+    window.location.href = ruta; 
 
 
     // var dataString = $('#registroUsuario').serialize();
