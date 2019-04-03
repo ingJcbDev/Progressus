@@ -86,6 +86,14 @@ bloquearModal = function (){
 
 registrarUsuario = function (){
 
+
+    alert(1);
+
+    return false;
+
+
+
+
     var ruta = $('#ruta').val();
 
     // var formData = new FormData($("#registroUsuario")[0]);
@@ -144,11 +152,11 @@ registrarUsuario = function (){
     
     
     
-    return true;
+    //return true;
 
 
 
-    window.location.href = ruta; 
+    //window.location.href = ruta; 
 
 
     // var dataString = $('#registroUsuario').serialize();

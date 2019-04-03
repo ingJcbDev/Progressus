@@ -13,6 +13,7 @@ switch ($_GET["op"]) {
     break;
     case 'insert':
     
+    echo json_encode(true);
     // echo"<pre><br> _REQUEST:\n";
     // print_r($_REQUEST);
     // echo"</pre><br> :\n";

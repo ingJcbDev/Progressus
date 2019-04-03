@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-body">
                 <!-- inicio formulario -->
-                <form id="registroUsuario" name="registroUsuario" method="POST">
+                <form id="registroUsuario" name="registroUsuario" method="POST" onsubmit="return registrarUsuario();">
                     <?php                
                         echo '<input id="ruta" type="hidden" value="'.$host.'vistas/usuario.php">';
                     ?>                    
@@ -114,12 +114,18 @@
                         </div>
                     </div>
 
-                </form>                    
-                <!-- fin formulario -->
-                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal"><i class='fas fa-window-close' style='font-size:16px;'></i> Cerrar</button>
-                    <button type="submit" class="btn btn-primary btnEstandar" onclick="registrarUsuario()"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button>
+                    <!-- <button type="submit" class="btn btn-primary btnEstandar" onclick="registrarUsuario()"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> -->
+                    <input type="submit" class="btn btn-primary btnEstandar">
+                </div>
+
+                </form>                    
+                <!-- fin formulario -->
+<form action="/action_page.php">
+  Username: <input type="text" name="usrname" required>
+  <input type="submit">
+</form>                
                 </div>
             </div>
         </div>
