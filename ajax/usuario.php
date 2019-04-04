@@ -13,7 +13,37 @@ switch ($_GET["op"]) {
     break;
     case 'insert':
     
-    echo json_encode(true);
+    $datos = $_REQUEST;
+    
+    
+    $rsptaLogin = $usuarioSql->existsLogin($datos);
+    $rsptaTipoDocume = $usuarioSql->existsTipoDocume($datos);
+    $rsptaEmail = $usuarioSql->existsEmail($datos);
+
+    if($rsptaLogin > 0){
+        $res['status']=false;
+        $res['message']="Este login ya esta registrado, favor digitar login valido.";
+    }elseif($rsptaTipoDocume > 0){
+        $res['status']=false;
+        $res['message']="Este documento ya esta registrado, favor digitar documento valido.";
+    }elseif($rsptaEmail > 0){
+        $res['status']=false;
+        $res['message']="Este correo ya esta registrado, favor digitar correo valido.";
+    }else{
+        $rsptaInsertUser = $usuarioSql->InsertUser($datos);
+        $res['status']=$rsptaInsertUser;
+        $res['message']=($rsptaInsertUser)?"Datos registrados satisfactoriamente.":"Error al registrar los datos.";            
+    }
+
+
+    // echo"<pre><br> rspta:\n";
+    // print_r($res);
+    // echo"</pre><br> :\n";
+    // DIE(); 
+
+    // return true;
+    echo json_encode($res);
+    
     // echo"<pre><br> _REQUEST:\n";
     // print_r($_REQUEST);
     // echo"</pre><br> :\n";
@@ -25,9 +55,7 @@ switch ($_GET["op"]) {
     // echo"</pre><br> :\n";
     // DIE(); 
 
-    $datos = $_REQUEST;
     
-    $rspta = $usuarioSql->InsertUser($datos);
     
     // echo"<pre><br> rspta:";
     // var_dump($rspta);

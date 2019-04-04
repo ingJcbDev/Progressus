@@ -18,15 +18,15 @@
         <table id="user_data" class="table display" style='width:100%; font-size:11px;'>
             <thead>
                 <tr>
-                    <th>idusuario</th>
-                    <th>nombre</th>
-                    <th>tipo_documento</th>
-                    <th>direccion</th>
-                    <th>telefono</th>
-                    <th>email</th>
-                    <th>cargo</th>
-                    <th>login</th>
-                    <th>condicion</th>
+                    <!-- <th>usuario</th> -->
+                    <th>Nombre</th>
+                    <th>Tipo documento</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Cargo</th>
+                    <th>Login</th>
+                    <th>Condicion</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

@@ -36,17 +36,59 @@ class UsuarioSql
         // DIE();
         //return $result;
     }
+    
+    public function existsLogin($datos)
+    {
+        try {
+            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE login='$datos[login]';";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $this->con->close_con();
+            $res = $query->fetch(PDO::FETCH_ASSOC);
+            return (int) $res['reslt'];  
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+        
+    }
+    public function existsTipoDocume($datos)
+    {
+        try {
+            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE tipo_documento='$datos[tipo_documento]' AND num_documento='$datos[num_documento]';";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $this->con->close_con();
+            $res = $query->fetch(PDO::FETCH_ASSOC);
+            return (int) $res['reslt'];  
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+        
+    }
+    public function existsEmail($datos)
+    {
+        try {
+            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE email='$datos[email]';";
+            // echo"<pre><br> sql:\n";
+            // print_r($sql);
+            // echo"</pre><br> :\n";
+            // DIE();            
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $this->con->close_con();
+            $res = $query->fetch(PDO::FETCH_ASSOC);
+            return (int) $res['reslt'];  
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+        
+    }
 
     public function InsertUser($datos)
     {
-        // global $connection;
-        // $sql="INSERT INTO usuario (nombre, tipo_documento, num_documento, direccion, telefono, email, cargo, login, clave, condicion) 
-        // VALUES ('usuario root', 'CC', '1151948216', 'cali clll cll cra', '518500', 'root@gmail.com', 'Administrador', 'root8', '123', '1');";
-
-        // $statement = $connection->prepare($sql);
-        // $resultado = $statement->execute();
-
-        
         try {
             $sql = "INSERT INTO usuario (
                 nombre
@@ -73,13 +115,13 @@ class UsuarioSql
                 ,'$datos[condicion]'
                 );";
 
-        echo"<pre><br> _GET:\n";
-        print_r($datos);
-        echo"</pre><br> :\n";
-        echo"<pre><br> sql:\n";
-        print_r($sql);
-        echo"</pre><br> :\n";
-        DIE("_________________ff");
+        // echo"<pre><br> _GET:\n";
+        // print_r($datos);
+        // echo"</pre><br> :\n";
+        // echo"<pre><br> sql:\n";
+        // print_r($sql);
+        // echo"</pre><br> :\n";
+        // DIE("_________________ff");
 
             $query = $this->con->prepare($sql);
             $result = $query->execute();

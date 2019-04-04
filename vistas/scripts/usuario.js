@@ -66,7 +66,7 @@ callAllUser = function () {
         "order": [[0, "desc"]],
         data: response,
         "columns": [
-            { "data": "idusuario" },
+            // { "data": "idusuario" },
             { "data": "nombre" },
             { "data": "tipo_documento" },
             { "data": "direccion" },
@@ -101,20 +101,12 @@ bloquearModal = function (){
 
 registrarUsuario = function (){
 
-    
-    alert(1);
-    
-return false;
-    
-    
-    
-    
-    
-    
     var datos = $('#registroUsuario').serialize();
     var ruta = $('#ruta').val();
     var clave=$('#clave').val();
     var clave1=$('#clave1').val();
+    var response = null;
+    var result = null;
         
     if(clave != clave1){
         alert("La contraseña no coinciden");
@@ -125,15 +117,35 @@ return false;
     $.ajax({                        
         type: "POST",                 
         url: url,
+        dataType: "json",
         data: datos,                    
-            success: function(data)            
+            success: function(result)            
             {
-                //$('#resp').html(data);           
+                // console.log(result);
+
+                if(result.status==false){
+                    alert(result.message);
+                }
+                if(result.status==true){
+                    alert(result.message);
+                    window.location.href = ruta; 
+                }
+
             }
     });
+
+    
+     
+    
+return false;
+    
+    
+    
+    
+    
+    
                 
-    window.location.href = ruta; 
-    return true;
+    //return true;
 }
 
 cleanModal = function (){
