@@ -9,16 +9,12 @@
             <button type="button" data-toggle="modal" data-target="#userModal" class="btn btn-success btnFueraTable" onclick="bloquearModal()">
             <i class="fa fa-user-plus"></i> Agregar Usuario
             </button>
-
-
-            <!-- <button type="button" id="add_button" data-toggle="modal" data-target="#userModal"
-                class="btn btn-info btn-lg">Agregar Usuario</button> -->
         </div>
         <br>
-        <table id="user_data" class="table display" style='width:100%; font-size:11px;'>
+        <table id="user_data" name="user_data" class="table display" style='width:100%; font-size:11px;'>
             <thead>
                 <tr>
-                    <!-- <th>usuario</th> -->
+                     <th>usuario</th> 
                     <th>Nombre</th>
                     <th>Tipo documento</th>
                     <th>Direccion</th>
@@ -46,7 +42,7 @@
                 </div>
                 <div class="modal-body">
                 <!-- inicio formulario -->
-                <form id="registroUsuario" name="registroUsuario" method="POST" onsubmit="return registrarUsuario();">
+                <form id="registroUsuario" name="registroUsuario" method="POST" onsubmit="return registrarUsuario();" autocomplete="off">
                     <?php                
                         echo '<input id="ruta" type="hidden" value="'.$host.'vistas/usuario.php">';
                     ?>                    

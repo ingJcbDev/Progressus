@@ -32,40 +32,22 @@ switch ($_GET["op"]) {
     }else{
         $rsptaInsertUser = $usuarioSql->InsertUser($datos);
         $res['status']=$rsptaInsertUser;
-        $res['message']=($rsptaInsertUser)?"Datos registrados satisfactoriamente.":"Error al registrar los datos.";            
+        $res['message']=($rsptaInsertUser==true)?"Datos registrados satisfactoriamente.":"Error al registrar los datos.";            
     }
 
-
-    // echo"<pre><br> rspta:\n";
-    // print_r($res);
-    // echo"</pre><br> :\n";
-    // DIE(); 
-
-    // return true;
     echo json_encode($res);
-    
-    // echo"<pre><br> _REQUEST:\n";
-    // print_r($_REQUEST);
-    // echo"</pre><br> :\n";
-    // echo"<pre><br> _POST:\n";
-    // print_r($_POST);
-    // echo"</pre><br> :\n";
-    // echo"<pre><br> _GET:\n";
-    // print_r($_GET);
-    // echo"</pre><br> :\n";
-    // DIE(); 
-
-    
-    
-    // echo"<pre><br> rspta:";
-    // var_dump($rspta);
-    // echo"</pre><br> :";
-    // DIE();    
-
-        //$rspta = $usuarioSql->allUser();
-        
-        //echo json_encode(array('data'=> $rspta));
     break;
+    
+    case'delete':
+    $datos = $_REQUEST;    
+        
+    $rspta = $usuarioSql->deleteUsuario($datos);    
+        
+    $res['status']=$rspta;
+    $res['message']=($rspta==true)?"Se elimino satisfactoriamente el usuario":"Error eliminando el usuario";            
+        
+    echo json_encode($res);
+    break;    
     
 }
 

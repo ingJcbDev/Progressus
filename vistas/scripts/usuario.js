@@ -66,7 +66,7 @@ callAllUser = function () {
         "order": [[0, "desc"]],
         data: response,
         "columns": [
-            // { "data": "idusuario" },
+            { "data": "idusuario" },
             { "data": "nombre" },
             { "data": "tipo_documento" },
             { "data": "direccion" },
@@ -80,7 +80,7 @@ callAllUser = function () {
             }, 
             {data: null, render: function (data, type, row) {
                 return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"activarInativar(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-                        <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"activarInativar(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                        <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
                 }, className: "center"
             }                       
         ]
@@ -105,8 +105,6 @@ registrarUsuario = function (){
     var ruta = $('#ruta').val();
     var clave=$('#clave').val();
     var clave1=$('#clave1').val();
-    var response = null;
-    var result = null;
         
     if(clave != clave1){
         alert("La contraseña no coinciden");
@@ -123,29 +121,21 @@ registrarUsuario = function (){
             {
                 // console.log(result);
 
-                if(result.status==false){
-                    alert(result.message);
-                }
+//                if(result.status==false){
+//                }
                 if(result.status==true){
                     alert(result.message);
-                    window.location.href = ruta; 
+                    //window.location.href = ruta; 
+//                    $("#user_data").dataTable().fnDestroy();
+//                    callAllUser();                    
+                }else{
+                    alert(result.message);
                 }
 
             }
     });
 
-    
-     
-    
-return false;
-    
-    
-    
-    
-    
-    
-                
-    //return true;
+    return false;
 }
 
 cleanModal = function (){
@@ -162,4 +152,31 @@ cleanModal = function (){
     $('#clave1').val("");
     
     return true;
+}
+
+deleteUser = function (idusuario){
+//    var ruta = $('#ruta').val();
+    var url = "../ajax/usuario.php?op=delete";
+    $.ajax({                        
+        type: "POST",                 
+        url: url,
+        dataType: "json",
+        data: {idusuario:idusuario},                    
+            success: function(result)            
+            {
+                // console.log(result);
+
+//                if(result.status==false){
+//                }
+                if(result.status==true){
+                    alert(result.message);
+//                    window.location.href = ruta; 
+                    $("#user_data").dataTable().fnDestroy();
+                    callAllUser();
+                }else{
+                    alert(result.message);
+                }
+
+            }
+    });    
 }
