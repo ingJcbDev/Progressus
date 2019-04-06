@@ -59,6 +59,7 @@
                         <div class="form-group col-md-6">
                             <label for="num_documento">No. Documento</label>
                             <input type="text" class="form-control" id="num_documento" name="num_documento" placeholder="No. Documento" required>
+                            <input type="hidden" id="idusuario" name="idusuario">
                         </div>
                     </div>
                     <div class="form-row">

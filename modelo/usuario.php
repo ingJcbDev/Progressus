@@ -1,24 +1,17 @@
 <?php
+
 include_once('../config/db.php');
 
+class UsuarioSql {
 
-class UsuarioSql
-{
     private $con;
+
     // Constructor
-	public function __construct()
-	{
+    public function __construct() {
         $this->con = new Database();
     }
-    
-    public function allUser()
-    {
-        // global $connection;
-        // $sql="SELECT * FROM usuario;";
-        // $statement = $connection->prepare($sql);
-        // $statement->execute();
-        // $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    public function allUser() {
         try {
 
             $query = $this->con->prepare('SELECT * FROM usuario;');
@@ -29,66 +22,51 @@ class UsuarioSql
 
             echo $e->getMessage();
         }
-        
-        // echo"<pre><br> _REQUEST***************:\n";
-        // print_r($result);
-        // echo"</pre><br> :\n";
-        // DIE();
-        //return $result;
     }
-    
-    public function existsLogin($datos)
-    {
+
+    public function existsLogin($datos) {
         try {
-            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE login='$datos[login]';";
+            $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE login='$datos[login]';";
             $query = $this->con->prepare($sql);
             $query->execute();
             $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
-            return (int) $res['reslt'];  
+            return (int) $res['reslt'];
         } catch (PDOException $e) {
 
             echo $e->getMessage();
         }
-        
     }
-    public function existsTipoDocume($datos)
-    {
+
+    public function existsTipoDocume($datos) {
         try {
-            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE tipo_documento='$datos[tipo_documento]' AND num_documento='$datos[num_documento]';";
+            $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE tipo_documento='$datos[tipo_documento]' AND num_documento='$datos[num_documento]';";
             $query = $this->con->prepare($sql);
             $query->execute();
             $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
-            return (int) $res['reslt'];  
+            return (int) $res['reslt'];
         } catch (PDOException $e) {
 
             echo $e->getMessage();
         }
-        
     }
-    public function existsEmail($datos)
-    {
+
+    public function existsEmail($datos) {
         try {
-            $sql="SELECT COUNT(*) AS reslt FROM usuario WHERE email='$datos[email]';";
-            // echo"<pre><br> sql:\n";
-            // print_r($sql);
-            // echo"</pre><br> :\n";
-            // DIE();            
+            $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE email='$datos[email]';";
             $query = $this->con->prepare($sql);
             $query->execute();
             $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
-            return (int) $res['reslt'];  
+            return (int) $res['reslt'];
         } catch (PDOException $e) {
 
             echo $e->getMessage();
         }
-        
     }
 
-    public function InsertUser($datos)
-    {
+    public function InsertUser($datos) {
         try {
             $sql = "INSERT INTO usuario (
                 nombre
@@ -121,32 +99,64 @@ class UsuarioSql
         } catch (PDOException $e) {
 
             echo $e->getMessage();
-        }        
+        }
 
         return $result;
     }
-    
-    public function deleteUsuario($datos){
 
-        try{
-            $sql="DELETE FROM usuario WHERE idusuario=$datos[idusuario];";
+    public function deleteUsuario($datos) {
+
+        try {
+            $sql = "DELETE FROM usuario WHERE idusuario=$datos[idusuario];";
             $query = $this->con->prepare($sql);
             $result = $query->execute();
             $this->con->close_con();
         } catch (PDOException $e) {
 
             echo $e->getMessage();
-        }        
+        }
 
-        return $result;        
+        return $result;
     }
-    
-    
+
+    public function datosUserEdit($datos) {
+        try {
+            $sql = "SELECT * FROM usuario WHERE idusuario=$datos[idusuario];";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $this->con->close_con();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+    }
+
+    public function updateUser($datos) {
+        try {
+            $sql = "UPDATE usuario 
+                    SET    nombre = '$datos[nombre]', 
+                           direccion = '$datos[direccion]', 
+                           telefono = '$datos[telefono]', 
+                           cargo = '$datos[cargo]', 
+                           clave = '$datos[clave]', 
+                           condicion = '$datos[condicion]' 
+                    WHERE  idusuario = $datos[idusuario];";
+            $query = $this->con->prepare($sql);
+            $result = $query->execute();
+            $this->con->close_con();
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+
+        return $result;
+    }
+
 //echo"<pre><br>sql:";
 //print_r($sql);
-//echo"</pre><br>";            
-    
+//echo"</pre><br>";         
 }
 
-
+//fin de la clase
 ?>

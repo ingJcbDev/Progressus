@@ -15,10 +15,10 @@ $(document).ready(function () {
                 && (key.charCode < 47 || key.charCode > 57) //numeros
                 )
             return false;
-    });    
+    });
 
     callAllUser();
-  
+
 });
 
 
@@ -34,10 +34,10 @@ callAllUser = function () {
         }
     });
 
-     //console.log("res-> \n");
-     //console.log(response);
+    //console.log("res-> \n");
+    //console.log(response);
 
-    tabla=$('#user_data').DataTable({
+    tabla = $('#user_data').DataTable({
         "language": {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -66,79 +66,79 @@ callAllUser = function () {
         "order": [[0, "desc"]],
         data: response,
         "columns": [
-            { "data": "idusuario" },
-            { "data": "nombre" },
-            { "data": "tipo_documento" },
-            { "data": "direccion" },
-            { "data": "telefono" },
-            { "data": "email" },
-            { "data": "cargo" },
-            { "data": "login" },
+            {"data": "idusuario"},
+            {"data": "nombre"},
+            {"data": "tipo_documento"},
+            {"data": "direccion"},
+            {"data": "telefono"},
+            {"data": "email"},
+            {"data": "cargo"},
+            {"data": "login"},
             {data: null, render: function (data, type, row) {
-                return  data.condicion === '1' ? '<i class="fas fa-user-check" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fas fa-user-shield" style="font-size:18px;color:red" title="inactivo"></i>';
+                    return  data.condicion === '1' ? '<i class="fas fa-user-check" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fas fa-user-shield" style="font-size:18px;color:red" title="inactivo"></i>';
                 }, className: "center"
-            }, 
+            },
             {data: null, render: function (data, type, row) {
-                return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"activarInativar(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
+                    return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
                         <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
                 }, className: "center"
-            }                       
+            }
         ]
     });
-    
+
 };
 
-activarInativar = function (idusuario){
+activarInativar = function (idusuario) {
     alert(idusuario);
     //tabla.ajax.reload();
     //location.reload();
 }
 
-bloquearModal = function (){
-        $("#userModal").modal({backdrop: "static", keyboard: false})
-        $("#userModal").modal("show");  
+bloquearModal = function () {
+    $("#userModal").modal({backdrop: "static", keyboard: false})
+    $("#userModal").modal("show");
 }
 
-registrarUsuario = function (){
+registrarUsuario = function () {
 
     var datos = $('#registroUsuario').serialize();
     var ruta = $('#ruta').val();
-    var clave=$('#clave').val();
-    var clave1=$('#clave1').val();
-        
-    if(clave != clave1){
+    var clave = $('#clave').val();
+    var clave1 = $('#clave1').val();
+
+    if (clave != clave1) {
         alert("La contraseña no coinciden");
         return false;
     }
-    
+
     var url = "../ajax/usuario.php?op=insert";
-    $.ajax({                        
-        type: "POST",                 
+    $.ajax({
+        type: "POST",
         url: url,
         dataType: "json",
-        data: datos,                    
-            success: function(result)            
-            {
-                // console.log(result);
+        data: datos,
+        success: function (result)
+        {
+            // console.log(result);
 
 //                if(result.status==false){
 //                }
-                if(result.status==true){
-                    alert(result.message);
-                    //window.location.href = ruta; 
+            if (result.status == true) {
+                alert(result.message);
+                window.location.href = ruta;
 //                    $("#user_data").dataTable().fnDestroy();
 //                    callAllUser();                    
-                }else{
-                    alert(result.message);
-                }
-
+            } else {
+                alert(result.message);
             }
+
+        }
     });
 
     return false;
 }
 
-cleanModal = function (){
+cleanModal = function () {
     $('#tipo_documento').val("");
     $('#num_documento').val("");
     $('#nombre').val("");
@@ -150,33 +150,84 @@ cleanModal = function (){
     $('#login').val("");
     $('#clave').val("");
     $('#clave1').val("");
-    
+
     return true;
 }
 
-deleteUser = function (idusuario){
+deleteUser = function (idusuario) {
 //    var ruta = $('#ruta').val();
     var url = "../ajax/usuario.php?op=delete";
-    $.ajax({                        
-        type: "POST",                 
+    $.ajax({
+        type: "POST",
         url: url,
         dataType: "json",
-        data: {idusuario:idusuario},                    
-            success: function(result)            
-            {
-                // console.log(result);
+        data: {idusuario: idusuario},
+        success: function (result)
+        {
+            // console.log(result);
 
 //                if(result.status==false){
 //                }
-                if(result.status==true){
-                    alert(result.message);
+            if (result.status == true) {
+                alert(result.message);
 //                    window.location.href = ruta; 
-                    $("#user_data").dataTable().fnDestroy();
-                    callAllUser();
-                }else{
-                    alert(result.message);
-                }
-
+                $("#user_data").dataTable().fnDestroy();
+                callAllUser();
+            } else {
+                alert(result.message);
             }
-    });    
+
+        }
+    });
+}
+
+datosUserEdit = function (idusuario) {
+//    var ruta = $('#ruta').val();
+    var url = "../ajax/usuario.php?op=update";
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: {idusuario: idusuario},
+        success: function (result)
+        {
+            console.log(result);
+
+
+            console.log(result.data.idusuario);
+
+            bloquearModal();
+//            $("#userModal").modal();
+
+            $("#tipo_documento").prop('disabled', true);
+            $("#num_documento").prop('disabled', true);
+            $("#email").prop('disabled', true);
+            $("#login").prop('disabled', true);
+
+            $('#idusuario').val(result.data.idusuario);
+            $('#tipo_documento').val(result.data.tipo_documento);
+            $('#num_documento').val(result.data.num_documento);
+            $('#nombre').val(result.data.nombre);
+            $('#direccion').val(result.data.direccion);
+            $('#telefono').val(result.data.telefono);
+            $('#telefono').val(result.data.telefono);
+            $('#email').val(result.data.email);
+            $('#cargo').val(result.data.cargo);
+            $('#login').val(result.data.login);
+            $('#clave').val(result.data.clave);
+            $('#clave1').val(result.data.clave);
+
+//                if(result.status==false){
+//                }
+//                if(result.status==true){
+//                    alert(result.message);
+////                    window.location.href = ruta; 
+//                    $("#user_data").dataTable().fnDestroy();
+//                    callAllUser();
+//                }else{
+//                    alert(result.message);
+//                }
+
+        }
+    });
 }

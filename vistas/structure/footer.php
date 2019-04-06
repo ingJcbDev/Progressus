@@ -80,6 +80,8 @@ echo'
     <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.jqueryui.min.js"></script> 		
 
+    <script src="'.$host.'vistas/structure/scripts/login.js"></script>
+        
     <!-- jquery and boostrap
     <script src="'.$host.'assets/js/jquery-3.3.1.min.js"></script>
     <script src="'.$host.'assets/js/popper.min.js"></script>
