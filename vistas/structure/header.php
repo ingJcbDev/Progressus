@@ -117,8 +117,6 @@ $host=($host=='http://localhost/Progressus/')?$host:"http://localhost/Progressus
 
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark
-<!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-            </button>  -->
             <a class="navbar-brand" href="index.php">
                 <img src="'.$host.'assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
             </a>

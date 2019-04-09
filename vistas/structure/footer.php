@@ -79,7 +79,8 @@ echo'
     <!-- bootstrap datatable JS-->
     <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/jquery.dataTables.min.js"></script> 
     <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.jqueryui.min.js"></script> 		
-
+        
+    <!-- login js -->
     <script src="'.$host.'vistas/structure/scripts/login.js"></script>
         
     <!-- jquery and boostrap

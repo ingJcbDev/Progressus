@@ -80,7 +80,7 @@ callAllUser = function () {
             },
             {data: null, render: function (data, type, row) {
                     return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-                        <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                            <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
                 }, className: "center"
             }
         ]
@@ -155,67 +155,74 @@ cleanModal = function () {
 }
 
 deleteUser = function (idusuario) {
+
+    if (confirm('Desea eliminar este usuario ?')) {
 //    var ruta = $('#ruta').val();
-    var url = "../ajax/usuario.php?op=delete";
-    $.ajax({
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: {idusuario: idusuario},
-        success: function (result)
-        {
-            // console.log(result);
+        var url = "../ajax/usuario.php?op=delete";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {idusuario: idusuario},
+            success: function (result)
+            {
+                // console.log(result);
 
 //                if(result.status==false){
 //                }
-            if (result.status == true) {
-                alert(result.message);
+                if (result.status == true) {
+                    alert(result.message);
 //                    window.location.href = ruta; 
-                $("#user_data").dataTable().fnDestroy();
-                callAllUser();
-            } else {
-                alert(result.message);
-            }
+                    $("#user_data").dataTable().fnDestroy();
+                    callAllUser();
+                } else {
+                    alert(result.message);
+                }
 
-        }
-    });
+            }
+        });
+    }
 }
 
 datosUserEdit = function (idusuario) {
+
+    if (confirm('Desea modificar los datos de este usuario ?')) {
+
 //    var ruta = $('#ruta').val();
-    var url = "../ajax/usuario.php?op=update";
-    $.ajax({
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: {idusuario: idusuario},
-        success: function (result)
-        {
-            console.log(result);
+
+        var url = "../ajax/usuario.php?op=update";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {idusuario: idusuario},
+            success: function (result)
+            {
+                console.log(result);
 
 
-            console.log(result.data.idusuario);
+                console.log(result.data.idusuario);
 
-            bloquearModal();
+                bloquearModal();
 //            $("#userModal").modal();
 
-            $("#tipo_documento").prop('disabled', true);
-            $("#num_documento").prop('disabled', true);
-            $("#email").prop('disabled', true);
-            $("#login").prop('disabled', true);
+                $("#tipo_documento").prop('disabled', true);
+                $("#num_documento").prop('disabled', true);
+                $("#email").prop('disabled', true);
+                $("#login").prop('disabled', true);
 
-            $('#idusuario').val(result.data.idusuario);
-            $('#tipo_documento').val(result.data.tipo_documento);
-            $('#num_documento').val(result.data.num_documento);
-            $('#nombre').val(result.data.nombre);
-            $('#direccion').val(result.data.direccion);
-            $('#telefono').val(result.data.telefono);
-            $('#telefono').val(result.data.telefono);
-            $('#email').val(result.data.email);
-            $('#cargo').val(result.data.cargo);
-            $('#login').val(result.data.login);
-            $('#clave').val(result.data.clave);
-            $('#clave1').val(result.data.clave);
+                $('#idusuario').val(result.data.idusuario);
+                $('#tipo_documento').val(result.data.tipo_documento);
+                $('#num_documento').val(result.data.num_documento);
+                $('#nombre').val(result.data.nombre);
+                $('#direccion').val(result.data.direccion);
+                $('#telefono').val(result.data.telefono);
+                $('#telefono').val(result.data.telefono);
+                $('#email').val(result.data.email);
+                $('#cargo').val(result.data.cargo);
+                $('#login').val(result.data.login);
+                $('#clave').val(result.data.clave);
+                $('#clave1').val(result.data.clave);
 
 //                if(result.status==false){
 //                }
@@ -228,6 +235,18 @@ datosUserEdit = function (idusuario) {
 //                    alert(result.message);
 //                }
 
-        }
-    });
+            }
+        });
+
+    } // validacion de edicion 
+
+}
+
+
+prueba = function () {
+    if (confirm('Desea continuar')) {
+        alert('True');
+    } else {
+        alert('False');
+    }
 }
