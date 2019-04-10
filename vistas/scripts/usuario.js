@@ -80,7 +80,7 @@ callAllUser = function () {
             },
             {data: null, render: function (data, type, row) {
                     return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-                            <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                            <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i> <i class="fa fa-check" aria-hidden="true"></i>';
                 }, className: "center"
             }
         ]
@@ -150,6 +150,11 @@ cleanModal = function () {
     $('#login').val("");
     $('#clave').val("");
     $('#clave1').val("");
+
+    $("#tipo_documento").prop('disabled', false);
+    $("#num_documento").prop('disabled', false);
+    $("#email").prop('disabled', false);
+    $("#login").prop('disabled', false);
 
     return true;
 }
