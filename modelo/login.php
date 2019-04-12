@@ -10,6 +10,8 @@ class UsuarioSql {
     public function __construct() {
         $this->con = new Database();
     }
+    
+    
 
 }
 

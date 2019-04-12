@@ -9,6 +9,7 @@ $posconf=strlen($C)-$conflen-1;
 $D=substr($C,1,$posconf);
 $host='http://'.$_SERVER['SERVER_NAME'].'/'.$D;
 $host=$host.$nameProyecto;
+
 $host=($host=='http://localhost/Progressus/')?$host:"http://localhost/Progressus/";
 
 
@@ -117,8 +118,6 @@ $host=($host=='http://localhost/Progressus/')?$host:"http://localhost/Progressus
 
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark
-<!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-            </button>  -->
             <a class="navbar-brand" href="index.php">
                 <img src="'.$host.'assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
             </a>
