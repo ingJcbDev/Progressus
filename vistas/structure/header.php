@@ -19,7 +19,7 @@ $host=($host=='http://localhost/Progressus/')?$host:"http://localhost/Progressus
 <html>
 
 <head>
-
+    
 <?php 
     echo'
     <meta charset="utf-8">
@@ -33,12 +33,12 @@ $host=($host=='http://localhost/Progressus/')?$host:"http://localhost/Progressus
         <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/jquery-ui.css"/>
         <!-- bootstrap datatable css-->
         <link rel="stylesheet" href="'.$host.'assets/dataTablesUi/css/dataTables.jqueryui.min.css"/>
-        <!-- bootstrap icons -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+        
         <!-- style -->
         <link rel="stylesheet" href="'.$host.'assets/css/style.css"/>
+
+        <!-- bootstrap icons -->
+        <link rel="stylesheet" href="'.$host.'assets/font-awesome-4.7.0/css/font-awesome.css">    
 
         <!-- css 
         <link href="'.$host.'assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

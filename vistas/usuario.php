@@ -118,7 +118,7 @@
                     </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal" onclick="cleanModal();"><i class='fas fa-window-close' style='font-size:16px;'></i> Cerrar</button>
+                    <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal" onclick="cleanModal();"><i class='fa fa-times-circle-o' style='font-size:16px;'></i> Cerrar</button>
                     <button type="submit" class="btn btn-primary btnEstandar"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
                 </div>
 

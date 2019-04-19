@@ -2,7 +2,7 @@ $(document).ready(function () {
     
 });
 
-prueba = function(){
+prueba1 = function(){
     alert(1);
 }
 

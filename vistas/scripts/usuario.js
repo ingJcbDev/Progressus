@@ -21,6 +21,18 @@ $(document).ready(function () {
 
 });
 
+prueba = function () {
+//    alert(1);
+
+//  var bool=confirm("Seguro de eliminar el dato?");
+    if (confirm("Seguro de eliminar el dato?")) {
+        alert("se elimino correctamente");
+    } else {
+        alert("cancelo la solicitud");
+    }
+
+}
+
 
 callAllUser = function () {
 
@@ -75,19 +87,19 @@ callAllUser = function () {
             {"data": "cargo"},
             {"data": "login"},
             {data: null, render: function (data, type, row) {
-                    return  data.condicion === '1' ? '<i class="fas fa-user-check" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fas fa-user-shield" style="font-size:18px;color:red" title="inactivo"></i>';
+                    return  data.condicion === '1' ? '<i class="fa fa-user-circle" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fa fa-user-circle-o" style="font-size:18px;color:red" title="inactivo"></i>';
                 }, className: "center"
             },
             {data: null, render: function (data, type, row) {
                     return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-                        <i class="fas fa-trash-alt" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                        <i class="fa fa-trash-o fa-lg" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
                 }, className: "center"
             }
         ]
     });
 
 };
-
+//<i class="fa fa-trash-o fa-lg"></i>
 activarInativar = function (idusuario) {
     alert(idusuario);
     //tabla.ajax.reload();
@@ -139,7 +151,9 @@ registrarUsuario = function () {
 }
 
 cleanModal = function () {
+    
     $('#tipo_documento').val("");
+    $('#idusuario').val("");
     $('#num_documento').val("");
     $('#nombre').val("");
     $('#direccion').val("");
@@ -150,72 +164,84 @@ cleanModal = function () {
     $('#login').val("");
     $('#clave').val("");
     $('#clave1').val("");
+    $("#tipo_documento").prop('disabled', false);
+    $("#num_documento").prop('disabled', false);
+    $("#email").prop('disabled', false);
+    $("#login").prop('disabled', false);
 
     return true;
 }
 
 deleteUser = function (idusuario) {
 //    var ruta = $('#ruta').val();
-    var url = "../ajax/usuario.php?op=delete";
-    $.ajax({
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: {idusuario: idusuario},
-        success: function (result)
-        {
-            // console.log(result);
+
+    if (confirm("Seguro de eliminar el dato?")) {
+
+        var url = "../ajax/usuario.php?op=delete";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {idusuario: idusuario},
+            success: function (result)
+            {
+                // console.log(result);
 
 //                if(result.status==false){
 //                }
-            if (result.status == true) {
-                alert(result.message);
+                if (result.status == true) {
+                    alert(result.message);
 //                    window.location.href = ruta; 
-                $("#user_data").dataTable().fnDestroy();
-                callAllUser();
-            } else {
-                alert(result.message);
-            }
+                    $("#user_data").dataTable().fnDestroy();
+                    callAllUser();
+                } else {
+                    alert(result.message);
+                }
 
-        }
-    });
+            }
+        });
+
+    }
 }
 
 datosUserEdit = function (idusuario) {
 //    var ruta = $('#ruta').val();
-    var url = "../ajax/usuario.php?op=update";
-    $.ajax({
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: {idusuario: idusuario},
-        success: function (result)
-        {
-            console.log(result);
+
+    if (confirm("Seguro de editar el dato?")) {
+
+        var url = "../ajax/usuario.php?op=update";
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType: "json",
+            data: {idusuario: idusuario},
+            success: function (result)
+            {
+                console.log(result);
 
 
-            console.log(result.data.idusuario);
+                console.log(result.data.idusuario);
 
-            bloquearModal();
+                bloquearModal();
 //            $("#userModal").modal();
 
-            $("#tipo_documento").prop('disabled', true);
-            $("#num_documento").prop('disabled', true);
-            $("#email").prop('disabled', true);
-            $("#login").prop('disabled', true);
+                $("#tipo_documento").prop('disabled', true);
+                $("#num_documento").prop('disabled', true);
+                $("#email").prop('disabled', true);
+                $("#login").prop('disabled', true);
 
-            $('#idusuario').val(result.data.idusuario);
-            $('#tipo_documento').val(result.data.tipo_documento);
-            $('#num_documento').val(result.data.num_documento);
-            $('#nombre').val(result.data.nombre);
-            $('#direccion').val(result.data.direccion);
-            $('#telefono').val(result.data.telefono);
-            $('#telefono').val(result.data.telefono);
-            $('#email').val(result.data.email);
-            $('#cargo').val(result.data.cargo);
-            $('#login').val(result.data.login);
-            $('#clave').val(result.data.clave);
-            $('#clave1').val(result.data.clave);
+                $('#idusuario').val(result.data.idusuario);
+                $('#tipo_documento').val(result.data.tipo_documento);
+                $('#num_documento').val(result.data.num_documento);
+                $('#nombre').val(result.data.nombre);
+                $('#direccion').val(result.data.direccion);
+                $('#telefono').val(result.data.telefono);
+                $('#telefono').val(result.data.telefono);
+                $('#email').val(result.data.email);
+                $('#cargo').val(result.data.cargo);
+                $('#login').val(result.data.login);
+                $('#clave').val(result.data.clave);
+                $('#clave1').val(result.data.clave);
 
 //                if(result.status==false){
 //                }
@@ -228,6 +254,9 @@ datosUserEdit = function (idusuario) {
 //                    alert(result.message);
 //                }
 
-        }
-    });
+            }
+        });
+
+    }
+
 }
