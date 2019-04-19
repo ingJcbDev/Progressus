@@ -242,6 +242,7 @@ datosUserEdit = function (idusuario) {
                 $('#login').val(result.data.login);
                 $('#clave').val(result.data.clave);
                 $('#clave1').val(result.data.clave);
+                $('#condicion').val(result.data.condicion);
 
 //                if(result.status==false){
 //                }

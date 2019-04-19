@@ -10,13 +10,17 @@ class UsuarioSql {
     public function __construct() {
         $this->con = new Database();
     }
+    
+    public function __destruct() {
+        $this->con->close_con();
+    }
 
     public function allUser() {
         try {
 
             $query = $this->con->prepare('SELECT * FROM usuario;');
             $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
             return $query->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
 
@@ -29,7 +33,7 @@ class UsuarioSql {
             $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE login='$datos[login]';";
             $query = $this->con->prepare($sql);
             $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
             return (int) $res['reslt'];
         } catch (PDOException $e) {
@@ -43,7 +47,7 @@ class UsuarioSql {
             $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE tipo_documento='$datos[tipo_documento]' AND num_documento='$datos[num_documento]';";
             $query = $this->con->prepare($sql);
             $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
             return (int) $res['reslt'];
         } catch (PDOException $e) {
@@ -57,7 +61,7 @@ class UsuarioSql {
             $sql = "SELECT COUNT(*) AS reslt FROM usuario WHERE email='$datos[email]';";
             $query = $this->con->prepare($sql);
             $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
             $res = $query->fetch(PDO::FETCH_ASSOC);
             return (int) $res['reslt'];
         } catch (PDOException $e) {
@@ -95,7 +99,7 @@ class UsuarioSql {
 
             $query = $this->con->prepare($sql);
             $result = $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
         } catch (PDOException $e) {
 
             echo $e->getMessage();
@@ -110,7 +114,7 @@ class UsuarioSql {
             $sql = "DELETE FROM usuario WHERE idusuario=$datos[idusuario];";
             $query = $this->con->prepare($sql);
             $result = $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
         } catch (PDOException $e) {
 
             echo $e->getMessage();
@@ -124,7 +128,7 @@ class UsuarioSql {
             $sql = "SELECT * FROM usuario WHERE idusuario=$datos[idusuario];";
             $query = $this->con->prepare($sql);
             $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
             return $query->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
 
@@ -144,7 +148,7 @@ class UsuarioSql {
                     WHERE  idusuario = $datos[idusuario];";
             $query = $this->con->prepare($sql);
             $result = $query->execute();
-            $this->con->close_con();
+//            $this->con->close_con();
         } catch (PDOException $e) {
 
             echo $e->getMessage();
