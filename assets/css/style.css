@@ -191,3 +191,12 @@ body {
 .pointer{
     cursor: pointer;
 }
+
+divBorderNone{
+    border: none;
+}
+
+divBorderHidden{
+    border-style: hidden;
+}
+

@@ -1,23 +1,72 @@
 $(document).ready(function () {
-    
+
 });
 
-prueba1 = function(){
+
+bloquearModalMostar = function () {
+    $("#loginModal").modal({backdrop: "static", keyboard: false})
+    $("#loginModal").modal("show");
+}
+
+
+prueba1 = function () {
     alert(1);
 }
 
-datosUserEdit = function (idusuario) {
-//    var ruta = $('#ruta').val();
-    var url = "../ajax/usuario.php?op=update";
+clearLogin = function () {
+    $('#login0').val("");
+    $('#clave0').val("");
+}
+
+login = function () {
+    
+    var datos = $('#loginForm').serialize();
+    var rutaLogin = $('#rutaLogin').val();
+    
+    var url = rutaLogin+"ajax/login.php?op=login";
     $.ajax({
         type: "POST",
         url: url,
         dataType: "json",
-        data: {idusuario: idusuario},
+        data: datos,
         success: function (result)
         {
-            console.log(result);
-            
+//             console.log(result);
+            if (result.status == true) {
+                alert(result.message);
+                location.reload();
+                window.location.href = rutaLogin;
+            } else {
+                alert(result.message);
+            }
         }
     });
+
+    return false;
 }
+
+loginclose = function () {
+    
+    var rutaLogin = $('#rutaLogin').val();
+    
+    var url = rutaLogin+"ajax/login.php?op=loginClose";
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        success: function (result)
+        {
+//             console.log(result);
+            if (result.status == true) {
+                alert(result.message);
+                location.reload();
+                window.location.href = rutaLogin;
+            } else {
+                alert(result.message);
+            }
+        }
+    });
+
+    return false;
+}
+
