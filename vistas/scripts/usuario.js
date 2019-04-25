@@ -37,6 +37,8 @@ prueba = function () {
 callAllUser = function () {
 
     var response = null;
+    $("#user_data").dataTable().fnDestroy();
+
     $.ajax({
         type: "POST",
         url: '../ajax/usuario.php?op=listar',
@@ -137,9 +139,12 @@ registrarUsuario = function () {
 //                }
             if (result.status == true) {
                 alert(result.message);
-                window.location.href = ruta;
+//                window.location.href = ruta;
+                callAllUser();
+//                $("#userModal .close").click();
+                $("#userModal").modal("hide");
+                cleanModal();
 //                    $("#user_data").dataTable().fnDestroy();
-//                    callAllUser();                    
             } else {
                 alert(result.message);
             }
@@ -151,7 +156,7 @@ registrarUsuario = function () {
 }
 
 cleanModal = function () {
-    
+
     $('#tipo_documento').val("");
     $('#idusuario').val("");
     $('#num_documento').val("");
@@ -217,10 +222,10 @@ datosUserEdit = function (idusuario) {
             data: {idusuario: idusuario},
             success: function (result)
             {
-                console.log(result);
+//                console.log(result);
 
 
-                console.log(result.data.idusuario);
+//                console.log(result.data.idusuario);
 
                 bloquearModal();
 //            $("#userModal").modal();
