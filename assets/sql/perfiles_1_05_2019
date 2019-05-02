@@ -1,0 +1,119 @@
+
+CREATE TABLE submenu (
+                submenu_id INT(11) NOT NULL,
+                descripcion VARCHAR(30) NOT NULL,
+                PRIMARY KEY (submenu_id)
+);
+ALTER TABLE submenu
+  MODIFY submenu_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+CREATE TABLE menu (
+                menu_id INT(11) NOT NULL,
+                descrpcion VARCHAR(30) NOT NULL,
+                PRIMARY KEY (menu_id)
+);
+
+ALTER TABLE menu
+  MODIFY menu_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+
+CREATE TABLE perfil (
+                perfil_id INT(11) NOT NULL,
+                descripcion VARCHAR(30) NOT NULL,
+                PRIMARY KEY (perfil_id)
+);
+ALTER TABLE perfil
+  MODIFY perfil_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+
+CREATE TABLE perfil_menu (
+                perfil_menu_id INT(11) NOT NULL,
+                perfil_id INT NOT NULL,
+                menu_id INT NOT NULL,
+                PRIMARY KEY (perfil_menu_id)
+);
+ALTER TABLE perfil_menu
+  MODIFY perfil_menu_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+
+CREATE TABLE usuario (
+                idusuario INT(11) AUTO_INCREMENT NOT NULL,
+                nombre VARCHAR(100) NOT NULL,
+                tipo_documento VARCHAR(20) NOT NULL,
+                num_documento VARCHAR(20) NOT NULL,
+                direccion VARCHAR(70),
+                telefono VARCHAR(20),
+                email VARCHAR(50),
+                cargo VARCHAR(20),
+                login VARCHAR(20) NOT NULL,
+                clave VARCHAR(64) NOT NULL,
+                condicion TINYINT DEFAULT 1 NOT NULL,
+                PRIMARY KEY (idusuario)
+);
+
+
+CREATE UNIQUE INDEX login_unique USING BTREE
+ ON usuario
+ ( login ASC );
+
+CREATE TABLE menu_submenu (
+                menu_submenu_id INT(11) NOT NULL,
+                idusuario INT NOT NULL,
+                menu_id INT NOT NULL,
+                submenu_id INT NOT NULL,
+                PRIMARY KEY (menu_submenu_id)
+);
+ALTER TABLE menu_submenu
+  MODIFY menu_submenu_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+CREATE TABLE usuario_perfil (
+                usuario_perfil_id INT(11) NOT NULL,
+                idusuario INT NOT NULL,
+                perfil_id INT NOT NULL,
+                PRIMARY KEY (usuario_perfil_id)
+);
+ALTER TABLE usuario_perfil
+  MODIFY usuario_perfil_id int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+
+ALTER TABLE menu_submenu ADD CONSTRAINT submenu_menu_submenu_fk
+FOREIGN KEY (submenu_id)
+REFERENCES submenu (submenu_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE perfil_menu ADD CONSTRAINT menu_perfil_menu_fk
+FOREIGN KEY (menu_id)
+REFERENCES menu (menu_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE menu_submenu ADD CONSTRAINT menu_menu_submenu_fk
+FOREIGN KEY (menu_id)
+REFERENCES menu (menu_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE usuario_perfil ADD CONSTRAINT perfil_usuario_perfil_fk
+FOREIGN KEY (perfil_id)
+REFERENCES perfil (perfil_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE perfil_menu ADD CONSTRAINT perfil_perfil_menu_fk
+FOREIGN KEY (perfil_id)
+REFERENCES perfil (perfil_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE usuario_perfil ADD CONSTRAINT usuario_usuario_perfil_fk
+FOREIGN KEY (idusuario)
+REFERENCES usuario (idusuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE menu_submenu ADD CONSTRAINT usuario_menu_submenu_fk
+FOREIGN KEY (idusuario)
+REFERENCES usuario (idusuario)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;

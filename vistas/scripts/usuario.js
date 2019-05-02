@@ -18,6 +18,7 @@ $(document).ready(function () {
     });
 
     callAllUser();
+    cargarDatosForm();
 
 });
 
@@ -86,7 +87,6 @@ callAllUser = function () {
             {"data": "direccion"},
             {"data": "telefono"},
             {"data": "email"},
-            {"data": "cargo"},
             {"data": "login"},
             {data: null, render: function (data, type, row) {
                     return  data.condicion === '1' ? '<i class="fa fa-user-circle" style="font-size:18px;color:green" title="Activo"></i>' : '<i class="fa fa-user-circle-o" style="font-size:18px;color:red" title="inactivo"></i>';
@@ -265,4 +265,27 @@ datosUserEdit = function (idusuario) {
 
     }
 
+}
+
+cargarDatosForm = function () {
+    $.ajax({
+        type: "POST",
+        url: '../ajax/usuario.php?op=selectCargo',
+        dataType: "json",
+        success: function (data) {
+            var array = data.data;
+
+            Html = '<select id="perfil" name="perfil" class="form-control" required>';
+            Html += '<option selected value="">--Seleccionar--</option>';
+            $.each(array, function (key, registro) {
+                Html += '<option value=' + registro.perfil_id + '>' + registro.descripcion + '</option>';
+            });
+            Html += '</select>';
+
+            $("#selectCargo").html(Html);
+        },
+        error: function (data) {
+            alert('error');
+        }
+    });
 }

@@ -1,5 +1,15 @@
 $(document).ready(function () {
 
+    $(".myClass").on('click', function (event) {
+
+        var Id = this.id;
+        var result = Id.split('_');
+//        alert(result[1]);
+        menuActivo(result[1]);
+
+    });
+
+
 });
 
 
@@ -19,11 +29,11 @@ clearLogin = function () {
 }
 
 login = function () {
-    
+
     var datos = $('#loginForm').serialize();
     var rutaLogin = $('#rutaLogin').val();
-    
-    var url = rutaLogin+"ajax/login.php?op=login";
+
+    var url = rutaLogin + "ajax/login.php?op=login";
     $.ajax({
         type: "POST",
         url: url,
@@ -46,10 +56,10 @@ login = function () {
 }
 
 loginclose = function () {
-    
+
     var rutaLogin = $('#rutaLogin').val();
-    
-    var url = rutaLogin+"ajax/login.php?op=loginClose";
+
+    var url = rutaLogin + "ajax/login.php?op=loginClose";
     $.ajax({
         type: "POST",
         url: url,
@@ -64,6 +74,25 @@ loginclose = function () {
             } else {
                 alert(result.message);
             }
+        }
+    });
+
+    return false;
+}
+
+menuActivo = function (id) {
+    var datos = {id: id};
+    var rutaLogin = $('#rutaLogin').val();
+    var url = rutaLogin + "ajax/login.php?op=menuActivo";
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: datos,
+        success: function (result)
+        {
+//            alert(5);
+//            return false;
         }
     });
 

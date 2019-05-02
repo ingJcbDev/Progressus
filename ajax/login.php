@@ -17,7 +17,9 @@ switch ($_GET["op"]) {
 
         if ($restLogin > 0) {
             $datoUser = $loginSql->datoUser($datos);
+            $datoMenu = $loginSql->datoMenu($datoUser);
             $_SESSION['dataUser'] = $datoUser;
+            $_SESSION['dataUser']['datoMenu'] = $datoMenu;
 
             $res['status'] = true;
             $res['message'] = "El usuario ingreso satisfactoriamente.";
@@ -29,6 +31,16 @@ switch ($_GET["op"]) {
         echo json_encode($res);
         break;
         
+    case 'menuActivo':
+        $datos = $_REQUEST;
+//echo"<pre><br>sql:";
+//print_r($datos);
+//echo"</pre><br>";  
+//die();
+        $_SESSION['dataUser']['menuActivo'] = $datos['id'];
+
+//        echo json_encode($res);
+        break;
     case 'loginClose':
         
         /*limpiar session*/

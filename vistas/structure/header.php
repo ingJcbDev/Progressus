@@ -24,7 +24,6 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
     <head>
 
         <?php
-        
 //        if (isset($_SESSION['dataUser'])) {
 //            echo"<br><pre> _SESSION:";
 //            print_r($_SESSION['dataUser']);
@@ -88,23 +87,39 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="' . $host . 'index.php">Inicio <span class="sr-only">(current)</span></a>
-                </li>
             ';
         if (isset($_SESSION['dataUser'])) {
 
-            if ($_SESSION['dataUser']['cargo'] == "root") {
-                echo'
-                <li class="nav-item">
-                    <a class="nav-link" href="' . $host . 'vistas/usuario.php">Usuario</a>
-                </li>
-            ';
+            $menu = $_SESSION['dataUser']['datoMenu'];
+//            if (!empty($_SESSION['dataUser']['menuActivo'])) {
+                $menuActivo = $_SESSION['dataUser']['menuActivo'];
+//            }
+
+//                    echo"<pre><br>  menuActivo-->";
+//                    print_r($menuActivo);
+//                    echo"</pre><br>";
+
+            if (!empty($menu)) {
+                foreach ($menu as $key => $value) {
+//                    if (!empty($Active)) {
+                        $Active = ($value['menu_id'] == $menuActivo) ? "active" : "";
+//                    }else{
+//                        $Active = "";
+//                    }
+//                    echo"<pre><br> value:";
+//                    print_r($Active);
+//                    echo"</pre><br>";
+                    echo'
+                    <li class="nav-item ' . $Active . '">
+                        <a id="a_' . $value["menu_id"] . '" name="a_' . $value["menu_id"] . '" class="nav-link myClass" href="' . $host . $value["url"] . '">' . $value["descrpcion"] . '</a>
+                    </li>
+                ';
+                }
             }
         }
 
         echo'
-                <!-- 
+                <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -123,7 +138,7 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
                  -->
-                <!-- 
+                <!--
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
@@ -159,7 +174,7 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
                 <div>
                     <label style="color: ghostwhite;">
                         <img src="' . $host . 'assets/images/logueado.png" width="35" height="35" class="d-inline-block align-top" alt="" title="Cerrar Sesion" onclick="loginclose()">
-                        '.$_SESSION['dataUser']['login'].'
+                        ' . $_SESSION['dataUser']['login'] . '
                     </label>
                 </div>
             ';

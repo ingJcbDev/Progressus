@@ -6,12 +6,15 @@ $usuarioSql = new UsuarioSql();
 
 switch ($_GET["op"]) {
     case 'listar':
-
-
         $rspta = $usuarioSql->allUser();
-
         echo json_encode(array('data' => $rspta));
         break;
+    
+    case'selectCargo':
+        $rspta = $usuarioSql->datosSelectCargo();
+        echo json_encode(array('data' => $rspta));
+        break;
+    
     case 'insert':
 
         $datos = $_REQUEST;

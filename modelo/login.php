@@ -39,6 +39,25 @@ class LoginSql {
             echo $e->getMessage();
         }
     }    
+    public function datoMenu($datos) {
+        try {
+            $sql = "SELECT p.*, m.*
+                        FROM usuario AS u
+                        INNER JOIN usuario_perfil AS up ON (u.idusuario = up.idusuario)
+                        INNER JOIN perfil AS p ON (up.perfil_id = p.perfil_id)
+                        INNER JOIN perfil_menu AS pm ON (p.perfil_id = pm.perfil_id)
+                        INNER JOIN menu AS m ON (pm.menu_id = m.menu_id)
+                        WHERE u.idusuario = $datos[idusuario]
+                        AND m.sw_estado = 1
+                        ORDER BY m.orden;";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetchall(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+    }    
     
     
 

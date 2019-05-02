@@ -27,6 +27,18 @@ class UsuarioSql {
             echo $e->getMessage();
         }
     }
+    
+    public function datosSelectCargo() {
+        try {
+
+            $query = $this->con->prepare('SELECT * FROM perfil;');
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+    }
 
     public function existsLogin($datos) {
         try {
@@ -79,7 +91,6 @@ class UsuarioSql {
                 ,direccion
                 ,telefono
                 ,email
-                ,cargo
                 ,LOGIN
                 ,clave
                 ,condicion
@@ -91,7 +102,6 @@ class UsuarioSql {
                 ,'$datos[direccion]'
                 ,'$datos[telefono]'
                 ,'$datos[email]'
-                ,'$datos[cargo]'
                 ,'$datos[login]'
                 ,'$datos[clave]'
                 ,'$datos[condicion]'
@@ -142,7 +152,6 @@ class UsuarioSql {
                     SET    nombre = '$datos[nombre]', 
                            direccion = '$datos[direccion]', 
                            telefono = '$datos[telefono]', 
-                           cargo = '$datos[cargo]', 
                            clave = '$datos[clave]', 
                            condicion = '$datos[condicion]' 
                     WHERE  idusuario = $datos[idusuario];";
