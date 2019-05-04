@@ -90,36 +90,58 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
             ';
         if (isset($_SESSION['dataUser'])) {
 
-            $menu = $_SESSION['dataUser']['datoMenu'];
-//            if (!empty($_SESSION['dataUser']['menuActivo'])) {
-                $menuActivo = $_SESSION['dataUser']['menuActivo'];
-//            }
+//            echo"<pre><br>  menuActivo-->";
+//            print_r($_SESSION['dataUser']);
+//            echo"</pre><br>";
 
-//                    echo"<pre><br>  menuActivo-->";
-//                    print_r($menuActivo);
-//                    echo"</pre><br>";
+            $menu = $_SESSION['dataUser']['datoMenu'];
+            $menuActivo = (isset($_SESSION['dataUser']['menuActivo'])) ? $_SESSION['dataUser']['menuActivo'] : "";
+
 
             if (!empty($menu)) {
+                $subMenu = $_SESSION['dataUser']['datoSubMenu'];
                 foreach ($menu as $key => $value) {
-//                    if (!empty($Active)) {
-                        $Active = ($value['menu_id'] == $menuActivo) ? "active" : "";
-//                    }else{
-//                        $Active = "";
-//                    }
-//                    echo"<pre><br> value:";
-//                    print_r($Active);
+
+
+                    $Active = ($value['menu_id'] == $menuActivo) ? "active" : "";
+                    $submenuSiNo = (bool) $value['sw_submenu'];
+
+                    if ($submenuSiNo == true) {
+                        echo'
+                            <li class="nav-item dropdown">
+                                <a id="a_' . $value["menu_id"] . '" name="a_' . $value["menu_id"] . '" class="nav-link dropdown-toggle" href="' . $host . $value["url"] . '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ' . $value["descrpcion"] . '
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            ';
+                        foreach ($subMenu as $keySub => $valueSub) {
+//                    echo"<pre><br>  menuActivo-->";
+//                    print_r($valueSub);
 //                    echo"</pre><br>";
-                    echo'
-                    <li class="nav-item ' . $Active . '">
-                        <a id="a_' . $value["menu_id"] . '" name="a_' . $value["menu_id"] . '" class="nav-link myClass" href="' . $host . $value["url"] . '">' . $value["descrpcion"] . '</a>
-                    </li>
-                ';
+                            if ($value['menu_id'] == $valueSub['menu_id']) {
+                                echo'
+                                    <a class="dropdown-item" href="#">'.$valueSub['descripcion'].'</a>
+                                ';
+                            }
+                        }
+
+                        echo'
+                                </div>
+                            </li> 
+                            ';
+                    } else {
+                        echo'
+                            <li class="nav-item ' . $Active . '">
+                                <a id="a_' . $value["menu_id"] . '" name="a_' . $value["menu_id"] . '" class="nav-link myClass" href="' . $host . $value["url"] . '">' . $value["descrpcion"] . '</a>
+                            </li>
+                            ';
+                    }
                 }
             }
         }
 
         echo'
-                <!--
+             <!--   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,25 +154,14 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
-                 -->
+             -->   
                 <!-- 
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
                  -->
-                <!--
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li> 
-                -->
+                
+                
 
             </ul>
 

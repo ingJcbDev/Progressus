@@ -18,8 +18,10 @@ switch ($_GET["op"]) {
         if ($restLogin > 0) {
             $datoUser = $loginSql->datoUser($datos);
             $datoMenu = $loginSql->datoMenu($datoUser);
+            $datoSubMenu = $loginSql->datoSubMenu($datoUser);
             $_SESSION['dataUser'] = $datoUser;
             $_SESSION['dataUser']['datoMenu'] = $datoMenu;
+            $_SESSION['dataUser']['datoSubMenu'] = $datoSubMenu;
 
             $res['status'] = true;
             $res['message'] = "El usuario ingreso satisfactoriamente.";
