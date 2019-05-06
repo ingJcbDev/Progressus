@@ -4,8 +4,11 @@ $(document).ready(function () {
 
         var Id = this.id;
         var result = Id.split('_');
-//        alert(result[1]);
-        menuActivo(result[1]);
+        console.log(result);
+//        alert(true);
+        menu=result[1];
+        submenu=result[2];
+        menuActivo(menu, submenu);
 
     });
 
@@ -80,8 +83,8 @@ loginclose = function () {
     return false;
 }
 
-menuActivo = function (id) {
-    var datos = {id: id};
+menuActivo = function (menu, submenu) {
+    var datos = {menu: menu, submenu:submenu};
     var rutaLogin = $('#rutaLogin').val();
     var url = rutaLogin + "ajax/login.php?op=menuActivo";
     $.ajax({

@@ -200,3 +200,7 @@ divBorderHidden{
     border-style: hidden;
 }
 
+.text_center{
+    text-align: center;
+}
+

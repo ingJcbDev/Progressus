@@ -32,22 +32,26 @@ switch ($_GET["op"]) {
 
         echo json_encode($res);
         break;
-        
+
     case 'menuActivo':
         $datos = $_REQUEST;
 //echo"<pre><br>sql:";
 //print_r($datos);
 //echo"</pre><br>";  
 //die();
-        $_SESSION['dataUser']['menuActivo'] = $datos['id'];
+        unset($_SESSION['dataUser']['M']);
+        $_SESSION['dataUser']['M']['menuActivo'] = $datos['menu'];
+        if (!empty($datos['submenu'])) {
+            $_SESSION['dataUser']['M']['subMenuActivo'] = $datos['submenu'];
+        }
 
 //        echo json_encode($res);
         break;
     case 'loginClose':
-        
-        /*limpiar session*/
+
+        /* limpiar session */
 //        session_unset();
-        session_destroy(); 
+        session_destroy();
 
         $res['status'] = true;
         $res['message'] = "Sesion cerrada.";

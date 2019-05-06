@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2019 a las 05:20:37
+-- Tiempo de generación: 06-05-2019 a las 06:13:30
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -25,6 +25,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `materias`
+--
+
+CREATE TABLE `materias` (
+  `materias_id` int(11) NOT NULL,
+  `descripcion` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materias`
+--
+
+INSERT INTO `materias` (`materias_id`, `descripcion`) VALUES
+(1, 'Matematicas grado 6'),
+(2, 'Sociales grado 6'),
+(3, 'Quimica grado 6'),
+(4, 'Matematicas grado 7'),
+(5, 'Sociales grado 7'),
+(6, 'Quimica grado 7');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `menu`
 --
 
@@ -33,6 +56,7 @@ CREATE TABLE `menu` (
   `descrpcion` varchar(30) NOT NULL,
   `url` varchar(50) DEFAULT NULL,
   `orden` int(11) NOT NULL DEFAULT '0',
+  `sw_submenu` int(11) NOT NULL DEFAULT '0' COMMENT 'Aplica submenu ((1) Si o (0) No)',
   `sw_estado` int(11) NOT NULL DEFAULT '1' COMMENT '(1) Activo - (0) Inactivo'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,13 +64,13 @@ CREATE TABLE `menu` (
 -- Volcado de datos para la tabla `menu`
 --
 
-INSERT INTO `menu` (`menu_id`, `descrpcion`, `url`, `orden`, `sw_estado`) VALUES
-(1, 'Gestion de Usuarios', 'vistas/usuario.php', 1, 1),
-(2, 'Gestion de Temas', NULL, 2, 1),
-(3, 'Temas', NULL, 3, 1),
-(4, 'Juegos', NULL, 5, 1),
-(5, 'Reporte Evaluacion', NULL, 4, 1),
-(6, 'Inicio', 'index.php', 0, 1);
+INSERT INTO `menu` (`menu_id`, `descrpcion`, `url`, `orden`, `sw_submenu`, `sw_estado`) VALUES
+(1, 'Gestion de Usuarios', 'vistas/usuario.php', 1, 0, 1),
+(2, 'Gestion de Temas', '#', 2, 1, 1),
+(3, 'Temas', '#', 3, 1, 1),
+(4, 'Juegos', '#', 5, 0, 1),
+(5, 'Reporte Evaluacion', '#', 4, 0, 1),
+(6, 'Inicio', 'index.php', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -60,6 +84,24 @@ CREATE TABLE `menu_submenu` (
   `menu_id` int(11) NOT NULL,
   `submenu_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `menu_submenu`
+--
+
+INSERT INTO `menu_submenu` (`menu_submenu_id`, `idusuario`, `menu_id`, `submenu_id`) VALUES
+(1, 32, 2, 1),
+(2, 32, 2, 2),
+(3, 32, 2, 3),
+(4, 32, 2, 4),
+(5, 32, 2, 5),
+(6, 32, 2, 6),
+(7, 32, 3, 1),
+(8, 32, 3, 2),
+(9, 32, 3, 3),
+(10, 32, 3, 4),
+(11, 32, 3, 5),
+(12, 32, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -108,13 +150,103 @@ INSERT INTO `perfil_menu` (`perfil_menu_id`, `perfil_id`, `menu_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `periodo`
+--
+
+CREATE TABLE `periodo` (
+  `periodo_id` int(11) NOT NULL,
+  `materias_id` int(11) NOT NULL,
+  `descripcion` varchar(30) NOT NULL,
+  `sw_estado` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `preguntas`
+--
+
+CREATE TABLE `preguntas` (
+  `pregunta_id` int(11) NOT NULL,
+  `periodo_id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `sw_estado` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregunta_detalle`
+--
+
+CREATE TABLE `pregunta_detalle` (
+  `pregunta_detalle_id` int(11) NOT NULL,
+  `pregunta_id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `respuesta` varchar(1) NOT NULL,
+  `sw_estado` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `respuestas`
+--
+
+CREATE TABLE `respuestas` (
+  `respuestas_id` int(11) NOT NULL,
+  `pregunta_id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `respuesta` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `submenu`
 --
 
 CREATE TABLE `submenu` (
   `submenu_id` int(11) NOT NULL,
+  `url` varchar(60) DEFAULT NULL,
   `descripcion` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `submenu`
+--
+
+INSERT INTO `submenu` (`submenu_id`, `url`, `descripcion`) VALUES
+(1, 'vistas/materias.php', 'Grado 6'),
+(2, 'vistas/materias.php', 'Grado 7'),
+(3, 'vistas/materias.php', 'Grado 8'),
+(4, 'vistas/materias.php', 'Grado 9'),
+(5, 'vistas/materias.php', 'Grado 10'),
+(6, 'vistas/materias.php', 'Grado 11');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `submenu_materias`
+--
+
+CREATE TABLE `submenu_materias` (
+  `submenu_marterias_id` int(11) NOT NULL,
+  `submenu_id` int(11) NOT NULL,
+  `materias_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `submenu_materias`
+--
+
+INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 2, 4),
+(5, 2, 5),
+(6, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -172,6 +304,12 @@ INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VAL
 --
 
 --
+-- Indices de la tabla `materias`
+--
+ALTER TABLE `materias`
+  ADD PRIMARY KEY (`materias_id`);
+
+--
 -- Indices de la tabla `menu`
 --
 ALTER TABLE `menu`
@@ -201,10 +339,46 @@ ALTER TABLE `perfil_menu`
   ADD KEY `perfil_perfil_menu_fk` (`perfil_id`);
 
 --
+-- Indices de la tabla `periodo`
+--
+ALTER TABLE `periodo`
+  ADD PRIMARY KEY (`periodo_id`),
+  ADD KEY `materias_periodo_fk` (`materias_id`);
+
+--
+-- Indices de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  ADD PRIMARY KEY (`pregunta_id`),
+  ADD KEY `periodo_preguntas_fk` (`periodo_id`);
+
+--
+-- Indices de la tabla `pregunta_detalle`
+--
+ALTER TABLE `pregunta_detalle`
+  ADD PRIMARY KEY (`pregunta_detalle_id`),
+  ADD KEY `preguntas_pregunta_detalle_fk` (`pregunta_id`);
+
+--
+-- Indices de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD PRIMARY KEY (`respuestas_id`),
+  ADD KEY `preguntas_respuestas_fk` (`pregunta_id`);
+
+--
 -- Indices de la tabla `submenu`
 --
 ALTER TABLE `submenu`
   ADD PRIMARY KEY (`submenu_id`);
+
+--
+-- Indices de la tabla `submenu_materias`
+--
+ALTER TABLE `submenu_materias`
+  ADD PRIMARY KEY (`submenu_marterias_id`),
+  ADD KEY `materias_submenu_materias_fk` (`materias_id`),
+  ADD KEY `submenu_submenu_materias_fk` (`submenu_id`);
 
 --
 -- Indices de la tabla `usuario`
@@ -226,6 +400,12 @@ ALTER TABLE `usuario_perfil`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `materias`
+--
+ALTER TABLE `materias`
+  MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
@@ -235,25 +415,55 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `menu_submenu`
 --
 ALTER TABLE `menu_submenu`
-  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil_menu`
 --
 ALTER TABLE `perfil_menu`
-  MODIFY `perfil_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `perfil_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `periodo`
+--
+ALTER TABLE `periodo`
+  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pregunta_detalle`
+--
+ALTER TABLE `pregunta_detalle`
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
 --
 ALTER TABLE `submenu`
-  MODIFY `submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `submenu_materias`
+--
+ALTER TABLE `submenu_materias`
+  MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -285,6 +495,37 @@ ALTER TABLE `menu_submenu`
 ALTER TABLE `perfil_menu`
   ADD CONSTRAINT `menu_perfil_menu_fk` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `perfil_perfil_menu_fk` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`perfil_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `periodo`
+--
+ALTER TABLE `periodo`
+  ADD CONSTRAINT `materias_periodo_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `preguntas`
+--
+ALTER TABLE `preguntas`
+  ADD CONSTRAINT `periodo_preguntas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `pregunta_detalle`
+--
+ALTER TABLE `pregunta_detalle`
+  ADD CONSTRAINT `preguntas_pregunta_detalle_fk` FOREIGN KEY (`pregunta_id`) REFERENCES `preguntas` (`pregunta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `respuestas`
+--
+ALTER TABLE `respuestas`
+  ADD CONSTRAINT `preguntas_respuestas_fk` FOREIGN KEY (`pregunta_id`) REFERENCES `preguntas` (`pregunta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `submenu_materias`
+--
+ALTER TABLE `submenu_materias`
+  ADD CONSTRAINT `materias_submenu_materias_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `submenu_submenu_materias_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuario_perfil`
