@@ -36,7 +36,8 @@ class Database extends PDO {
     //creamos la conexión a la base de datos prueba
     public function __construct() {
         try {
-            $this->dbh = parent::__construct("mysql:host=$this->host;dbname=$this->dbname",$this->user,$this->pass);            
+            $this->dbh = parent::__construct("mysql:host=$this->host;dbname=$this->dbname",$this->user,$this->pass); 
+            parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);// errores de sintaxis
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
