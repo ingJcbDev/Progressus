@@ -8,6 +8,7 @@ require 'structure/header.php';
         print_r($_SESSION['dataUser']['M']);
         echo"</pre><br>";
         
+echo'<input type="hidden" name="menuActivo" id="menuActivo" value="'.$_SESSION['dataUser']['M']['menuActivo'].'" />';
 echo'<input type="hidden" name="subMenuActivo" id="subMenuActivo" value="'.$_SESSION['dataUser']['M']['subMenuActivo'].'" />';
 echo'<input type="hidden" name="ruta" id="ruta" value="'.$host.'" />';
         

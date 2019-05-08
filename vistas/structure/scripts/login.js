@@ -8,7 +8,8 @@ $(document).ready(function () {
 //        alert(true);
         menu=result[1];
         submenu=result[2];
-        menuActivo(menu, submenu);
+        materia=result[3];
+        menuActivo(menu, submenu, materia);
 
     });
 
@@ -83,8 +84,9 @@ loginclose = function () {
     return false;
 }
 
-menuActivo = function (menu, submenu) {
-    var datos = {menu: menu, submenu:submenu};
+menuActivo = function (menu, submenu, materia) {
+//    alert(materia);
+    var datos = {menu: menu, submenu:submenu, materia:materia};
     var rutaLogin = $('#rutaLogin').val();
     var url = rutaLogin + "ajax/login.php?op=menuActivo";
     $.ajax({

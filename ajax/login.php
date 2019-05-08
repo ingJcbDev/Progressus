@@ -43,6 +43,9 @@ switch ($_GET["op"]) {
         $_SESSION['dataUser']['M']['menuActivo'] = $datos['menu'];
         if (!empty($datos['submenu'])) {
             $_SESSION['dataUser']['M']['subMenuActivo'] = $datos['submenu'];
+            $_SESSION['dataUser']['M']['materia'] = $datos['materia'];
+        }
+        if (!empty($datos['materia'])) {
         }
 
 //        echo json_encode($res);

@@ -5,7 +5,7 @@ $(document).ready(function () {
         var Id = this.id;
         var result = Id.split('_');
         console.log(result);
-//        alert(true);
+        alert(true);
         menu = result[1];
         submenu = result[2];
         menuActivo(menu, submenu);
@@ -16,9 +16,10 @@ $(document).ready(function () {
 });
 
 cargarDatosMaterias = function () {
-    var submenu = $("#subMenuActivo").val();
+    var menu = $("#menuActivo").val();
+    var submenu1 = $("#subMenuActivo").val();
     var ruta = $("#ruta").val();
-    submenu = {submenu: submenu};
+    submenu = {submenu: submenu1};
     $.ajax({
         type: "POST",
         url: '../ajax/materias.php?op=loadAll',
@@ -27,11 +28,12 @@ cargarDatosMaterias = function () {
         success: function (data) {
             var array = data.data;
 
-            console.log(array);
+//            console.log(array);
 
             Html = '<ul class="list-group">';
             $.each(array, function (key, registro) {
-                Html += '<li class="list-group-item text_center">Dapibus ac facilisis in</li>';
+//            console.log(registro);
+                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="prueba();" href="#" class="dropdown-item myClass">'+registro.descripcion+'</a></li>';
             });
             Html += '</ul>';
 
@@ -41,4 +43,8 @@ cargarDatosMaterias = function () {
             alert('error');
         }
     });
+}
+
+prueba = function () {
+    alert(1);
 }
