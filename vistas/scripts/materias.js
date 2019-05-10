@@ -1,18 +1,7 @@
 $(document).ready(function () {
-
-    $(".myClass").on('click', function (event) {
-
-        var Id = this.id;
-        var result = Id.split('_');
-        console.log(result);
-        alert(true);
-        menu = result[1];
-        submenu = result[2];
-        menuActivo(menu, submenu);
-
-    });
-
-    cargarDatosMaterias()
+    
+    cargarDatosMaterias();
+    
 });
 
 cargarDatosMaterias = function () {
@@ -33,7 +22,7 @@ cargarDatosMaterias = function () {
             Html = '<ul class="list-group">';
             $.each(array, function (key, registro) {
 //            console.log(registro);
-                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="prueba();" href="#" class="dropdown-item myClass">'+registro.descripcion+'</a></li>';
+                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="prueba(this);" href="#" class="dropdown-item">'+registro.descripcion+'</a></li>';
             });
             Html += '</ul>';
 
@@ -45,6 +34,18 @@ cargarDatosMaterias = function () {
     });
 }
 
-prueba = function () {
-    alert(1);
+prueba = function (obj) {
+    
+            var Id = obj.id;
+        var result = Id.split('_');
+//        console.log(result);
+        alert('Epa la repa');
+        menu = result[1];
+        submenu = result[2];
+//        menuActivo(menu, submenu);
+
+    console.log(result);
+    alert('dddddddddddd');
+
+    
 }

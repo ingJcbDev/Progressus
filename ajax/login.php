@@ -35,10 +35,10 @@ switch ($_GET["op"]) {
 
     case 'menuActivo':
         $datos = $_REQUEST;
-//echo"<pre><br>sql:";
-//print_r($datos);
-//echo"</pre><br>";  
-//die();
+echo"<pre><br>sql:";
+print_r($datos);
+echo"</pre><br>";  
+die();
         unset($_SESSION['dataUser']['M']);
         $_SESSION['dataUser']['M']['menuActivo'] = $datos['menu'];
         if (!empty($datos['submenu'])) {

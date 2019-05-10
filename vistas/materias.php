@@ -15,16 +15,16 @@ echo'<input type="hidden" name="ruta" id="ruta" value="'.$host.'" />';
 ?>
 <div class="container box">
     <h1 align="center">Materias</h1>
-
-    
-        <!--<li class="list-group-item disabled">Cras justo odio</li>-->
-        <!--<li class="list-group-item text_center">Dapibus ac facilisis in</li>-->
         <div id="listasMaterias" id="listasMaterias"></div>
-        
-
 </div>
 
+<?php
 
+
+
+
+
+?>
 
 
 

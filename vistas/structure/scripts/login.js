@@ -5,7 +5,7 @@ $(document).ready(function () {
         var Id = this.id;
         var result = Id.split('_');
         console.log(result);
-//        alert(true);
+        alert('5555555555555555555555555555');
         menu=result[1];
         submenu=result[2];
         materia=result[3];
