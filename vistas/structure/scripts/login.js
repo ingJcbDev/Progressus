@@ -87,7 +87,11 @@ loginclose = function () {
 menuActivo = function (menu, submenu, materia) {
 //    alert(materia);
     var datos = {menu: menu, submenu:submenu, materia:materia};
-    var rutaLogin = $('#rutaLogin').val();
+    var rutaLogin = $('#rutaHeader').val();
+    
+    console.log(rutaLogin);
+    alert(222222);
+    
     var url = rutaLogin + "ajax/login.php?op=menuActivo";
     $.ajax({
         type: "POST",

@@ -73,6 +73,10 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
     <header>
 
         <?php
+            echo '<input type="hidden" id="rutaHeader" name="rutaHeader" value="' . $host . '">';
+        ?>    
+        
+        <?php
         echo'
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 

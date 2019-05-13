@@ -22,7 +22,7 @@ cargarDatosMaterias = function () {
             Html = '<ul class="list-group">';
             $.each(array, function (key, registro) {
 //            console.log(registro);
-                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="prueba(this);" href="#" class="dropdown-item">'+registro.descripcion+'</a></li>';
+                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="menuSubmenu(this);" href="#" class="dropdown-item">'+registro.descripcion+'</a></li>';
             });
             Html += '</ul>';
 
@@ -34,18 +34,41 @@ cargarDatosMaterias = function () {
     });
 }
 
-prueba = function (obj) {
+menuSubmenu = function (obj) {
     
-            var Id = obj.id;
+        var Id = obj.id;
         var result = Id.split('_');
-//        console.log(result);
-        alert('Epa la repa');
         menu = result[1];
         submenu = result[2];
-//        menuActivo(menu, submenu);
-
+        materia=result[3];
+        menuActivo(menu, submenu, materia);
+        
     console.log(result);
     alert('dddddddddddd');
 
     
+}
+
+menuActivo = function (menu, submenu, materia) {
+//    alert(materia);
+    var datos = {menu: menu, submenu:submenu, materia:materia};
+    var rutaLogin = $('#rutaHeader').val();
+    
+    console.log(rutaLogin);
+    alert(222222);
+    
+    var url = rutaLogin + "ajax/login.php?op=menuActivo";
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: datos,
+        success: function (result)
+        {
+//            alert(5);
+//            return false;
+        }
+    });
+
+    return false;
 }
