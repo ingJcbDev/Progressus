@@ -48,6 +48,9 @@ switch ($_GET["op"]) {
         if (!empty($datos['materia'])) {
             $_SESSION['dataUser']['M']['materia'] = $datos['materia'];
         }
+        if (!empty($datos['periodo'])) {
+            $_SESSION['dataUser']['M']['periodo'] = $datos['periodo'];
+        }
 
 //        echo json_encode($res);
         break;

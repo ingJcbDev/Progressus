@@ -30,7 +30,16 @@ class LoginSql {
 
     public function datoUser($datos) {
         try {
-            $sql = "SELECT * FROM usuario WHERE login='$datos[login0]' AND clave='$datos[clave0]';";
+            $sql = "select
+                            u.*, p.*
+                    from
+                            usuario as u
+                            inner join usuario_perfil as up on (u.idusuario=up.idusuario)
+                            inner join perfil as p on (up.perfil_id=p.perfil_id)
+                    where
+                            login = '$datos[login0]'
+                            and clave = '$datos[clave0]';";      
+            
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetch(PDO::FETCH_ASSOC);

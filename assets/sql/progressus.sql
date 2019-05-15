@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2019 a las 06:13:30
+-- Tiempo de generación: 15-05-2019 a las 06:39:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -159,6 +159,20 @@ CREATE TABLE `periodo` (
   `descripcion` varchar(30) NOT NULL,
   `sw_estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `periodo`
+--
+
+INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) VALUES
+(1, 1, 'periodo 1', '1'),
+(2, 1, 'periodo 2', '1'),
+(3, 1, 'periodo 3', '1'),
+(4, 1, 'periodo 4', '1'),
+(5, 2, 'periodo 1', '1'),
+(6, 2, 'periodo 2', '1'),
+(7, 2, 'periodo 3', '1'),
+(8, 2, 'periodo 4', '1');
 
 -- --------------------------------------------------------
 
@@ -433,7 +447,7 @@ ALTER TABLE `perfil_menu`
 -- AUTO_INCREMENT de la tabla `periodo`
 --
 ALTER TABLE `periodo`
-  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`

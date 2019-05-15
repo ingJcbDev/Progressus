@@ -15,7 +15,7 @@ echo'<input type="hidden" name="ruta" id="ruta" value="'.$host.'" />';
 ?>
 <div class="container box">
     <h1 align="center">Materias</h1>
-        <div id="listasMaterias" id="listasMaterias"></div>
+        <div id="listasMaterias" name="listasMaterias"></div>
 </div>
 
 <?php

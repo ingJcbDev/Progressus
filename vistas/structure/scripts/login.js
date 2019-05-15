@@ -5,7 +5,6 @@ $(document).ready(function () {
         var Id = this.id;
         var result = Id.split('_');
         console.log(result);
-        alert('5555555555555555555555555555');
         menu=result[1];
         submenu=result[2];
         materia=result[3];
@@ -89,8 +88,8 @@ menuActivo = function (menu, submenu, materia) {
     var datos = {menu: menu, submenu:submenu, materia:materia};
     var rutaLogin = $('#rutaHeader').val();
     
-    console.log(rutaLogin);
-    alert(222222);
+//    console.log(rutaLogin);
+//    alert(222222);
     
     var url = rutaLogin + "ajax/login.php?op=menuActivo";
     $.ajax({

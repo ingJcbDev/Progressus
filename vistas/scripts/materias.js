@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    
+
     cargarDatosMaterias();
-    
+
 });
 
 cargarDatosMaterias = function () {
@@ -18,15 +18,20 @@ cargarDatosMaterias = function () {
             var array = data.data;
 
 //            console.log(array);
-
-            Html = '<ul class="list-group">';
-            $.each(array, function (key, registro) {
+            if (array.length != 0) {
+                Html = '<ul class="list-group">';
+                $.each(array, function (key, registro) {
 //            console.log(registro);
-                Html += '<li class="list-group-item text_center"><a id="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" name="a_'+menu+'_'+submenu1+'_'+registro.materias_id+'" onclick="menuSubmenu(this);" href="#" class="dropdown-item">'+registro.descripcion+'</a></li>';
-            });
-            Html += '</ul>';
+                    Html += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '" onclick="menuSubmenu(this);" href="' + ruta + 'vistas/periodo.php" class="dropdown-item">' + registro.descripcion + '</a></li>';
+                });
+                Html += '</ul>';
 
-            $("#listasMaterias").html(Html);
+                $("#listasMaterias").html(Html);
+            }else{
+                alert('No existen datos registrados para la seleccion');
+                location.reload();
+                window.location.href = ruta;
+            }
         },
         error: function (data) {
             alert('error');
@@ -35,28 +40,28 @@ cargarDatosMaterias = function () {
 }
 
 menuSubmenu = function (obj) {
-    
-        var Id = obj.id;
-        var result = Id.split('_');
-        menu = result[1];
-        submenu = result[2];
-        materia=result[3];
-        menuActivo(menu, submenu, materia);
-        
-    console.log(result);
-    alert('dddddddddddd');
 
-    
+    var Id = obj.id;
+    var result = Id.split('_');
+    menu = result[1];
+    submenu = result[2];
+    materia = result[3];
+    menuActivo(menu, submenu, materia);
+
+//    console.log(result);
+//    alert('dddddddddddd');
+
+
 }
 
 menuActivo = function (menu, submenu, materia) {
 //    alert(materia);
-    var datos = {menu: menu, submenu:submenu, materia:materia};
+    var datos = {menu: menu, submenu: submenu, materia: materia};
     var rutaLogin = $('#rutaHeader').val();
-    
-    console.log(rutaLogin);
-    alert(222222);
-    
+
+//    console.log(rutaLogin);
+//    alert(222222);
+
     var url = rutaLogin + "ajax/login.php?op=menuActivo";
     $.ajax({
         type: "POST",
