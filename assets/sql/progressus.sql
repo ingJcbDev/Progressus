@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-05-2019 a las 06:39:25
+-- Tiempo de generación: 16-05-2019 a las 06:48:21
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -183,6 +183,7 @@ INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) 
 CREATE TABLE `preguntas` (
   `pregunta_id` int(11) NOT NULL,
   `periodo_id` int(11) NOT NULL,
+  `tema_id` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `sw_estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -261,6 +262,18 @@ INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_
 (4, 2, 4),
 (5, 2, 5),
 (6, 2, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temas`
+--
+
+CREATE TABLE `temas` (
+  `temas_id` int(11) NOT NULL,
+  `foto` mediumtext NOT NULL,
+  `descripcion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -364,7 +377,8 @@ ALTER TABLE `periodo`
 --
 ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`pregunta_id`),
-  ADD KEY `periodo_preguntas_fk` (`periodo_id`);
+  ADD KEY `periodo_preguntas_fk` (`periodo_id`),
+  ADD KEY `tema_fk` (`tema_id`);
 
 --
 -- Indices de la tabla `pregunta_detalle`
@@ -393,6 +407,12 @@ ALTER TABLE `submenu_materias`
   ADD PRIMARY KEY (`submenu_marterias_id`),
   ADD KEY `materias_submenu_materias_fk` (`materias_id`),
   ADD KEY `submenu_submenu_materias_fk` (`submenu_id`);
+
+--
+-- Indices de la tabla `temas`
+--
+ALTER TABLE `temas`
+  ADD PRIMARY KEY (`temas_id`);
 
 --
 -- Indices de la tabla `usuario`
@@ -520,7 +540,8 @@ ALTER TABLE `periodo`
 -- Filtros para la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  ADD CONSTRAINT `periodo_preguntas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `periodo_preguntas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tema_fk` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`temas_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pregunta_detalle`

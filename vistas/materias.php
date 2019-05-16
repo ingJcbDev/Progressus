@@ -4,9 +4,9 @@ require 'structure/header.php';
 
 
 <?php
-        echo"<pre><br>  menuActivo-->";
-        print_r($_SESSION['dataUser']['M']);
-        echo"</pre><br>";
+//        echo"<pre><br>  menuActivo-->";
+//        print_r($_SESSION['dataUser']['M']);
+//        echo"</pre><br>";
         
 echo'<input type="hidden" name="menuActivo" id="menuActivo" value="'.$_SESSION['dataUser']['M']['menuActivo'].'" />';
 echo'<input type="hidden" name="subMenuActivo" id="subMenuActivo" value="'.$_SESSION['dataUser']['M']['subMenuActivo'].'" />';
