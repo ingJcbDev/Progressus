@@ -114,7 +114,7 @@ bloquearModal = function () {
 }
 
 registrarUsuario = function () {
-
+    
     var datos = $('#registroUsuario').serialize();
     var ruta = $('#ruta').val();
     var clave = $('#clave').val();

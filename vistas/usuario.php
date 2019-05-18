@@ -37,8 +37,6 @@ require 'structure/header.php';
 
 <div id="userModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  data-backdrop='static' data-keyboard='false'>
 
-    <!--<div  id='modalCrearNuevaArea' class='modal fade bd-example-modal-lg' tabindex='-1' role='dialog' aria-labelledby='modalCrearNuevaArea' aria-hidden='true' data-backdrop='static' data-keyboard='false'>-->
-
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,7 +45,7 @@ require 'structure/header.php';
             <div class="modal-body">
                 <!-- inicio formulario -->
                 <!--onsubmit="return registrarUsuario();"-->
-                <form id="registroUsuario" name="registroUsuario" method="POST" autocomplete="off"> 
+                <form id="registroUsuario" name="registroUsuario" method="POST" onsubmit="return registrarUsuario();" autocomplete="off"> 
                     <?php
                     echo '<input id="ruta" type="hidden" value="' . $host . 'vistas/usuario.php">';
                     ?>                    
@@ -131,11 +129,12 @@ require 'structure/header.php';
                             <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Confirmacion Contraseña" required>
                         </div>
                     </div>
+                    
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btnEstandar" data-dismiss="modal" onclick="cleanModal();"><i class='fa fa-times-circle-o' style='font-size:16px;'></i> Cerrar</button>
-                <button type="button" class="btn btn-primary btnEstandar" onclick="registrarUsuario();"><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
+                <button type="submit" class="btn btn-primary btnEstandar" onclick=""><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
             </div>
 
             </form>                    
@@ -143,6 +142,7 @@ require 'structure/header.php';
         </div>
     </div>
 </div>
+
 </div>
 </div>
 

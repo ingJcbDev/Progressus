@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2019 a las 06:48:21
+-- Tiempo de generación: 19-05-2019 a las 00:39:05
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -185,7 +185,7 @@ CREATE TABLE `preguntas` (
   `periodo_id` int(11) NOT NULL,
   `tema_id` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `sw_estado` varchar(1) NOT NULL
+  `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -199,7 +199,7 @@ CREATE TABLE `pregunta_detalle` (
   `pregunta_id` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `respuesta` varchar(1) NOT NULL,
-  `sw_estado` varchar(1) NOT NULL
+  `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -266,12 +266,32 @@ INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `system_variables`
+--
+
+CREATE TABLE `system_variables` (
+  `variable_id` int(11) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
+  `valor` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `system_variables`
+--
+
+INSERT INTO `system_variables` (`variable_id`, `descripcion`, `valor`) VALUES
+(1, 'cantidadPreguntas', '3');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `temas`
 --
 
 CREATE TABLE `temas` (
   `temas_id` int(11) NOT NULL,
-  `foto` mediumtext NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `foto` varchar(100) DEFAULT NULL,
   `descripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -305,7 +325,8 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (31, 'andres', 'TI', '33333333', 'palmira', '34356789', 'andres@gmail.com', 'andres', '1', 1),
 (32, 'jonier cabrera', 'CC', '2344343434', 'cauca seco', '547646656', 'jonier.cabrera', 'jonier.cabrera', '1', 1),
 (33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
-(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 0);
+(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
+(45, '', '', '', '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -409,6 +430,12 @@ ALTER TABLE `submenu_materias`
   ADD KEY `submenu_submenu_materias_fk` (`submenu_id`);
 
 --
+-- Indices de la tabla `system_variables`
+--
+ALTER TABLE `system_variables`
+  ADD PRIMARY KEY (`variable_id`);
+
+--
 -- Indices de la tabla `temas`
 --
 ALTER TABLE `temas`
@@ -500,10 +527,16 @@ ALTER TABLE `submenu_materias`
   MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `system_variables`
+--
+ALTER TABLE `system_variables`
+  MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_perfil`

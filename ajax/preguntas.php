@@ -10,6 +10,34 @@ switch ($_GET["op"]) {
         $rspta = $preguntas->allPeriodo($datos);
         echo json_encode(array('data' => $rspta));
         break;
+    case 'insert':
+        $datos = $_REQUEST;
+
+        $rspta = $preguntas->allPeriodo($datos);
+
+echo"<pre><br>datos:";
+print_r($rspta);
+echo"</pre><br>";  
+die();        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+//        $rspta = $preguntas->allPeriodo($datos);
+//        echo json_encode(array('data' => $rspta));
+        break;
+    
     case 'upload':
         $datos = $_REQUEST;
 //        $rspta = $preguntas->allPeriodo($datos);
@@ -33,26 +61,8 @@ switch ($_GET["op"]) {
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         echo json_encode(array('data' => $rspta));
         break;
 
-//echo"<pre><br>sql:";
-//print_r($datos);
-//echo"</pre><br>";  
-//die();        
 }
 ?>

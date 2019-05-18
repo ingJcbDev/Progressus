@@ -36,6 +36,18 @@ class PeriodoSql {
         }
     }
     
+    public function cantidadPreguntas() {
+        try {
+            $sql='select valor from system_variables where descripcion = "cantidadPreguntas";';
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+
+            echo $e->getMessage();
+        }
+    }    
+    
 //echo"<pre><br>sql:";
 //print_r($sql);
 //echo"</pre><br>";         

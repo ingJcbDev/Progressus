@@ -204,3 +204,7 @@ divBorderHidden{
     text-align: center;
 }
 
+.modal-lg { 
+    max-width: 80%; 
+} 
+

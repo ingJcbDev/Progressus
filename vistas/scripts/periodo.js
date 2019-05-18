@@ -38,7 +38,7 @@ cargarDatosPeriodo = function () {
 
                 Html = '<ul class="list-group">';
                 $.each(array, function (key, registro) {
-                    Html += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="menuSubmenu(this);" href="'+ruta+'/vistas/preguntas.php" class="dropdown-item">' + registro.descripcion + '</a></li>';
+                    Html += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="menuSubmenu(this);" href="'+ruta+'vistas/preguntas.php" class="dropdown-item">' + registro.descripcion + '</a></li>';
                     h5 = registro.masteria;
                 });
                 Html += '</ul>';
