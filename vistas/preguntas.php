@@ -192,7 +192,7 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
         <table id="preguntas_table" name="preguntas_table" class="table display" style='width:100%; font-size:11px;'>
             <thead>
                 <tr>
-                    <th>Materias id</th> 
+                    <!--<th>Materias id</th>--> 
                     <th>Materia</th>
                     <th>Periodo</th>
                     <th>Titulo del tema</th>

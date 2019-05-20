@@ -18,6 +18,11 @@ switch ($_GET["op"]) {
         $rspta = $preguntas->allPeriodo($datos);
         echo json_encode(array('data' => $rspta));
         break;
+    case 'updateTema':
+        $datos = $_REQUEST;
+        $rspta = $preguntas->updateTema($datos);
+        echo json_encode(array('status' => $rspta));
+        break;
     case 'insert':
         $datos = $_REQUEST;
 

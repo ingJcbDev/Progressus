@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-05-2019 a las 04:30:31
+-- Tiempo de generación: 21-05-2019 a las 01:41:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -177,13 +177,32 @@ INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `periodos_temas`
+--
+
+CREATE TABLE `periodos_temas` (
+  `periodos_temas_id` int(11) NOT NULL,
+  `temas_id` int(11) NOT NULL,
+  `periodo_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `periodos_temas`
+--
+
+INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VALUES
+(1, 1, 1),
+(2, 2, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `preguntas`
 --
 
 CREATE TABLE `preguntas` (
   `pregunta_id` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
-  `tema_id` int(11) NOT NULL,
+  `periodos_temas_id` int(11) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -192,11 +211,11 @@ CREATE TABLE `preguntas` (
 -- Volcado de datos para la tabla `preguntas`
 --
 
-INSERT INTO `preguntas` (`pregunta_id`, `periodo_id`, `tema_id`, `descripcion`, `sw_estado`) VALUES
-(1, 1, 1, 'pregunta 1 p1', '1'),
-(2, 1, 1, 'pregunta 2 p1', '1'),
-(3, 2, 2, 'pregunta 1 p2', '1'),
-(4, 2, 2, 'Pregunta 2 p2', '1');
+INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_estado`) VALUES
+(1, 1, 'pregunta 1', '1'),
+(2, 1, 'pregunta 2', '1'),
+(3, 2, 'p1 periodo 2', '1'),
+(4, 2, 'p2 periodo 2', '1');
 
 -- --------------------------------------------------------
 
@@ -217,22 +236,22 @@ CREATE TABLE `pregunta_detalle` (
 --
 
 INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripcion`, `respuesta`, `sw_estado`) VALUES
-(1, 1, 'respuesta 1', '0', '1'),
-(2, 1, 'respuesta 2', '0', '1'),
-(3, 1, 'respuesta 3', '1', '1'),
-(4, 1, 'respuesta 4', '0', '1'),
-(5, 2, 'respuesta 1', '0', '1'),
-(6, 2, 'respuesta 2', '1', '1'),
-(7, 2, 'respuesta 3', '0', '1'),
-(8, 2, 'respuesta 4', '0', '1'),
-(9, 3, 'respuesta 1 p2', '0', '1'),
-(10, 3, 'respuesta 2 p2', '1', '1'),
-(11, 3, 'respuesta 3 p2', '0', '1'),
-(12, 3, 'respuesta 4 p2', '0', '1'),
-(13, 4, 'respuesta 1 p2', '0', '1'),
-(14, 4, 'respuesta 2 p2', '0', '1'),
-(15, 4, 'reapuesta 3 p2', '1', '1'),
-(16, 4, 'respuesta 4 p2', '0', '1');
+(1, 1, 'respuesta 1 tema 1', '0', '1'),
+(2, 1, 'respuesta 2 tema 1', '0', '1'),
+(3, 1, 'respuesta 3 tema 1', '1', '1'),
+(4, 1, 'respuesta 4 tema 1', '0', '1'),
+(5, 2, 'respuesta 2-1 tema 1', '0', '1'),
+(6, 2, 'respuesta 2-2 tema 1', '0', '1'),
+(7, 2, 'respuesta 2-2 tema 1', '0', '1'),
+(8, 2, 'respuesta 2-4 tema 1', '1', '1'),
+(9, 3, 'r1', '0', '1'),
+(10, 3, 'r2', '0', '1'),
+(11, 3, 'r3', '1', '1'),
+(12, 3, 'r4', '0', '1'),
+(13, 4, 'r1 p2', '0', '1'),
+(14, 4, 'r2 p2', '0', '1'),
+(15, 4, 'r3 p2', '1', '1'),
+(16, 4, 'r4 p2', '0', '1');
 
 -- --------------------------------------------------------
 
@@ -333,8 +352,8 @@ CREATE TABLE `temas` (
 --
 
 INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) VALUES
-(1, 'tema titulo', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1'),
-(2, 'titulo matematicas periodo', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1');
+(1, 'titulo del tema', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1'),
+(2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1');
 
 -- --------------------------------------------------------
 
@@ -434,12 +453,19 @@ ALTER TABLE `periodo`
   ADD KEY `materias_periodo_fk` (`materias_id`);
 
 --
+-- Indices de la tabla `periodos_temas`
+--
+ALTER TABLE `periodos_temas`
+  ADD PRIMARY KEY (`periodos_temas_id`),
+  ADD KEY `temas_periodos_temas_fk` (`temas_id`),
+  ADD KEY `periodo_periodos_temas_fk` (`periodo_id`);
+
+--
 -- Indices de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`pregunta_id`),
-  ADD KEY `periodo_preguntas_fk` (`periodo_id`),
-  ADD KEY `preguntas_fk` (`tema_id`);
+  ADD KEY `preguntas_fk` (`periodos_temas_id`);
 
 --
 -- Indices de la tabla `pregunta_detalle`
@@ -537,6 +563,12 @@ ALTER TABLE `periodo`
   MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `periodos_temas`
+--
+ALTER TABLE `periodos_temas`
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
@@ -616,11 +648,17 @@ ALTER TABLE `periodo`
   ADD CONSTRAINT `materias_periodo_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Filtros para la tabla `periodos_temas`
+--
+ALTER TABLE `periodos_temas`
+  ADD CONSTRAINT `periodo_periodos_temas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `temas_periodos_temas_fk` FOREIGN KEY (`temas_id`) REFERENCES `temas` (`temas_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Filtros para la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  ADD CONSTRAINT `periodo_preguntas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `preguntas_fk` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`temas_id`);
+  ADD CONSTRAINT `preguntas_fk` FOREIGN KEY (`periodos_temas_id`) REFERENCES `periodos_temas` (`periodos_temas_id`);
 
 --
 -- Filtros para la tabla `pregunta_detalle`

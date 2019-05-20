@@ -17,20 +17,22 @@ class Preguntas {
 
     public function loadPreguntas($datos) {
         try {
-            $sql = "SELECT DISTINCT m.materias_id
-                                    ,m.descripcion as materia
-                                    ,pe.periodo_id
-                                    ,pe.descripcion as periodo
-                                    ,t.temas_id
-                                    ,t.titulo as titulo_tema
-                                    ,t.sw_estado
-                            FROM temas t
-                            INNER JOIN preguntas p ON (t.temas_id = p.periodo_id)
-                            INNER JOIN periodo pe ON (p.periodo_id = pe.periodo_id)
-                            INNER JOIN materias m ON (m.materias_id = pe.materias_id)
-                            WHERE m.materias_id = " . $datos['materia'] . "
-                            AND pe.periodo_id = " . $datos['periodo'] . "
-                            AND t.sw_estado = '1';";
+            $sql = "SELECT m.materias_id
+                            ,m.descripcion AS materia
+                            ,p.periodo_id
+                            ,p.descripcion AS periodo
+                            ,t.temas_id
+                            ,t.titulo AS titulo_tema
+                            ,t.sw_estado
+                    FROM materias m
+                    INNER JOIN periodo p ON (m.materias_id = p.materias_id)
+                    INNER JOIN periodos_temas pt ON (p.periodo_id = pt.periodo_id)
+                    INNER JOIN temas t ON (pt.temas_id = t.temas_id)
+                    WHERE m.materias_id = " . $datos['materia'] . "
+                            AND p.periodo_id = " . $datos['periodo'] . ";";
+//echo"sql:<pre>";
+//print_r($sql);
+//echo"</pre>";            
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -39,6 +41,7 @@ class Preguntas {
             echo $e->getMessage();
         }
     }
+
     public function allPeriodo($datos) {
         try {
             $sql = 'select
@@ -56,6 +59,29 @@ class Preguntas {
         } catch (PDOException $e) {
 
             echo $e->getMessage();
+        }
+    }
+    
+    public function updateTema($datos) {
+        try {
+            
+//echo"sql:<pre>";
+//print_r($sql);
+//echo"</pre>";
+//die();
+            
+            $sw_estado = ($datos['sw_estado']=='1')?'0':'1';
+            
+            $sql = "UPDATE temas
+                    SET sw_estado='".$sw_estado."'
+                    WHERE temas_id=".$datos['temas_id'].";
+                    ";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
         }
     }
 
@@ -83,7 +109,25 @@ class Preguntas {
             echo $e->getMessage();
             return false;
         }
+        
+        try {
 
+            $sql = "INSERT INTO periodos_temas (
+                                    temas_id
+                                    ,periodo_id
+                                    )
+                            VALUES (
+                                    $temas_id
+                                    ," . $datosM['periodo'] . "
+                                    );";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $periodos_temas_id = $this->con->lastInsertId();
+        } catch (PDOException $e) {
+            $this->con->rollback();
+            echo $e->getMessage();
+            return false;
+        }
 
         foreach ($datos as $key => $value) {
 
@@ -91,20 +135,19 @@ class Preguntas {
 
             if ($key1['0'] == "pregunta") {
 
+
+
                 try {
                     $sql = "INSERT INTO preguntas (
-                                periodo_id
-                                ,tema_id
-                                ,descripcion
-                                )
-                        VALUES 
-                                (
-                                " . $datosM['periodo'] . "
-                                ,$temas_id
-                                ,'" . $value . "'
-                                )
-                                ;";
-
+                                    periodos_temas_id
+                                    ,descripcion
+                                    ,sw_estado
+                                    )
+                            VALUES (
+                                    $periodos_temas_id
+                                    ,'" . $value . "'
+                                    ,'1'
+                                    );";
                     $query = $this->con->prepare($sql);
                     $query->execute();
                     $pregunta_id = $this->con->lastInsertId();
@@ -179,6 +222,28 @@ class Preguntas {
     }
 
 }
+
+
+/*
+  select                            m.materias_id
+  ,m.descripcion as materia
+  ,p.periodo_id
+  ,p.descripcion as periodo
+  ,t.temas_id
+  ,t.titulo as titulo_tema
+  ,t.sw_estado
+  ,pre.pregunta_id
+  ,pre.descripcion
+  from
+  materias m
+  inner join periodo p on (m.materias_id=p.materias_id)
+  inner join periodos_temas pt on (p.periodo_id=pt.periodo_id)
+  inner join temas t on (pt.temas_id=t.temas_id)
+  inner join preguntas pre on (pt.periodos_temas_id=pre.periodos_temas_id)
+  WHERE m.materias_id = 1
+  and p.periodo_id=1
+  and t.sw_estado='1';
+ */
 
 //fin de la clase
 ?>
