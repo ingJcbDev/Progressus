@@ -4,9 +4,9 @@ require 'structure/header.php';
 
 
 <?php
-//echo"<pre><br>  menuActivo-->";
-//print_r($_SESSION['dataUser']['M']);
-//echo"</pre><br>";
+echo"<pre><br>  menuActivo-->";
+print_r($_SESSION['dataUser']['M']);
+echo"</pre><br>";
 //echo"<pre><br>  -->";
 //print_r($_SESSION['cantidadPreguntas']);
 //echo"</pre><br>";
@@ -43,6 +43,11 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
   <div class="col-3">col-3</div>
 </div>                          -->
 
+<!--<div class="container box">
+    <h1 align="center">Modulo Gestion de Usuario</h1>
+    <div class="table-responsive">
+    </div>
+</div>-->
 
 
 <div id="preguntasModal" name="preguntasModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"  data-backdrop='static' data-keyboard='false'>
@@ -148,7 +153,7 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
                     }
                     ?>
 
-                <!--</form>-->
+                    <!--</form>-->
 
 
 
@@ -174,11 +179,28 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
         </div>
         <div class="card-body">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preguntasModal">
+<!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preguntasModal">
                 Gestionar Tema
+            </button>-->
+            
+        <div align="right">
+            <button type="button" class="btn btn-success btnFueraTable" data-toggle="modal" data-target="#preguntasModal" onclick="">
+                <i class="fa fa-user-plus"></i> Agregar
             </button>
-
-
+        </div>
+        <br>
+        <table id="preguntas_table" name="preguntas_table" class="table display" style='width:100%; font-size:11px;'>
+            <thead>
+                <tr>
+                    <th>Materias id</th> 
+                    <th>Materia</th>
+                    <th>Periodo</th>
+                    <th>Titulo del tema</th>
+                    <th>Condicion</th>
+                    <!--<th>Acciones</th>-->
+                </tr>
+            </thead>
+        </table>
 
         </div>
     </div>

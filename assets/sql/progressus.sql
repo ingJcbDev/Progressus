@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2019 a las 00:39:05
+-- Tiempo de generación: 20-05-2019 a las 04:30:31
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -188,6 +188,16 @@ CREATE TABLE `preguntas` (
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`pregunta_id`, `periodo_id`, `tema_id`, `descripcion`, `sw_estado`) VALUES
+(1, 1, 1, 'pregunta 1 p1', '1'),
+(2, 1, 1, 'pregunta 2 p1', '1'),
+(3, 2, 2, 'pregunta 1 p2', '1'),
+(4, 2, 2, 'Pregunta 2 p2', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -201,6 +211,28 @@ CREATE TABLE `pregunta_detalle` (
   `respuesta` varchar(1) NOT NULL,
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pregunta_detalle`
+--
+
+INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripcion`, `respuesta`, `sw_estado`) VALUES
+(1, 1, 'respuesta 1', '0', '1'),
+(2, 1, 'respuesta 2', '0', '1'),
+(3, 1, 'respuesta 3', '1', '1'),
+(4, 1, 'respuesta 4', '0', '1'),
+(5, 2, 'respuesta 1', '0', '1'),
+(6, 2, 'respuesta 2', '1', '1'),
+(7, 2, 'respuesta 3', '0', '1'),
+(8, 2, 'respuesta 4', '0', '1'),
+(9, 3, 'respuesta 1 p2', '0', '1'),
+(10, 3, 'respuesta 2 p2', '1', '1'),
+(11, 3, 'respuesta 3 p2', '0', '1'),
+(12, 3, 'respuesta 4 p2', '0', '1'),
+(13, 4, 'respuesta 1 p2', '0', '1'),
+(14, 4, 'respuesta 2 p2', '0', '1'),
+(15, 4, 'reapuesta 3 p2', '1', '1'),
+(16, 4, 'respuesta 4 p2', '0', '1');
 
 -- --------------------------------------------------------
 
@@ -292,8 +324,17 @@ CREATE TABLE `temas` (
   `temas_id` int(11) NOT NULL,
   `titulo` varchar(100) NOT NULL,
   `foto` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(255) NOT NULL
+  `descripcion` mediumtext NOT NULL,
+  `sw_estado` varchar(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `temas`
+--
+
+INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) VALUES
+(1, 'tema titulo', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1'),
+(2, 'titulo matematicas periodo', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1');
 
 -- --------------------------------------------------------
 
@@ -325,8 +366,7 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (31, 'andres', 'TI', '33333333', 'palmira', '34356789', 'andres@gmail.com', 'andres', '1', 1),
 (32, 'jonier cabrera', 'CC', '2344343434', 'cauca seco', '547646656', 'jonier.cabrera', 'jonier.cabrera', '1', 1),
 (33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
-(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
-(45, '', '', '', '', '', '', '', '', 0);
+(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -399,7 +439,7 @@ ALTER TABLE `periodo`
 ALTER TABLE `preguntas`
   ADD PRIMARY KEY (`pregunta_id`),
   ADD KEY `periodo_preguntas_fk` (`periodo_id`),
-  ADD KEY `tema_fk` (`tema_id`);
+  ADD KEY `preguntas_fk` (`tema_id`);
 
 --
 -- Indices de la tabla `pregunta_detalle`
@@ -500,13 +540,13 @@ ALTER TABLE `periodo`
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
@@ -531,6 +571,12 @@ ALTER TABLE `submenu_materias`
 --
 ALTER TABLE `system_variables`
   MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `temas`
+--
+ALTER TABLE `temas`
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -574,7 +620,7 @@ ALTER TABLE `periodo`
 --
 ALTER TABLE `preguntas`
   ADD CONSTRAINT `periodo_preguntas_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `tema_fk` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`temas_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `preguntas_fk` FOREIGN KEY (`tema_id`) REFERENCES `temas` (`temas_id`);
 
 --
 -- Filtros para la tabla `pregunta_detalle`

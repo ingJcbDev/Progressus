@@ -63,7 +63,7 @@ cargarDatosPeriodo = function () {
             }
         },
         error: function (data) {
-            alert('error');
+            alert('error *-*');
         }
     });
 }

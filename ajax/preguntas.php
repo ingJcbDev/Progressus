@@ -2,9 +2,17 @@
 
 require_once "../modelo/preguntas.php";
 
+/* inicia la session */
+session_start();
+
 $preguntas = new Preguntas();
 
 switch ($_GET["op"]) {
+    case 'loadData':
+        $datos = $_REQUEST;
+        $rspta = $preguntas->loadPreguntas($datos);
+        echo json_encode(array('data' => $rspta));
+        break;
     case 'loadAll':
         $datos = $_REQUEST;
         $rspta = $preguntas->allPeriodo($datos);
@@ -13,29 +21,28 @@ switch ($_GET["op"]) {
     case 'insert':
         $datos = $_REQUEST;
 
-        $rspta = $preguntas->allPeriodo($datos);
+        $rspta = $preguntas->insertPregunta($datos);
 
-echo"<pre><br>datos:";
-print_r($rspta);
-echo"</pre><br>";  
-die();        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        if($rspta==true){
+        $status=true;
+        $message="Datos insertados correctamente"; 
+        $data = array('status' => $status, 'message' => $message);
+        echo json_encode($data);    
+        }else{
+        $status=false;
+        $message="Error al insertar los datos"; 
+        $data = array('status' => $status, 'message' => $message);
+        echo json_encode($data);    
+        }
         
-//        $rspta = $preguntas->allPeriodo($datos);
-//        echo json_encode(array('data' => $rspta));
+//echo"<pre><br>datos:";
+//print_r($rspta);
+//echo"</pre><br>";  
+//echo"<pre><br>data:";
+//print_r($data);
+//echo"</pre><br>";  
+//die('--------------------------->');        
+
         break;
     
     case 'upload':

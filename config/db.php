@@ -31,7 +31,8 @@ class Database extends PDO {
     private $dbh;
     //puerto postgreSql
     private $port = 5432;
-    protected $transactionCount = 0;
+    
+    protected $transactionCounter = 0;
 
     //creamos la conexión a la base de datos prueba
     public function __construct() {
