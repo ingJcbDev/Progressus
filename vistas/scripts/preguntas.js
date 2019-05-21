@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     cargarDatosTema();
+    loadPreguntas();
 
     $("textarea[maxlength]").keyup(function () {
         var limit = $(this).attr("maxlength"); // Límite del textarea
@@ -36,7 +37,10 @@ $(document).ready(function () {
      });
      */
 
-    loadPreguntas();
+    $("#btnCerrar").click(function (event) {
+        $("#registroPreguntas")[0].reset();
+    });
+
 
 });
 
@@ -214,11 +218,11 @@ loadPreguntas = function () {
                 success: function (data) {
 //                var array = data.data;
 //                    console.log(data);
-                    if(data.status==true){
+                    if (data.status == true) {
                         loadPreguntas();
                         alert('Datos actualizados satisfactoriamente');
-                        
-                    }else{
+
+                    } else {
                         alert('Error al actualizar los datos');
                     }
 

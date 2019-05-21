@@ -24,7 +24,8 @@ cargarDatosPeriodo = function () {
             console.log(array);
 
             if (array.length != 0) {
-                
+
+/*                
                 if(perfil=='1'){
                 $("#profesor").css('display', 'block');
                 $("#estudiante").css('display', 'block');
@@ -33,6 +34,15 @@ cargarDatosPeriodo = function () {
                 $("#profesor").css('display', 'block');
                 }
                 if(perfil=='3'){
+                $("#estudiante").css('display', 'block');
+                }
+*/              
+//                alert(menu);
+                
+                if(menu=='2'){
+                $("#profesor").css('display', 'block');
+                }
+                if(menu=='3'){
                 $("#estudiante").css('display', 'block');
                 }
 
@@ -48,7 +58,7 @@ cargarDatosPeriodo = function () {
                 
                 Html1 = '<ul class="list-group">';
                 $.each(array, function (key, registro) {
-                    Html1 += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="menuSubmenu(this);" href="#" class="dropdown-item">' + registro.descripcion + '</a></li>';
+                    Html1 += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="menuSubmenu(this);" href="'+ruta+'vistas/respuestas.php" class="dropdown-item">' + registro.descripcion + '</a></li>';
                     h51 = registro.masteria;
                 });
                 Html += '</ul>';

@@ -5,7 +5,7 @@ require 'structure/header.php';
 
 <?php
 //echo"<pre><br>  menuActivo-->";
-//print_r($_SESSION['dataUser']['M']);
+//print_r($_SESSION['dataUser']['M']['menuActivo']);
 //echo"</pre><br>";
 //echo"<pre><br>  -->";
 //print_r($_SESSION['dataUser']);

@@ -30,9 +30,6 @@ class Preguntas {
                     INNER JOIN temas t ON (pt.temas_id = t.temas_id)
                     WHERE m.materias_id = " . $datos['materia'] . "
                             AND p.periodo_id = " . $datos['periodo'] . ";";
-//echo"sql:<pre>";
-//print_r($sql);
-//echo"</pre>";            
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -65,10 +62,6 @@ class Preguntas {
     public function updateTema($datos) {
         try {
             
-//echo"sql:<pre>";
-//print_r($sql);
-//echo"</pre>";
-//die();
             
             $sw_estado = ($datos['sw_estado']=='1')?'0':'1';
             
@@ -223,6 +216,10 @@ class Preguntas {
 
 }
 
+//echo"sql:<pre>";
+//print_r($sql);
+//echo"</pre>";
+//die();
 
 /*
   select                            m.materias_id
