@@ -29,6 +29,7 @@ class Respuestas {
                     INNER JOIN periodos_temas pt ON (p.periodo_id = pt.periodo_id)
                     INNER JOIN temas t ON (pt.temas_id = t.temas_id)
                     WHERE m.materias_id = " . $datos['materia'] . "
+                            AND t.sw_estado = '1'
                             AND p.periodo_id = " . $datos['periodo'] . ";";
 //echo"<pre><br>sql:";
 //print_r($sql);

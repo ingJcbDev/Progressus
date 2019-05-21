@@ -4,9 +4,9 @@ require 'structure/header.php';
 
 
 <?php
-echo"<pre><br>  menuActivo-->";
-print_r($_SESSION['dataUser']['M']);
-echo"</pre><br>";
+//echo"<pre><br>  menuActivo-->";
+//print_r($_SESSION['dataUser']['M']);
+//echo"</pre><br>";
 //echo"<pre><br>  -->";
 //print_r($_SESSION['cantidadPreguntas']);
 //echo"</pre><br>";
