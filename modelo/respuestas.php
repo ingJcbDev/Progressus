@@ -31,10 +31,60 @@ class Respuestas {
                     WHERE m.materias_id = " . $datos['materia'] . "
                             AND t.sw_estado = '1'
                             AND p.periodo_id = " . $datos['periodo'] . ";";
-//echo"<pre><br>sql:";
-//print_r($sql);
-//echo"</pre><br>";  
-//die();
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }    
+    public function loadTema($datos) {
+        try {
+            $sql = "SELECT t.temas_id
+                            ,t.titulo
+                            ,t.descripcion
+                    FROM temas t
+                    WHERE t.sw_estado = '1'
+                            AND t.temas_id = " . $datos['temas_id'] . ";";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }       
+    public function loadPreguntass($datos) {
+        try {
+            $sql = "SELECT t.temas_id
+                            ,pt.periodos_temas_id
+                            ,p.pregunta_id
+                            ,p.descripcion AS pregunta
+                    FROM temas t
+                    INNER JOIN periodos_temas AS pt ON (pt.temas_id = t.temas_id)
+                    INNER JOIN preguntas AS p ON (pt.periodos_temas_id = p.periodos_temas_id)
+                    WHERE t.sw_estado = '1'
+                            AND t.temas_id = " . $datos['temas_id'] . ";";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }    
+    public function loadRespuestas($datos) {
+        try {
+            $sql = "SELECT t.temas_id
+                            ,pt.periodos_temas_id
+                            ,p.pregunta_id
+                            ,pd.pregunta_detalle_id
+                            ,pd.descripcion AS pregunta_detalle
+                            ,pd.respuesta
+                    FROM temas t
+                    INNER JOIN periodos_temas AS pt ON (pt.temas_id = t.temas_id)
+                    INNER JOIN preguntas AS p ON (pt.periodos_temas_id = p.periodos_temas_id)
+                    INNER JOIN pregunta_detalle AS pd ON (pd.pregunta_id = p.pregunta_id)
+                    WHERE t.sw_estado = '1'
+                            AND t.temas_id = " . $datos['temas_id'] . ";";
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -44,6 +94,10 @@ class Respuestas {
     }    
     
  
+//echo"<pre><br>sql:";
+//print_r($sql);
+//echo"</pre><br>";  
+//die();
 }
 
 //fin de la clase

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-05-2019 a las 01:41:25
+-- Tiempo de generación: 22-05-2019 a las 07:34:02
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -192,7 +192,8 @@ CREATE TABLE `periodos_temas` (
 
 INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VALUES
 (1, 1, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +216,9 @@ INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_
 (1, 1, 'pregunta 1', '1'),
 (2, 1, 'pregunta 2', '1'),
 (3, 2, 'p1 periodo 2', '1'),
-(4, 2, 'p2 periodo 2', '1');
+(4, 2, 'p2 periodo 2', '1'),
+(5, 3, 'p1 per1', '1'),
+(6, 3, 'p2 per1', '1');
 
 -- --------------------------------------------------------
 
@@ -251,7 +254,15 @@ INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripci
 (13, 4, 'r1 p2', '0', '1'),
 (14, 4, 'r2 p2', '0', '1'),
 (15, 4, 'r3 p2', '1', '1'),
-(16, 4, 'r4 p2', '0', '1');
+(16, 4, 'r4 p2', '0', '1'),
+(17, 5, 'r1 p1', '0', '1'),
+(18, 5, 'r2 p1', '0', '1'),
+(19, 5, 'r3 p1', '1', '1'),
+(20, 5, 'r4 p1', '0', '1'),
+(21, 6, 'r1 p1', '0', '1'),
+(22, 6, 'r2 p1', '0', '1'),
+(23, 6, 'r3 p1', '0', '1'),
+(24, 6, 'r4 p1', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -352,8 +363,9 @@ CREATE TABLE `temas` (
 --
 
 INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) VALUES
-(1, 'titulo del tema', NULL, 'tema tema tema tema tema tema tema tema tema tema tema tema tema tema ', '1'),
-(2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1');
+(1, 'titulo del tema 1 periodo 1', NULL, 'Este libro de texto que tienes en tus manos es una herramienta muy importante para que puedas desarrollar los aprendizajes de la mejor manera. Un libro de texto no debe ser la única fuente de investiga- ción y de descubrimiento, pero siempre es un buen aliado que te permite descubrir por ti mismo la maravilla de aprender. El Ministerio de Educación ha realizado un ajuste curricular que busca mejores oportunidades de aprendizaje para todos los estudiantes del país en el marco de un proyecto que propicia su desarrollo personal pleno y su integración en una sociedad guiada por los principios del Buen Vivir, la participación democrática y la convivencia armónica.', '1'),
+(2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1'),
+(3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1');
 
 -- --------------------------------------------------------
 
@@ -383,7 +395,7 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (29, 'katherine', 'CC', '122335555555', 'yumbo', '6666666', 'katherine@gmail.com', 'katherine', '1', 1),
 (30, 'dario cabrera cardenas', 'CC', '333333333337', 'cauca seco', '55347837', 'dario@gmail.com', 'dario', '1', 1),
 (31, 'andres', 'TI', '33333333', 'palmira', '34356789', 'andres@gmail.com', 'andres', '1', 1),
-(32, 'jonier cabrera', 'CC', '2344343434', 'cauca seco', '547646656', 'jonier.cabrera', 'jonier.cabrera', '1', 1),
+(32, 'admin a.', 'CC', '2344343434', 'cauca seco', '547646656', 'admin', 'admin', '1', 1),
 (33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
 (34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1);
 
@@ -404,7 +416,7 @@ CREATE TABLE `usuario_perfil` (
 --
 
 INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VALUES
-(32, 32, 1);
+(1, 32, 1);
 
 --
 -- Índices para tablas volcadas
@@ -566,19 +578,19 @@ ALTER TABLE `periodo`
 -- AUTO_INCREMENT de la tabla `periodos_temas`
 --
 ALTER TABLE `periodos_temas`
-  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
@@ -608,19 +620,19 @@ ALTER TABLE `system_variables`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_perfil`
 --
 ALTER TABLE `usuario_perfil`
-  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

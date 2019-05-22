@@ -208,12 +208,11 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 
 </div>
 
-
-
-
-
-
-
+<style>
+.modal-lg { 
+    max-width: 80%; 
+}
+</style>
 
 <?php
 require 'structure/footer.php';
