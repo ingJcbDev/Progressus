@@ -10,7 +10,7 @@ class Respuestas {
     public function __construct() {
         $this->con = new Database();
     }
-    
+
     public function __destruct() {
         $this->con->close_con();
     }
@@ -37,7 +37,8 @@ class Respuestas {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }    
+    }
+
     public function loadTema($datos) {
         try {
             $sql = "SELECT t.temas_id
@@ -52,7 +53,8 @@ class Respuestas {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }       
+    }
+
     public function loadPreguntass($datos) {
         try {
             $sql = "SELECT t.temas_id
@@ -70,7 +72,8 @@ class Respuestas {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }    
+    }
+
     public function loadRespuestas($datos) {
         try {
             $sql = "SELECT t.temas_id
@@ -91,13 +94,69 @@ class Respuestas {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-    }    
-    
- 
-//echo"<pre><br>sql:";
-//print_r($sql);
-//echo"</pre><br>";  
-//die();
+    }
+
+    public function insertNotas($datos, $nDef, $idusuario) {
+//        echo"<pre><br>sql:";
+//        print_r($datos);
+//        echo"</pre><br>";
+//        die();
+
+        $tema_id = $datos['tema_id'];
+
+        $this->con->beginTransaction();
+
+        try {
+            $sql = "INSERT INTO temas_notas (
+                            temas_id
+                            ,nota
+                            ,idusuario
+                            )
+                    VALUES (
+                            $tema_id
+                            ,$nDef
+                            ,$idusuario
+                            );";
+
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            $temas_notas_id = $this->con->lastInsertId();
+        } catch (PDOException $e) {
+            $this->con->rollback();
+            echo $e->getMessage();
+            return false;
+        }
+
+        foreach ($datos as $key => $value) {
+            $valueR = explode('_', $value);
+            if($valueR['0']==='radioRespuesta') {
+                try {
+                    $sql = "INSERT INTO progressus.respuestas (
+                            pregunta_id
+                            ,pregunta_detalle_id
+                            ,temas_notas_id
+                            )
+                    VALUES (
+                            ".$valueR['1']."
+                            ,".$valueR['2']."
+                            ,$temas_notas_id
+                            );
+                    ";
+
+                    $query = $this->con->prepare($sql);
+                    $query->execute();
+                } catch (PDOException $e) {
+                    $this->con->rollback();
+                    echo $e->getMessage();
+                    return false;
+                }
+            }
+        }
+
+        $this->con->commit();
+        return true;
+    }
+
 }
 
 //fin de la clase

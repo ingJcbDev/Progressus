@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2019 a las 07:34:02
+-- Tiempo de generación: 23-05-2019 a las 08:23:50
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -273,9 +273,17 @@ INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripci
 CREATE TABLE `respuestas` (
   `respuestas_id` int(11) NOT NULL,
   `pregunta_id` int(11) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
-  `respuesta` decimal(10,0) NOT NULL
+  `pregunta_detalle_id` int(11) NOT NULL,
+  `temas_notas_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
+(1, 1, 1, 0),
+(2, 2, 8, 0);
 
 -- --------------------------------------------------------
 
@@ -366,6 +374,26 @@ INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) V
 (1, 'titulo del tema 1 periodo 1', NULL, 'Este libro de texto que tienes en tus manos es una herramienta muy importante para que puedas desarrollar los aprendizajes de la mejor manera. Un libro de texto no debe ser la única fuente de investiga- ción y de descubrimiento, pero siempre es un buen aliado que te permite descubrir por ti mismo la maravilla de aprender. El Ministerio de Educación ha realizado un ajuste curricular que busca mejores oportunidades de aprendizaje para todos los estudiantes del país en el marco de un proyecto que propicia su desarrollo personal pleno y su integración en una sociedad guiada por los principios del Buen Vivir, la participación democrática y la convivencia armónica.', '1'),
 (2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1'),
 (3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temas_notas`
+--
+
+CREATE TABLE `temas_notas` (
+  `temas_notas_id` int(11) NOT NULL,
+  `temas_id` int(11) NOT NULL,
+  `nota` decimal(10,1) NOT NULL,
+  `idusuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `temas_notas`
+--
+
+INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
+(0, 1, '3.0', 32);
 
 -- --------------------------------------------------------
 
@@ -491,7 +519,8 @@ ALTER TABLE `pregunta_detalle`
 --
 ALTER TABLE `respuestas`
   ADD PRIMARY KEY (`respuestas_id`),
-  ADD KEY `preguntas_respuestas_fk` (`pregunta_id`);
+  ADD KEY `preguntas_respuestas_fk` (`pregunta_id`),
+  ADD KEY `respuestas_fk` (`temas_notas_id`);
 
 --
 -- Indices de la tabla `submenu`
@@ -518,6 +547,14 @@ ALTER TABLE `system_variables`
 --
 ALTER TABLE `temas`
   ADD PRIMARY KEY (`temas_id`);
+
+--
+-- Indices de la tabla `temas_notas`
+--
+ALTER TABLE `temas_notas`
+  ADD PRIMARY KEY (`temas_notas_id`),
+  ADD KEY `temas_notas_fk` (`temas_id`),
+  ADD KEY `temas_notas_fk_1` (`idusuario`);
 
 --
 -- Indices de la tabla `usuario`
@@ -596,7 +633,7 @@ ALTER TABLE `pregunta_detalle`
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -682,7 +719,8 @@ ALTER TABLE `pregunta_detalle`
 -- Filtros para la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  ADD CONSTRAINT `preguntas_respuestas_fk` FOREIGN KEY (`pregunta_id`) REFERENCES `preguntas` (`pregunta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `preguntas_respuestas_fk` FOREIGN KEY (`pregunta_id`) REFERENCES `preguntas` (`pregunta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `respuestas_fk` FOREIGN KEY (`temas_notas_id`) REFERENCES `temas_notas` (`temas_notas_id`);
 
 --
 -- Filtros para la tabla `submenu_materias`
@@ -690,6 +728,13 @@ ALTER TABLE `respuestas`
 ALTER TABLE `submenu_materias`
   ADD CONSTRAINT `materias_submenu_materias_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `submenu_submenu_materias_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `temas_notas`
+--
+ALTER TABLE `temas_notas`
+  ADD CONSTRAINT `temas_notas_fk` FOREIGN KEY (`temas_id`) REFERENCES `temas` (`temas_id`),
+  ADD CONSTRAINT `temas_notas_fk_1` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`);
 
 --
 -- Filtros para la tabla `usuario_perfil`

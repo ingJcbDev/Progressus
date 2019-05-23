@@ -221,26 +221,5 @@ class Preguntas {
 //echo"</pre>";
 //die();
 
-/*
-  select                            m.materias_id
-  ,m.descripcion as materia
-  ,p.periodo_id
-  ,p.descripcion as periodo
-  ,t.temas_id
-  ,t.titulo as titulo_tema
-  ,t.sw_estado
-  ,pre.pregunta_id
-  ,pre.descripcion
-  from
-  materias m
-  inner join periodo p on (m.materias_id=p.materias_id)
-  inner join periodos_temas pt on (p.periodo_id=pt.periodo_id)
-  inner join temas t on (pt.temas_id=t.temas_id)
-  inner join preguntas pre on (pt.periodos_temas_id=pre.periodos_temas_id)
-  WHERE m.materias_id = 1
-  and p.periodo_id=1
-  and t.sw_estado='1';
- */
-
 //fin de la clase
 ?>

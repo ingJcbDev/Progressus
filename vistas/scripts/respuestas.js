@@ -139,9 +139,10 @@ preguntas = function (temas_id) {
             var Html = '';
 
             $.each(array, function (key, registro) {
-//                console.log(registro);
+                console.log(registro);
                 Html += '<div class="card w-100">\n\
                             <div class="card-body">\n\
+                                <input type="hidden" name="tema_id" id="tema_id" value="' + registro.temas_id + '">\n\
                                 <div class="form-group">\n\
                                     <label for="pregunta_' + registro.pregunta_id + '"><b>' + registro.pregunta + '</b></label>\n\
                                 </div>\n\
@@ -153,19 +154,19 @@ preguntas = function (temas_id) {
                         ';
 
                 $.each(array1, function (key, registro1) {
-                    console.log(registro1);
-                    if(registro.pregunta_id==registro1.pregunta_id){
-                    Html += '\
+//                    console.log(registro1);
+                    if (registro.pregunta_id == registro1.pregunta_id) {
+                        Html += '\
                                         <div class="col-sm-6">\n\
                                             <div class="custom-control custom-radio custom-control-inline">\n\
-                                                <input type="radio" id="radioRespuesta_' + registro.pregunta_id + '_'+registro1.pregunta_detalle_id+'" name="radioRespuesta_' + registro.pregunta_id + '" value="radioRespuesta_' + registro.pregunta_id + '_'+registro1.pregunta_detalle_id+'_'+registro1.respuesta+'" class="custom-control-input" required>\n\
-                                                <label class="custom-control-label" for="radioRespuesta_' + registro.pregunta_id + '_'+registro1.pregunta_detalle_id+'">'+registro1.pregunta_detalle+'</label>\n\
+                                                <input type="radio" id="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '" name="radioRespuestas_' + registro.pregunta_id + '" value="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '_' + registro1.respuesta + '" class="custom-control-input" required>\n\
+                                                <label class="custom-control-label" for="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '">' + registro1.pregunta_detalle + '</label>\n\
                                             </div>\n\
                                         </div>\n\
                         ';
                     }
                 });
-                
+
                 Html += '\
                                     </div>\n\
                                         \n\
@@ -175,15 +176,6 @@ preguntas = function (temas_id) {
                 Html += '   </div>\n\
                         </div>\n\
                         ';
-                /*
-                 <div class="col-sm-6">\n\
-                 <div class="custom-control custom-radio custom-control-inline">\n\
-                 <input type="radio" id="radioRespuesta_2" name="radioRespuesta" value="radioRespuesta_2" class="custom-control-input" required>\n\
-                 <label class="custom-control-label" for="radioRespuesta_2">Respuestas 2</label>\n\
-                 </div>\n\
-                 </div>\n\
-                 */
-
             });
 //            console.log(array1);
 
@@ -195,10 +187,35 @@ preguntas = function (temas_id) {
     });
 
 
+}
 
 
-    /*
-     
-     */
+calificarRespuestas = function () {
+    var datos = $('#formCalificarRespuestas').serialize();
+    var ruta = $('#ruta').val();
 
+
+//    datos = {datos:dato};
+//    console.log(datos);
+
+//    alert(1);
+
+
+    $.ajax({
+        type: "POST",
+        url: ruta + 'ajax/respuestas.php?op=calificarRespuestas',
+        dataType: "json",
+        data: datos,
+        success: function (data) {
+            array = data.data;
+        },
+        error: function (data) {
+            alert('error calificarRespuestas');
+        }
+    });
+
+
+
+
+    return false;
 }
