@@ -25,7 +25,7 @@ cargarDatosTemas = function () {
             if (array.length != 0) {
                 Html = '<ul class="list-group">';
                 $.each(array, function (key, registro) {
-                    Html += '<li class="list-group-item text_center"><button type="button" class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#respuestasModal" id="tbn_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="btn_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="modalParaRespuestas(' + registro.temas_id + ');" class="dropdown-item">' + registro.titulo_tema + '</button></li>';
+                    Html += '<li class="list-group-item text_center"><button type="button" class="btn btn-outline-secondary btn-block" id="tbn_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="btn_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="modalParaRespuestas(' + registro.temas_id + ');" class="dropdown-item">' + registro.titulo_tema + '</button></li>';
 //             Html += '<li class="list-group-item text_center"><a id="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" name="a_' + menu + '_' + submenu1 + '_' + registro.materias_id + '_' + registro.periodo_id + '" onclick="menuSubmenu(this); modalParaRespuestas('+registro.temas_id+');" class="dropdown-item">'+registro.titulo_tema+'</a></li>';
                     h5 = '(' + registro.materia + ' - ' + registro.periodo + ')';
                 });
@@ -90,26 +90,58 @@ menuActivo = function (menu, submenu, materia, periodo) {
 
 modalParaRespuestas = function (temas_id) {
     var ruta = $("#ruta").val();
+    var data_tr = null;
     datos = {temas_id: temas_id};
+
+
     $.ajax({
         type: "POST",
-        url: ruta + 'ajax/respuestas.php?op=loadTema',
+        url: ruta + 'ajax/respuestas.php?op=temaRegistrado',
         dataType: "json",
         data: datos,
         success: function (data) {
-            var array = data.data;
+
+            if (data.length > 0) {
+
+                console.log(data);
+                alert(1);
+
+
+            } else {
+
+                $.ajax({
+                    type: "POST",
+                    url: ruta + 'ajax/respuestas.php?op=loadTema',
+                    dataType: "json",
+                    data: datos,
+                    success: function (data) {
+                        var array = data.data;
 //            console.log(array);
 
-            $("#exampleModalLabel").html(array.titulo);
-            $("#text_justify").html(array.descripcion);
+                        $("#respuestasModal").modal("show");
+                        $("#exampleModalLabel").html(array.titulo);
+                        $("#text_justify").html(array.descripcion);
 
-            preguntas(temas_id);
+                        preguntas(temas_id);
+
+                    },
+                    error: function (data) {
+                        alert('error *-*');
+                    }
+                });
+
+            }
+
 
         },
-        error: function (data) {
+        error: function (data_tr) {
             alert('error *-*');
         }
     });
+
+
+
+
 }
 preguntas = function (temas_id) {
     var ruta = $("#ruta").val();
@@ -139,7 +171,7 @@ preguntas = function (temas_id) {
             var Html = '';
 
             $.each(array, function (key, registro) {
-                console.log(registro);
+//                console.log(registro);
                 Html += '<div class="card w-100">\n\
                             <div class="card-body">\n\
                                 <input type="hidden" name="tema_id" id="tema_id" value="' + registro.temas_id + '">\n\
@@ -157,13 +189,18 @@ preguntas = function (temas_id) {
 //                    console.log(registro1);
                     if (registro.pregunta_id == registro1.pregunta_id) {
                         Html += '\
-                                        <div class="col-sm-6">\n\
+                                        <div id="div_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '" class="col-sm-6">\n\
                                             <div class="custom-control custom-radio custom-control-inline">\n\
                                                 <input type="radio" id="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '" name="radioRespuestas_' + registro.pregunta_id + '" value="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '_' + registro1.respuesta + '" class="custom-control-input" required>\n\
-                                                <label class="custom-control-label" for="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '">' + registro1.pregunta_detalle + '</label>\n\
+                                                <label class="custom-control-label" for="radioRespuesta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '">' + registro1.pregunta_detalle + '          <b id="correcta1_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '"></b></label>\n\
                                             </div>\n\
                                         </div>\n\
                         ';
+                        if (registro1.respuesta === '1') {
+                            Html += '\n\
+                        <input type="hidden" id="correcta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '" name="correcta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '" value="correcta_' + registro.pregunta_id + '_' + registro1.pregunta_detalle_id + '_' + registro1.respuesta + '">\n\
+                        ';
+                        }
                     }
                 });
 
@@ -191,15 +228,20 @@ preguntas = function (temas_id) {
 
 
 calificarRespuestas = function () {
+
     var datos = $('#formCalificarRespuestas').serialize();
+    var datos1 = $('#formCalificarRespuestas').serializeArray();
     var ruta = $('#ruta').val();
 
+    $.each(datos1, function (key, value) {
+        var key_r = value.name.split('_');
+        if (key_r['0'] === "correcta") {
+            Html = '<i class="fa fa-check" aria-hidden="true" style="color: green;"></i>';
+            $("#correcta1_" + key_r['1'] + "_" + key_r['2']).html(Html);
+        }
+    });
 
-//    datos = {datos:dato};
-//    console.log(datos);
-
-//    alert(1);
-
+    $("#btnGuardar").attr("disabled", "disabled");
 
     $.ajax({
         type: "POST",
@@ -207,10 +249,18 @@ calificarRespuestas = function () {
         dataType: "json",
         data: datos,
         success: function (data) {
-            array = data.data;
+//            console.log(data);
+            if (data.status == true) {
+                $('#preguntas *').prop('disabled', true); //desabilita todo lo del div
+                Html = 'Calificacion -> '+data.calificacion;
+                $("#calif").html(Html);
+                alert(data.message);
+            } else {
+                alert(data.message);
+            }
         },
         error: function (data) {
-            alert('error calificarRespuestas');
+            alert('Error calificarRespuestas');
         }
     });
 

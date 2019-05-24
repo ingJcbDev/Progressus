@@ -25,20 +25,6 @@ cargarDatosPeriodo = function () {
 
             if (array.length != 0) {
 
-/*                
-                if(perfil=='1'){
-                $("#profesor").css('display', 'block');
-                $("#estudiante").css('display', 'block');
-                }
-                if(perfil=='2'){
-                $("#profesor").css('display', 'block');
-                }
-                if(perfil=='3'){
-                $("#estudiante").css('display', 'block');
-                }
-*/              
-//                alert(menu);
-                
                 if(menu=='2'){
                 $("#profesor").css('display', 'block');
                 }

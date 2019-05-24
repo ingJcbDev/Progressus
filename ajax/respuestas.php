@@ -32,6 +32,13 @@ switch ($_GET["op"]) {
         $rspta = utf8_string_array_encode($rspta);
         echo json_encode(array('data' => $rspta));
         break;
+    case 'temaRegistrado':
+        $datos = $_REQUEST;
+        $idusuario=$_SESSION['dataUser']['idusuario'];
+        $rspta = $respuestas->temaRegistrado($datos, $idusuario);
+        $rspta = utf8_string_array_encode($rspta);
+        echo json_encode($rspta);
+        break;
     case 'calificarRespuestas':
         $datos = $_REQUEST;
 
@@ -59,15 +66,19 @@ switch ($_GET["op"]) {
         $nDef = number_format($nDef, 1, '.', '');
 
         $rspta = $respuestas->insertNotas($datos, $nDef, $idusuario);
+        
+        $res['status'] = $rspta;
+        $res['calificacion'] = $nDef;
+        $res['message'] = ($rspta == true) ? "Datos actualizados satisfactoriamente." : "Error al actualizar los datos.";  
+       
 //        echo"-->:<pre><br>";
-//        print_r($rspta);
+//        var_dump($res);
 //        echo"</pre><br>";
 //        die();
 
-//        $rspta = utf8_string_array_encode($rspta);
-//          $return = json_encode(array('data' => $rspta));  
-        echo $return;
+        echo json_encode($res);
         break;
+        
 }
 
 function utf8_string_array_encode(&$array) {

@@ -38,7 +38,7 @@ $(document).ready(function () {
      */
 
     $("#btnCerrar").click(function (event) {
-        $("#registroPreguntas")[0].reset();
+        $("#registroPreguntas")[0].reset(); //limpiar form
     });
 
 
@@ -169,13 +169,6 @@ loadPreguntas = function () {
                             return  data.sw_estado === '1' ? '<i class="fa fa-toggle-on" style="font-size:20px;color:cornflowerblue" onclick=\"updateTema(' + data.temas_id + ', ' + data.sw_estado + ')\" title="Activo"></i>' : '<i class="fa fa-toggle-off" style="font-size:20px;color:darkgrey" onclick=\"updateTema(' + data.temas_id + ', ' + data.sw_estado + ')\" title="inactivo"></i>';
                         }, className: "center"
                     }
-                    // <i class="fa fa-toggle-on" aria-hidden="true"></i>
-//                    ,
-//                    {data: null, render: function (data, type, row) {
-//                            return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-//                        <i class="fa fa-trash-o fa-lg" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
-//                        }, className: "center"
-//                    }
                 ]
             });
         },
@@ -186,23 +179,6 @@ loadPreguntas = function () {
 
     });
     updateTema = function (temas_id, sw_estado) {
-
-//        if (confirm("Seguro de eliminar el dato?")) {
-//            alert("se elimino correctamente");
-//        } else {
-//            alert("cancelo la solicitud");
-//        }
-
-//        alert(temas_id + ' - ' + sw_estado);
-
-//        var menu = $("#menuActivo").val();
-//        var submenu1 = $("#subMenuActivo").val();
-//        var materia = $("#materia").val();
-//        var periodo = $("#periodo").val();
-//        var perfil = $("#perfil").val();
-
-
-
 
         if (confirm("Seguro de actualizar el dato?")) {
 

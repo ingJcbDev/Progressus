@@ -58,7 +58,7 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 
                 <form id="formCalificarRespuestas" name="formCalificarRespuestas" method="POST" onsubmit="return calificarRespuestas();" autocomplete="off">
 
-                    
+
                     <div class="card w-100">
                         <div class="card-body">
                             <div class="container">
@@ -68,22 +68,64 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
                         </div>
                     </div>
                     <br>
-
-
+                    <center><h6 id="calif" style="color: mediumblue;"></h6></center>
+                    <br>
                     <div id="preguntas"></div>
 
-                    </div>
+            </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btnEstandar" id="btnCerrar" name="btnCerrar" data-dismiss="modal" onclick=""><i class='fa fa-times-circle-o' style='font-size:16px;'></i> Cerrar</button>
-                        <button type="submit" class="btn btn-primary btnEstandar" onclick=""><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
-                    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btnEstandar" id="btnCerrar" name="btnCerrar" data-dismiss="modal" onclick=""><i class='fa fa-times-circle-o' style='font-size:16px;'></i> Cerrar</button>
+                <button id="btnGuardar" type="submit" class="btn btn-primary btnEstandar" onclick=""><i class="fa fa-save" style="font-size:16px"></i> Guardar</button> 
+            </div>
 
-                </form>                    
+            </form>                    
             <!-- fin formulario -->
         </div>
     </div>
 </div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temaCalificado">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="temaCalificado" name="temaCalificado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitleCalificacion">Titulo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    
+                        <div class="card w-100">
+                            <div class="card-body">
+                                <div class="container">
+                                    <p id="text_justify" class="text-justify">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <h3 id="calificacion">xxxxxxxxx</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <style>
     /*.modal-lg { 

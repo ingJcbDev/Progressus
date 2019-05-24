@@ -95,6 +95,25 @@ class Respuestas {
             echo $e->getMessage();
         }
     }
+    
+    public function temaRegistrado($datos, $idusuario) {
+        try {
+            $sql = "SELECT tn.*
+                            ,t.temas_id
+                            ,t.titulo
+                            ,r.*
+                    FROM temas_notas AS tn
+                    INNER JOIN temas AS t ON (t.temas_id = tn.temas_id)
+                    INNER JOIN respuestas AS r ON (r.temas_notas_id = tn.temas_notas_id)
+                    WHERE tn.idusuario = $idusuario
+                            AND tn.temas_id = ".$datos['temas_id'].";";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     public function insertNotas($datos, $nDef, $idusuario) {
 //        echo"<pre><br>sql:";

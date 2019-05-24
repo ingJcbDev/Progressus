@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-05-2019 a las 08:23:50
+-- Tiempo de generación: 24-05-2019 a las 09:21:58
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -282,8 +282,8 @@ CREATE TABLE `respuestas` (
 --
 
 INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
-(1, 1, 1, 0),
-(2, 2, 8, 0);
+(1, 1, 1, 1),
+(2, 2, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -393,7 +393,7 @@ CREATE TABLE `temas_notas` (
 --
 
 INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
-(0, 1, '3.0', 32);
+(1, 1, '2.5', 32);
 
 -- --------------------------------------------------------
 
@@ -658,6 +658,12 @@ ALTER TABLE `system_variables`
 --
 ALTER TABLE `temas`
   MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `temas_notas`
+--
+ALTER TABLE `temas_notas`
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
