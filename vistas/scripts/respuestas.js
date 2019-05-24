@@ -103,10 +103,12 @@ modalParaRespuestas = function (temas_id) {
 
             if (data.length > 0) {
 
-                console.log(data);
-                alert(1);
-
-
+            $.each(data, function (key, value) {
+                console.log(value);
+                $("#ModalLongTitleCalificacion").html(value.titulo);
+                $("#calificacion").html(value.nota);
+            });
+                $("#temaCalificado").modal("show");
             } else {
 
                 $.ajax({
@@ -116,8 +118,7 @@ modalParaRespuestas = function (temas_id) {
                     data: datos,
                     success: function (data) {
                         var array = data.data;
-//            console.log(array);
-
+                        
                         $("#respuestasModal").modal("show");
                         $("#exampleModalLabel").html(array.titulo);
                         $("#text_justify").html(array.descripcion);

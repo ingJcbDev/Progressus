@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2019 a las 09:21:58
+-- Tiempo de generación: 25-05-2019 a las 01:28:58
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -283,7 +283,9 @@ CREATE TABLE `respuestas` (
 
 INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
 (1, 1, 1, 1),
-(2, 2, 8, 1);
+(2, 2, 8, 1),
+(3, 5, 19, 2),
+(4, 6, 24, 2);
 
 -- --------------------------------------------------------
 
@@ -393,7 +395,8 @@ CREATE TABLE `temas_notas` (
 --
 
 INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
-(1, 1, '2.5', 32);
+(1, 1, '2.5', 32),
+(2, 3, '5.0', 32);
 
 -- --------------------------------------------------------
 
@@ -633,7 +636,7 @@ ALTER TABLE `pregunta_detalle`
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -663,7 +666,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

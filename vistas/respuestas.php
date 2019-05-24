@@ -86,12 +86,6 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 </div>
 
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#temaCalificado">
-    Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="temaCalificado" name="temaCalificado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -104,12 +98,15 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
             </div>
             <div class="modal-body">
                 <div class="modal-body">
-                    
+                        <h6>Calificacion</h6>
                         <div class="card w-100">
                             <div class="card-body">
                                 <div class="container">
-                                    <p id="text_justify" class="text-justify">
-                                    </p>
+                                    <center>
+                                    <h5 id="calificacion" style="color: mediumblue;"></h5>
+<!--                                    <p id="text_justify" class="text-justify" style="color: mediumblue;">-->
+                                    <!--</p>-->
+                                    </center>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +117,6 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
                 </div>
             </div>
             <div class="modal-footer">
-                <h3 id="calificacion">xxxxxxxxx</h3>
             </div>
         </div>
     </div>
