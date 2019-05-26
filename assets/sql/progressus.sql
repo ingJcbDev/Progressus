@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2019 a las 01:28:58
+-- Tiempo de generación: 26-05-2019 a las 07:10:46
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -43,7 +43,8 @@ INSERT INTO `materias` (`materias_id`, `descripcion`) VALUES
 (3, 'Quimica grado 6'),
 (4, 'Matematicas grado 7'),
 (5, 'Sociales grado 7'),
-(6, 'Quimica grado 7');
+(6, 'Quimica grado 7'),
+(7, 'Biologia Grado 11');
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,8 @@ INSERT INTO `menu` (`menu_id`, `descrpcion`, `url`, `orden`, `sw_submenu`, `sw_e
 (1, 'Gestion de Usuarios', 'vistas/usuario.php', 1, 0, 1),
 (2, 'Gestion de Temas', '#', 2, 1, 1),
 (3, 'Temas', '#', 3, 1, 1),
-(4, 'Juegos', '#', 5, 0, 1),
-(5, 'Reporte Evaluacion', '#', 4, 0, 1),
+(4, 'Juegos', 'vistas/juego.php', 5, 0, 1),
+(5, 'Reporte Evaluacion', '#', 4, 1, 1),
 (6, 'Inicio', 'index.php', 0, 0, 1);
 
 -- --------------------------------------------------------
@@ -80,28 +81,47 @@ INSERT INTO `menu` (`menu_id`, `descrpcion`, `url`, `orden`, `sw_submenu`, `sw_e
 
 CREATE TABLE `menu_submenu` (
   `menu_submenu_id` int(11) NOT NULL,
-  `idusuario` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
-  `submenu_id` int(11) NOT NULL
+  `submenu_id` int(11) NOT NULL,
+  `perfil_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `menu_submenu`
 --
 
-INSERT INTO `menu_submenu` (`menu_submenu_id`, `idusuario`, `menu_id`, `submenu_id`) VALUES
-(1, 32, 2, 1),
-(2, 32, 2, 2),
-(3, 32, 2, 3),
-(4, 32, 2, 4),
-(5, 32, 2, 5),
-(6, 32, 2, 6),
-(7, 32, 3, 1),
-(8, 32, 3, 2),
-(9, 32, 3, 3),
-(10, 32, 3, 4),
-(11, 32, 3, 5),
-(12, 32, 3, 6);
+INSERT INTO `menu_submenu` (`menu_submenu_id`, `menu_id`, `submenu_id`, `perfil_id`) VALUES
+(1, 2, 1, 1),
+(2, 2, 2, 1),
+(3, 2, 3, 1),
+(4, 2, 4, 1),
+(5, 2, 5, 1),
+(6, 2, 6, 1),
+(7, 3, 1, 1),
+(8, 3, 2, 1),
+(9, 3, 3, 1),
+(10, 3, 4, 1),
+(11, 3, 5, 1),
+(12, 3, 6, 1),
+(13, 2, 1, 2),
+(14, 2, 2, 2),
+(15, 2, 3, 2),
+(16, 2, 4, 2),
+(17, 2, 5, 2),
+(18, 2, 6, 2),
+(19, 3, 1, 3),
+(20, 3, 2, 4),
+(21, 3, 3, 5),
+(22, 3, 4, 6),
+(23, 3, 5, 7),
+(24, 3, 6, 8),
+(25, 5, 7, 2),
+(26, 5, 8, 3),
+(27, 5, 8, 4),
+(28, 5, 8, 5),
+(29, 5, 8, 6),
+(30, 5, 8, 7),
+(31, 5, 8, 8);
 
 -- --------------------------------------------------------
 
@@ -121,7 +141,12 @@ CREATE TABLE `perfil` (
 INSERT INTO `perfil` (`perfil_id`, `descripcion`) VALUES
 (1, 'Root'),
 (2, 'Profesor'),
-(3, 'Estudiante');
+(3, 'Estudiante Grado 6'),
+(4, 'Estudiante Grado 7'),
+(5, 'Estudiante Grado 8'),
+(6, 'Estudiante Grado 9'),
+(7, 'Estudiante Grado 10'),
+(8, 'Estudiante Grado 11');
 
 -- --------------------------------------------------------
 
@@ -145,7 +170,35 @@ INSERT INTO `perfil_menu` (`perfil_menu_id`, `perfil_id`, `menu_id`) VALUES
 (3, 1, 6),
 (4, 1, 3),
 (5, 1, 5),
-(6, 1, 4);
+(6, 1, 4),
+(7, 2, 6),
+(8, 2, 2),
+(9, 2, 5),
+(10, 2, 4),
+(11, 3, 6),
+(12, 3, 3),
+(13, 3, 4),
+(14, 3, 5),
+(15, 4, 6),
+(16, 4, 3),
+(17, 4, 4),
+(18, 4, 5),
+(19, 5, 6),
+(20, 5, 3),
+(21, 5, 4),
+(22, 5, 5),
+(23, 6, 6),
+(24, 6, 3),
+(25, 6, 4),
+(26, 6, 5),
+(27, 7, 6),
+(28, 7, 3),
+(29, 7, 4),
+(30, 7, 5),
+(31, 8, 6),
+(32, 8, 3),
+(33, 8, 4),
+(34, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -172,7 +225,11 @@ INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) 
 (5, 2, 'periodo 1', '1'),
 (6, 2, 'periodo 2', '1'),
 (7, 2, 'periodo 3', '1'),
-(8, 2, 'periodo 4', '1');
+(8, 2, 'periodo 4', '1'),
+(9, 7, 'periodo 1', '1'),
+(10, 7, 'periodo 2', '1'),
+(11, 7, 'periodo 3', '1'),
+(12, 7, 'periodo 4', '1');
 
 -- --------------------------------------------------------
 
@@ -193,7 +250,8 @@ CREATE TABLE `periodos_temas` (
 INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VALUES
 (1, 1, 1),
 (2, 2, 2),
-(3, 3, 1);
+(3, 3, 1),
+(4, 4, 9);
 
 -- --------------------------------------------------------
 
@@ -218,7 +276,8 @@ INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_
 (3, 2, 'p1 periodo 2', '1'),
 (4, 2, 'p2 periodo 2', '1'),
 (5, 3, 'p1 per1', '1'),
-(6, 3, 'p2 per1', '1');
+(6, 3, 'p2 per1', '1'),
+(7, 4, 'Las mitocondrias son orgÃ¡nulos celulares cuya funciÃ³n principal es', '1');
 
 -- --------------------------------------------------------
 
@@ -262,7 +321,11 @@ INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripci
 (21, 6, 'r1 p1', '0', '1'),
 (22, 6, 'r2 p1', '0', '1'),
 (23, 6, 'r3 p1', '0', '1'),
-(24, 6, 'r4 p1', '1', '1');
+(24, 6, 'r4 p1', '1', '1'),
+(25, 7, 'La fotosÃ­ntesis', '0', '1'),
+(26, 7, 'La respiraciÃ³n celular', '0', '1'),
+(27, 7, 'La mitosis', '0', '1'),
+(28, 7, 'La sÃ­ntesis de proteÃ­nas ', '1', '1');
 
 -- --------------------------------------------------------
 
@@ -309,7 +372,9 @@ INSERT INTO `submenu` (`submenu_id`, `url`, `descripcion`) VALUES
 (3, 'vistas/materias.php', 'Grado 8'),
 (4, 'vistas/materias.php', 'Grado 9'),
 (5, 'vistas/materias.php', 'Grado 10'),
-(6, 'vistas/materias.php', 'Grado 11');
+(6, 'vistas/materias.php', 'Grado 11'),
+(7, 'vistas/reporte_profesor.php', 'Reporte Notas'),
+(8, 'vistas/reporte_estudiante.php', 'Reporte Mis Notas');
 
 -- --------------------------------------------------------
 
@@ -333,7 +398,8 @@ INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_
 (3, 1, 3),
 (4, 2, 4),
 (5, 2, 5),
-(6, 2, 6);
+(6, 2, 6),
+(7, 6, 7);
 
 -- --------------------------------------------------------
 
@@ -375,7 +441,8 @@ CREATE TABLE `temas` (
 INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) VALUES
 (1, 'titulo del tema 1 periodo 1', NULL, 'Este libro de texto que tienes en tus manos es una herramienta muy importante para que puedas desarrollar los aprendizajes de la mejor manera. Un libro de texto no debe ser la única fuente de investiga- ción y de descubrimiento, pero siempre es un buen aliado que te permite descubrir por ti mismo la maravilla de aprender. El Ministerio de Educación ha realizado un ajuste curricular que busca mejores oportunidades de aprendizaje para todos los estudiantes del país en el marco de un proyecto que propicia su desarrollo personal pleno y su integración en una sociedad guiada por los principios del Buen Vivir, la participación democrática y la convivencia armónica.', '1'),
 (2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1'),
-(3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1');
+(3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1'),
+(4, 'Las mitocondrias ', NULL, 'Las mitocondrias son orgÃ¡nulos celulares encargados de suministrar la mayor parte de la energÃ­a necesaria para la actividad celular (respiraciÃ³n celular).â€‹ ActÃºan como centrales energÃ©ticas de la cÃ©lula y sintetizan ATP a expensas de los carburantes metabÃ³licos (glucosa, Ã¡cidos grasos y aminoÃ¡cidos).', '1');
 
 -- --------------------------------------------------------
 
@@ -428,7 +495,8 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (31, 'andres', 'TI', '33333333', 'palmira', '34356789', 'andres@gmail.com', 'andres', '1', 1),
 (32, 'admin a.', 'CC', '2344343434', 'cauca seco', '547646656', 'admin', 'admin', '1', 1),
 (33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
-(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1);
+(34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
+(38, 'sebastian villada', 'TI', '23456789087654', 'cali', '4354687', 'sebas@gmail.com', 'sebas', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -447,7 +515,10 @@ CREATE TABLE `usuario_perfil` (
 --
 
 INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VALUES
-(1, 32, 1);
+(1, 32, 1),
+(2, 31, 2),
+(3, 34, 4),
+(7, 38, 8);
 
 --
 -- Índices para tablas volcadas
@@ -472,7 +543,7 @@ ALTER TABLE `menu_submenu`
   ADD PRIMARY KEY (`menu_submenu_id`),
   ADD KEY `submenu_menu_submenu_fk` (`submenu_id`),
   ADD KEY `menu_menu_submenu_fk` (`menu_id`),
-  ADD KEY `usuario_menu_submenu_fk` (`idusuario`);
+  ADD KEY `menu_submenu_fk` (`perfil_id`);
 
 --
 -- Indices de la tabla `perfil`
@@ -582,7 +653,7 @@ ALTER TABLE `usuario_perfil`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -594,43 +665,43 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `menu_submenu`
 --
 ALTER TABLE `menu_submenu`
-  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
-  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil_menu`
 --
 ALTER TABLE `perfil_menu`
-  MODIFY `perfil_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `perfil_menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `periodo`
 --
 ALTER TABLE `periodo`
-  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos_temas`
 --
 ALTER TABLE `periodos_temas`
-  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
@@ -642,13 +713,13 @@ ALTER TABLE `respuestas`
 -- AUTO_INCREMENT de la tabla `submenu`
 --
 ALTER TABLE `submenu`
-  MODIFY `submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu_materias`
 --
 ALTER TABLE `submenu_materias`
-  MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `system_variables`
@@ -660,7 +731,7 @@ ALTER TABLE `system_variables`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `temas_notas`
@@ -672,13 +743,13 @@ ALTER TABLE `temas_notas`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_perfil`
 --
 ALTER TABLE `usuario_perfil`
-  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
@@ -689,8 +760,7 @@ ALTER TABLE `usuario_perfil`
 --
 ALTER TABLE `menu_submenu`
   ADD CONSTRAINT `menu_menu_submenu_fk` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `submenu_menu_submenu_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `usuario_menu_submenu_fk` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `submenu_menu_submenu_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `perfil_menu`
