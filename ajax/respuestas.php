@@ -11,6 +11,7 @@ switch ($_GET["op"]) {
     case 'loadAll':
         $datos = $_REQUEST;
         $rspta = $respuestas->loadPreguntas($datos);
+        $rspta = utf8_string_array_encode($rspta);
         echo json_encode(array('data' => $rspta));
         break;
     case 'loadTema':

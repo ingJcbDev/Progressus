@@ -85,27 +85,24 @@ require 'structure/header.php';
                             <input type="email" class="form-control valEmail" id="email" name="email" placeholder="Correo" required>
                         </div>
                     </div>
-                    <!--                    <div class="form-row">
-                                                                        <div class="form-group col-md-6">
-                                                                            <label for="perfil">Perfil</label>
-                                                                            <select id="cargo" name="cargo" class="form-control" required>
-                                                                                <option selected value="">--Seleccionar--</option>
-                                                                                <option value="root">Root</option>
-                                                                                <option value="profesor">Profesor</option>
-                                                                                <option value="estudiante">Estudiante</option>
-                                                                            </select> 
-                                                                            
-                                                                                <select id="select" name="select" class="form-control" required>
-                                                                                <option selected value="">--Seleccionar--</option>
-                                                                                <option value="root">Root</option>
-                                                                                <option value="profesor">Profesor</option>
-                                                                                <option value="estudiante">Estudiante</option>
-                                                                            </select> 
-                                                                            
-                                                                            <div id="selectCargo" name="selectCargo"></div>
-                                                                            
-                                                                            
-                                                                        </div>-->
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="perfil">Perfil</label>
+<!--                            <select id="cargo" name="cargo" class="form-control" required>
+                                <option selected value="">--Seleccionar--</option>
+                                <option value="root">Root</option>
+                                <option value="profesor">Profesor</option>
+                                <option value="estudiante">Estudiante</option>
+                            </select> -->
+                            <div id="selectCargo" name="selectCargo"></div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="login">Login</label>
+                            <input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
+                        </div>
+                    </div>
+                    
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="condicion">Estado</label>
@@ -113,10 +110,6 @@ require 'structure/header.php';
                                 <option selected value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select> 
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="login">Login</label>
-                            <input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -129,7 +122,7 @@ require 'structure/header.php';
                             <input type="password" class="form-control" id="clave1" name="clave1" placeholder="Confirmacion Contraseña" required>
                         </div>
                     </div>
-                    
+
             </div>
 
             <div class="modal-footer">

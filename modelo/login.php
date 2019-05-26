@@ -68,18 +68,24 @@ class LoginSql {
         }
     }    
     public function datoSubMenu($datos) {
+        
         try {
-            $sql = "SELECT m.menu_id,m.descrpcion,s.*
-                        FROM usuario AS u
-                        INNER JOIN usuario_perfil AS up ON (u.idusuario = up.idusuario)
-                        INNER JOIN perfil AS p ON (up.perfil_id = p.perfil_id)
-                        INNER JOIN perfil_menu AS pm ON (p.perfil_id = pm.perfil_id)
-                        INNER JOIN menu AS m ON (pm.menu_id = m.menu_id)
-                        INNER JOIN menu_submenu AS ms ON (m.menu_id = ms.menu_id AND u.idusuario=ms.idusuario)
-                        INNER JOIN submenu AS s ON (ms.submenu_id=s.submenu_id)
-                        WHERE u.idusuario = $datos[idusuario]
-                        AND m.sw_estado = 1
-                        ORDER BY 3;";
+            $sql = "SELECT m.menu_id
+                            ,m.descrpcion
+                            ,s.*
+                    FROM usuario AS u
+                    INNER JOIN usuario_perfil AS up ON (u.idusuario = up.idusuario)
+                    INNER JOIN perfil AS p ON (up.perfil_id = p.perfil_id)
+                    INNER JOIN perfil_menu AS pm ON (p.perfil_id = pm.perfil_id)
+                    INNER JOIN menu AS m ON (pm.menu_id = m.menu_id)
+                    INNER JOIN menu_submenu AS ms ON (
+                                    m.menu_id = ms.menu_id
+                                    AND p.perfil_id = ms.perfil_id
+                                    )
+                    INNER JOIN submenu AS s ON (ms.submenu_id = s.submenu_id)
+                    WHERE u.idusuario = $datos[idusuario]
+                            AND m.sw_estado = 1
+                    ORDER BY 3;";
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchall(PDO::FETCH_ASSOC);
@@ -87,6 +93,7 @@ class LoginSql {
 
             echo $e->getMessage();
         }
+        
     }    
     
     

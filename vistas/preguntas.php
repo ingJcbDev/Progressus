@@ -59,7 +59,6 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
             </div>
             <div class="modal-body">
 
-                <!--<form id="registroUsuario" name="registroUsuario" method="POST" onsubmit="return registrarUsuario();" autocomplete="off">--> 
                 <form id="registroPreguntas" name="registroPreguntas" method="POST" onsubmit="return insertarPreguntas();" autocomplete="off">
 
                     <div class="form-group">
@@ -71,91 +70,7 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
                         <textarea class="form-control" id="temaTextarea" name="temaTextarea" rows="5" maxlength="1000024" placeholder="Tema ......................" required></textarea>
                     </div>
 
-                    <?php
-                    $can = (int) $_SESSION['cantidadPreguntas'];
-                    for ($index = 1; $index < $can; $index++) {
-
-                        echo'
-                
-                <!------------------->
-
-                <div class="card w-100">
-                    <div class="card-body">
-
-                        <div class="form-group">
-                            <label for="pregunta1"><b>Pregunta ' . $index . ':</b></label>
-                            <input type="text" class="form-control" id="pregunta_' . $index . '" name="pregunta_' . $index . '" placeholder="Pregunta ' . $index . '" required>
-                        </div>
-
-                        <label for="pregunta1"><b>Respuestas ' . $index . ':</b></label>
-                        <div class="card w-100">
-                            <div class="card-body">
-
-                                <div class="row">
-                                    <div class="col-sm-6">
-
-                                        <input type="text" class="form-control" id="respuesta_' . $index . '_1" name="respuesta_' . $index . '_1" placeholder="Respuesta 1" required>                                        
-
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="radioRespuesta_' . $index . '_1" name="radioRespuesta_' . $index . '" value="radioRespuesta_' . $index . '_1" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="radioRespuesta_' . $index . '_1"><i class="fa fa-check" aria-hidden="true" style="color: green;"></i></label>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="col-sm-6">
-
-
-                                        <input type="text" class="form-control" id="respuesta_' . $index . '_2" name="respuesta_' . $index . '_2" placeholder="Respuesta 2" required>                                        
-
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="radioRespuesta_' . $index . '_2" name="radioRespuesta_' . $index . '" value="radioRespuesta_' . $index . '_2" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="radioRespuesta_' . $index . '_2"><i class="fa fa-check" aria-hidden="true" style="color: green;"></i></label>
-                                        </div>
-
-                                        
-                                    </div>
-                                </div>   
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">
-
-
-                                        <input type="text" class="form-control" id="respuesta_' . $index . '_3" name="respuesta_' . $index . '_3" placeholder="Respuesta 3" required>                                        
-
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="radioRespuesta_' . $index . '_3" name="radioRespuesta_' . $index . '" value="radioRespuesta_' . $index . '_3" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="radioRespuesta_' . $index . '_3"><i class="fa fa-check" aria-hidden="true" style="color: green;"></i></label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-sm-6">
-
-                                        <input type="text" class="form-control" id="respuesta_' . $index . '_4" name="respuesta_' . $index . '_4" placeholder="Respuesta 4" required>                                        
-
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="radioRespuesta_' . $index . '_4" name="radioRespuesta_' . $index . '" value="radioRespuesta_' . $index . '_4" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="radioRespuesta_' . $index . '_4"><i class="fa fa-check" aria-hidden="true" style="color: green;"></i></label>
-                                        </div>
-
-
-                                    </div>
-                                </div>                     
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!------------------->
-
-                            ';
-                    }
-                    ?>
-
-                    <!--</form>-->
-
-
+                    <div id="modalPreguntas_"></div>
 
             </div>
 
@@ -172,6 +87,11 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 
 
 
+
+
+
+
+
 <div class="container box">
     <div class="card">
         <div class="card-header">
@@ -179,28 +99,47 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
         </div>
         <div class="card-body">
             <!-- Button trigger modal -->
-<!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preguntasModal">
-                Gestionar Tema
-            </button>-->
-            
-        <div align="right">
-            <button type="button" class="btn btn-success btnFueraTable" data-toggle="modal" data-target="#preguntasModal" onclick="">
-                <i class="fa fa-user-plus"></i> Agregar
-            </button>
-        </div>
-        <br>
-        <table id="preguntas_table" name="preguntas_table" class="table display" style='width:100%; font-size:11px;'>
-            <thead>
-                <tr>
-                    <!--<th>Materias id</th>--> 
-                    <th>Materia</th>
-                    <th>Periodo</th>
-                    <th>Titulo del tema</th>
-                    <th>Condicion</th>
-                    <!--<th>Acciones</th>-->
-                </tr>
-            </thead>
-        </table>
+            <!--            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#preguntasModal">
+                            Gestionar Tema
+                        </button>-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <label for="sel1" >Cantidad de Preguntas</label>
+                    <select class="form-control" style="padding-bottom: 0px;padding-top: 0px;padding-right: 12px;width: 176px;height: 27px;" id="can" name="can">
+                        <option value="2">1</option>
+                        <option value="3">2</option>
+                        <option value="4">3</option>
+                        <option value="5">4</option>
+                        <option value="6">5</option>
+                        <option value="7">6</option>
+                        <option value="8">7</option>
+                        <option value="9">8</option>
+                        <option value="10">9</option>
+                        <option value="11">10</option>
+                    </select>            
+                </div>
+                <div class="col-sm-6">
+                    <div align="right">
+                        <button type="button" class="btn btn-success btnFueraTable" data-toggle="modal" data-target="#preguntasModal" onclick="recargarModal();">
+                            <i class="fa fa-user-plus"></i> Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <table id="preguntas_table" name="preguntas_table" class="table display" style='width:100%; font-size:11px;'>
+                <thead>
+                    <tr>
+                        <!--<th>Materias id</th>--> 
+                        <th>Materia</th>
+                        <th>Periodo</th>
+                        <th>Titulo del tema</th>
+                        <th>Condicion</th>
+                        <!--<th>Acciones</th>-->
+                    </tr>
+                </thead>
+            </table>
 
         </div>
     </div>
@@ -209,9 +148,9 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 </div>
 
 <style>
-.modal-lg { 
-    max-width: 80%; 
-}
+    .modal-lg { 
+        max-width: 80%; 
+    }
 </style>
 
 <?php

@@ -93,12 +93,12 @@ callAllUser = function () {
                 }, className: "center"
             },
             {data: null, render: function (data, type, row) {
-                    return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>&nbsp; | &nbsp;\n\
-                        <i class="fa fa-trash-o fa-lg" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
+                    return  '<i class="fa fa-pencil-square-o fa-4 pointer" aria-hidden="true" style="font-size:18px;color:blue" onclick=\"datosUserEdit(' + data.idusuario + ')\" title="Modificar Usuario"></i>';
                 }, className: "center"
             }
         ]
     });
+    //    <i class="fa fa-trash-o fa-lg" style="font-size:18px;color:red" onclick=\"deleteUser(' + data.idusuario + ')\" title="Eliminar Usuario"></i>';
 
 };
 //<i class="fa fa-trash-o fa-lg"></i>
@@ -248,6 +248,7 @@ datosUserEdit = function (idusuario) {
                 $('#clave').val(result.data.clave);
                 $('#clave1').val(result.data.clave);
                 $('#condicion').val(result.data.condicion);
+                $('#perfil').val(result.data.perfil_id);
 
 //                if(result.status==false){
 //                }

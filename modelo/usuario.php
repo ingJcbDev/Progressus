@@ -10,7 +10,7 @@ class UsuarioSql {
     public function __construct() {
         $this->con = new Database();
     }
-    
+
     public function __destruct() {
         $this->con->close_con();
     }
@@ -27,7 +27,7 @@ class UsuarioSql {
             echo $e->getMessage();
         }
     }
-    
+
     public function datosSelectCargo() {
         try {
 
@@ -83,6 +83,9 @@ class UsuarioSql {
     }
 
     public function InsertUser($datos) {
+
+        $this->con->beginTransaction();
+
         try {
             $sql = "INSERT INTO usuario (
                 nombre
@@ -108,14 +111,34 @@ class UsuarioSql {
                 );";
 
             $query = $this->con->prepare($sql);
-            $result = $query->execute();
-//            $this->con->close_con();
+            $query->execute();
+            $idusuario = $this->con->lastInsertId();
         } catch (PDOException $e) {
-
+            $this->con->rollback();
             echo $e->getMessage();
+            return false;
         }
 
-        return $result;
+        try {
+            $sql = "INSERT INTO usuario_perfil (
+                            idusuario
+                            ,perfil_id
+                            )
+                    VALUES (
+                            $idusuario
+                            ,$datos[perfil]
+                            );";
+
+            $query = $this->con->prepare($sql);
+            $query->execute();
+        } catch (PDOException $e) {
+            $this->con->rollback();
+            echo $e->getMessage();
+            return false;
+        }
+        
+        $this->con->commit();
+        return true;
     }
 
     public function deleteUsuario($datos) {
@@ -135,7 +158,10 @@ class UsuarioSql {
 
     public function datosUserEdit($datos) {
         try {
-            $sql = "SELECT * FROM usuario WHERE idusuario=$datos[idusuario];";
+            $sql = "SELECT *
+                    FROM usuario u
+                    INNER JOIN usuario_perfil AS up ON (u.idusuario = up.idusuario)
+                    WHERE u.idusuario =$datos[idusuario];";
             $query = $this->con->prepare($sql);
             $query->execute();
 //            $this->con->close_con();
@@ -147,6 +173,7 @@ class UsuarioSql {
     }
 
     public function updateUser($datos) {
+        $this->con->beginTransaction();
         try {
             $sql = "UPDATE usuario 
                     SET    nombre = '$datos[nombre]', 
@@ -156,19 +183,29 @@ class UsuarioSql {
                            condicion = '$datos[condicion]' 
                     WHERE  idusuario = $datos[idusuario];";
             $query = $this->con->prepare($sql);
-            $result = $query->execute();
-//            $this->con->close_con();
+            $query->execute();
         } catch (PDOException $e) {
-
+            $this->con->rollback();
             echo $e->getMessage();
+            return false;
+        }
+        
+        try {
+            $sql = "UPDATE usuario_perfil
+                    SET perfil_id=$datos[perfil]
+                    WHERE idusuario = $datos[idusuario];";
+            $query = $this->con->prepare($sql);
+            $query->execute();
+        } catch (PDOException $e) {
+            $this->con->rollback();
+            echo $e->getMessage();
+            return false;
         }
 
-        return $result;
+        $this->con->commit();
+        return true;
     }
 
-//echo"<pre><br>sql:";
-//print_r($sql);
-//echo"</pre><br>";         
 }
 
 //fin de la clase
