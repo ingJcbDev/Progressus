@@ -35,7 +35,7 @@ cargarDatosTemas = function () {
                 $("#titleTema").html(h5);
 
             } else {
-                alert('No existen datos registrados para la seleccion');
+                alert('No existen datos registrados para la seleccion2');
                 location.reload();
                 window.location.href = ruta;
             }

@@ -17,16 +17,15 @@ class PeriodoSql {
 
     public function allPeriodo($datos) {
         try {
-            $sql='select
-                            p.*, m.materias_id,m.descripcion as masteria
-                    from
-                            submenu_materias as sm
-                    inner join materias as m on
-                            (sm.materias_id = m.materias_id)
-                    inner join periodo as p on
-                            (sm.materias_id=p.materias_id)
-                    where
-                            m.materias_id = '.$datos['materia'].';';
+            $sql='
+                SELECT p.*
+                        ,m.materias_id
+                        ,m.descripcion AS masteria
+                FROM submenu_materias AS sm
+                INNER JOIN materias AS m ON (sm.materias_id = m.materias_id)
+                INNER JOIN materias_periodos AS mr ON (mr.materias_id = m.materias_id)
+                INNER JOIN periodo AS p ON (p.periodo_id = mr.periodo_id)
+                WHERE m.materias_id = '.$datos['materia'].';';
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);

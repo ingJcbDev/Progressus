@@ -28,7 +28,7 @@ cargarDatosMaterias = function () {
 
                 $("#listasMaterias").html(Html);
             }else{
-                alert('No existen datos registrados para la seleccion');
+                alert('No existen datos registrados para la seleccion*-*');
                 location.reload();
                 window.location.href = ruta;
             }

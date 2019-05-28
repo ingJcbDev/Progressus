@@ -41,15 +41,14 @@ class Preguntas {
 
     public function allPeriodo($datos) {
         try {
-            $sql = 'select
-                            m.descripcion as materia, p.descripcion as periodo
-                    from
-                            materias m
-                    inner join periodo p on
-                            (m.materias_id = p.materias_id)
-                    where
-                            m.materias_id = ' . $datos['materia'] . '
-                            and p.periodo_id = ' . $datos['periodo'] . ';';
+            $sql = '
+                    SELECT m.descripcion AS materia
+                            ,p.descripcion AS periodo
+                    FROM materias m
+                    INNER JOIN materias_periodos AS mp ON (m.materias_id = mp.materias_id)
+                    INNER JOIN periodo p ON (mp.periodo_id = p.periodo_id)
+                    WHERE m.materias_id = ' . $datos['materia'] . '
+                            AND p.periodo_id = ' . $datos['periodo'] . ';';
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetch(PDO::FETCH_ASSOC);

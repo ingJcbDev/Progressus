@@ -53,7 +53,7 @@ cargarDatosPeriodo = function () {
                 $("#titleMateria1").html(h51);
 
             } else {
-                alert('No existen datos registrados para la seleccion');
+                alert('No existen datos registrados para la seleccion1');
                 location.reload();
                 window.location.href = ruta;
             }

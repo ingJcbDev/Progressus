@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-05-2019 a las 07:10:46
+-- Tiempo de generación: 28-05-2019 a las 08:44:59
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -45,6 +45,52 @@ INSERT INTO `materias` (`materias_id`, `descripcion`) VALUES
 (5, 'Sociales grado 7'),
 (6, 'Quimica grado 7'),
 (7, 'Biologia Grado 11');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `materias_periodos`
+--
+
+CREATE TABLE `materias_periodos` (
+  `matrias_periodos_id` int(11) NOT NULL,
+  `periodo_id` int(11) NOT NULL,
+  `materias_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `materias_periodos`
+--
+
+INSERT INTO `materias_periodos` (`matrias_periodos_id`, `periodo_id`, `materias_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 1),
+(4, 4, 1),
+(5, 1, 2),
+(6, 2, 2),
+(7, 3, 2),
+(8, 4, 2),
+(9, 1, 3),
+(10, 2, 3),
+(11, 3, 3),
+(12, 4, 3),
+(13, 1, 4),
+(14, 2, 4),
+(15, 3, 4),
+(16, 4, 4),
+(17, 1, 5),
+(18, 2, 5),
+(19, 3, 5),
+(20, 4, 5),
+(21, 1, 6),
+(22, 2, 6),
+(23, 3, 6),
+(24, 4, 6),
+(25, 1, 7),
+(26, 2, 7),
+(27, 3, 7),
+(28, 4, 7);
 
 -- --------------------------------------------------------
 
@@ -121,7 +167,9 @@ INSERT INTO `menu_submenu` (`menu_submenu_id`, `menu_id`, `submenu_id`, `perfil_
 (28, 5, 8, 5),
 (29, 5, 8, 6),
 (30, 5, 8, 7),
-(31, 5, 8, 8);
+(31, 5, 8, 8),
+(32, 5, 8, 1),
+(33, 5, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -221,15 +269,7 @@ INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) 
 (1, 1, 'periodo 1', '1'),
 (2, 1, 'periodo 2', '1'),
 (3, 1, 'periodo 3', '1'),
-(4, 1, 'periodo 4', '1'),
-(5, 2, 'periodo 1', '1'),
-(6, 2, 'periodo 2', '1'),
-(7, 2, 'periodo 3', '1'),
-(8, 2, 'periodo 4', '1'),
-(9, 7, 'periodo 1', '1'),
-(10, 7, 'periodo 2', '1'),
-(11, 7, 'periodo 3', '1'),
-(12, 7, 'periodo 4', '1');
+(4, 1, 'periodo 4', '1');
 
 -- --------------------------------------------------------
 
@@ -243,16 +283,6 @@ CREATE TABLE `periodos_temas` (
   `periodo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `periodos_temas`
---
-
-INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VALUES
-(1, 1, 1),
-(2, 2, 2),
-(3, 3, 1),
-(4, 4, 9);
-
 -- --------------------------------------------------------
 
 --
@@ -265,19 +295,6 @@ CREATE TABLE `preguntas` (
   `descripcion` varchar(255) NOT NULL,
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `preguntas`
---
-
-INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_estado`) VALUES
-(1, 1, 'pregunta 1', '1'),
-(2, 1, 'pregunta 2', '1'),
-(3, 2, 'p1 periodo 2', '1'),
-(4, 2, 'p2 periodo 2', '1'),
-(5, 3, 'p1 per1', '1'),
-(6, 3, 'p2 per1', '1'),
-(7, 4, 'Las mitocondrias son orgÃ¡nulos celulares cuya funciÃ³n principal es', '1');
 
 -- --------------------------------------------------------
 
@@ -293,40 +310,6 @@ CREATE TABLE `pregunta_detalle` (
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `pregunta_detalle`
---
-
-INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripcion`, `respuesta`, `sw_estado`) VALUES
-(1, 1, 'respuesta 1 tema 1', '0', '1'),
-(2, 1, 'respuesta 2 tema 1', '0', '1'),
-(3, 1, 'respuesta 3 tema 1', '1', '1'),
-(4, 1, 'respuesta 4 tema 1', '0', '1'),
-(5, 2, 'respuesta 2-1 tema 1', '0', '1'),
-(6, 2, 'respuesta 2-2 tema 1', '0', '1'),
-(7, 2, 'respuesta 2-2 tema 1', '0', '1'),
-(8, 2, 'respuesta 2-4 tema 1', '1', '1'),
-(9, 3, 'r1', '0', '1'),
-(10, 3, 'r2', '0', '1'),
-(11, 3, 'r3', '1', '1'),
-(12, 3, 'r4', '0', '1'),
-(13, 4, 'r1 p2', '0', '1'),
-(14, 4, 'r2 p2', '0', '1'),
-(15, 4, 'r3 p2', '1', '1'),
-(16, 4, 'r4 p2', '0', '1'),
-(17, 5, 'r1 p1', '0', '1'),
-(18, 5, 'r2 p1', '0', '1'),
-(19, 5, 'r3 p1', '1', '1'),
-(20, 5, 'r4 p1', '0', '1'),
-(21, 6, 'r1 p1', '0', '1'),
-(22, 6, 'r2 p1', '0', '1'),
-(23, 6, 'r3 p1', '0', '1'),
-(24, 6, 'r4 p1', '1', '1'),
-(25, 7, 'La fotosÃ­ntesis', '0', '1'),
-(26, 7, 'La respiraciÃ³n celular', '0', '1'),
-(27, 7, 'La mitosis', '0', '1'),
-(28, 7, 'La sÃ­ntesis de proteÃ­nas ', '1', '1');
-
 -- --------------------------------------------------------
 
 --
@@ -339,16 +322,6 @@ CREATE TABLE `respuestas` (
   `pregunta_detalle_id` int(11) NOT NULL,
   `temas_notas_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `respuestas`
---
-
-INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
-(1, 1, 1, 1),
-(2, 2, 8, 1),
-(3, 5, 19, 2),
-(4, 6, 24, 2);
 
 -- --------------------------------------------------------
 
@@ -442,7 +415,16 @@ INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) V
 (1, 'titulo del tema 1 periodo 1', NULL, 'Este libro de texto que tienes en tus manos es una herramienta muy importante para que puedas desarrollar los aprendizajes de la mejor manera. Un libro de texto no debe ser la única fuente de investiga- ción y de descubrimiento, pero siempre es un buen aliado que te permite descubrir por ti mismo la maravilla de aprender. El Ministerio de Educación ha realizado un ajuste curricular que busca mejores oportunidades de aprendizaje para todos los estudiantes del país en el marco de un proyecto que propicia su desarrollo personal pleno y su integración en una sociedad guiada por los principios del Buen Vivir, la participación democrática y la convivencia armónica.', '1'),
 (2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1'),
 (3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1'),
-(4, 'Las mitocondrias ', NULL, 'Las mitocondrias son orgÃ¡nulos celulares encargados de suministrar la mayor parte de la energÃ­a necesaria para la actividad celular (respiraciÃ³n celular).â€‹ ActÃºan como centrales energÃ©ticas de la cÃ©lula y sintetizan ATP a expensas de los carburantes metabÃ³licos (glucosa, Ã¡cidos grasos y aminoÃ¡cidos).', '1');
+(4, 'Las mitocondrias ', NULL, 'Las mitocondrias son orgÃ¡nulos celulares encargados de suministrar la mayor parte de la energÃ­a necesaria para la actividad celular (respiraciÃ³n celular).â€‹ ActÃºan como centrales energÃ©ticas de la cÃ©lula y sintetizan ATP a expensas de los carburantes metabÃ³licos (glucosa, Ã¡cidos grasos y aminoÃ¡cidos).', '1'),
+(5, 'matemÃ¡ticas suma y resta', NULL, 'en este tema se evaluar las operaciones de suma y resta', '1'),
+(6, 'matemÃ¡tica suma y resta', NULL, 'en este tema se evaluar las operaciones de suma y resta', '1'),
+(7, 'matematicas ', NULL, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '1'),
+(8, 'mate g 6 ', NULL, 'ssssssssssssssssss', '1'),
+(9, 'sociales 1 p', NULL, 'dddddddddddd', '1'),
+(10, 'sociales capital del valle', NULL, 'bgfhhhhhhhhhhh', '1'),
+(11, 'Centro del valle', NULL, 'xxxxxxxxxxxxxxxxxxxxxx', '1'),
+(12, 'hogar del seÃ±or de los milagros', NULL, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '1'),
+(13, 'sociales', NULL, 'xxxxxxxxxxxxxxxxx', '1');
 
 -- --------------------------------------------------------
 
@@ -456,14 +438,6 @@ CREATE TABLE `temas_notas` (
   `nota` decimal(10,1) NOT NULL,
   `idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `temas_notas`
---
-
-INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
-(1, 1, '2.5', 32),
-(2, 3, '5.0', 32);
 
 -- --------------------------------------------------------
 
@@ -496,7 +470,9 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (32, 'admin a.', 'CC', '2344343434', 'cauca seco', '547646656', 'admin', 'admin', '1', 1),
 (33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
 (34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
-(38, 'sebastian villada', 'TI', '23456789087654', 'cali', '4354687', 'sebas@gmail.com', 'sebas', '1', 1);
+(38, 'sebastian villada', 'TI', '23456789087654', 'cali', '4354687', 'sebas@gmail.com', 'sebas', '1', 1),
+(39, 'stevan', 'TI', '10058765', 'calle34a', '124635', 'stevan@gmail.com', 'stevan23', '1', 1),
+(40, 'julio', 'CC', '56898765', 'calle34', '8586868494', 'julio.24@gmail.com', 'julio67', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -518,7 +494,9 @@ INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VAL
 (1, 32, 1),
 (2, 31, 2),
 (3, 34, 4),
-(7, 38, 8);
+(7, 38, 3),
+(8, 39, 8),
+(9, 40, 2);
 
 --
 -- Índices para tablas volcadas
@@ -529,6 +507,14 @@ INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VAL
 --
 ALTER TABLE `materias`
   ADD PRIMARY KEY (`materias_id`);
+
+--
+-- Indices de la tabla `materias_periodos`
+--
+ALTER TABLE `materias_periodos`
+  ADD PRIMARY KEY (`matrias_periodos_id`),
+  ADD KEY `periodo_matrias_periodos_fk` (`periodo_id`),
+  ADD KEY `materias_matrias_periodos_fk` (`materias_id`);
 
 --
 -- Indices de la tabla `menu`
@@ -656,6 +642,12 @@ ALTER TABLE `materias`
   MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `materias_periodos`
+--
+ALTER TABLE `materias_periodos`
+  MODIFY `matrias_periodos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
@@ -665,7 +657,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT de la tabla `menu_submenu`
 --
 ALTER TABLE `menu_submenu`
-  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -689,25 +681,25 @@ ALTER TABLE `periodo`
 -- AUTO_INCREMENT de la tabla `periodos_temas`
 --
 ALTER TABLE `periodos_temas`
-  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -731,29 +723,36 @@ ALTER TABLE `system_variables`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_perfil`
 --
 ALTER TABLE `usuario_perfil`
-  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `materias_periodos`
+--
+ALTER TABLE `materias_periodos`
+  ADD CONSTRAINT `materias_matrias_periodos_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`),
+  ADD CONSTRAINT `periodo_matrias_periodos_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`);
 
 --
 -- Filtros para la tabla `menu_submenu`
@@ -768,12 +767,6 @@ ALTER TABLE `menu_submenu`
 ALTER TABLE `perfil_menu`
   ADD CONSTRAINT `menu_perfil_menu_fk` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `perfil_perfil_menu_fk` FOREIGN KEY (`perfil_id`) REFERENCES `perfil` (`perfil_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `periodo`
---
-ALTER TABLE `periodo`
-  ADD CONSTRAINT `materias_periodo_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `periodos_temas`
