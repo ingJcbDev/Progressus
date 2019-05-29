@@ -24,9 +24,6 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
   <div class="col-6">
                     
                     <div class="card" style="width: 18rem;">-->
-<?php
-//         echo'<img class="card-img-top" src="'.$host.'assets/images_load/default-avatar.png">';
-?>                        
 <!--                        <div class="card-body">
                             <h5 class="card-title">Sube una imagen</h5>
                             <p class="card-text">La imagen puede ser en formato .jpg, o .png.</p>
@@ -60,6 +57,10 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
             <div class="modal-body">
 
                 <form id="registroPreguntas" name="registroPreguntas" method="POST" onsubmit="return insertarPreguntas();" autocomplete="off">
+                    
+                    <?php
+                    echo'<input type="hidden" name="materia1" id="materia1" value="' . $_SESSION['dataUser']['M']['materia'] . '" />';
+                    ?>                        
 
                     <div class="form-group">
                         <label for="temaTextarea"><b>Titulo:</b></label>
@@ -142,6 +143,15 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
             </table>
 
         </div>
+    <div style="text-align: center;">
+
+        <?php
+        echo'
+               <a href="' . $host . 'vistas/periodo.php" class="btn btn-light"><i class="fa fa-reply" aria-hidden="true"></i> Volver</a>
+            ';
+        ?>
+    </div>        
+    <br>
     </div>
 
 

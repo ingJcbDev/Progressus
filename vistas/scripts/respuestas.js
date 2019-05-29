@@ -43,7 +43,7 @@ cargarDatosTemas = function () {
 
         },
         error: function (data) {
-            alert('error *-*');
+            alert('error *-*3');
         }
     });
 }
@@ -127,7 +127,7 @@ modalParaRespuestas = function (temas_id) {
 
                     },
                     error: function (data) {
-                        alert('error *-*');
+                        alert('error *-*4');
                     }
                 });
 
@@ -136,7 +136,7 @@ modalParaRespuestas = function (temas_id) {
 
         },
         error: function (data_tr) {
-            alert('error *-*');
+            alert('error *-*5');
         }
     });
 
@@ -220,7 +220,7 @@ preguntas = function (temas_id) {
             $("#preguntas").html(Html);
         },
         error: function (data) {
-            alert('error *-*');
+            alert('error *-*2');
         }
     });
 

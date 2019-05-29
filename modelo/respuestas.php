@@ -17,20 +17,26 @@ class Respuestas {
 
     public function loadPreguntas($datos) {
         try {
-            $sql = "SELECT m.materias_id
-                            ,m.descripcion AS materia
-                            ,p.periodo_id
-                            ,p.descripcion AS periodo
-                            ,t.temas_id
-                            ,t.titulo AS titulo_tema
-                            ,t.sw_estado
-                    FROM materias m
-                    INNER JOIN periodo p ON (m.materias_id = p.materias_id)
-                    INNER JOIN periodos_temas pt ON (p.periodo_id = pt.periodo_id)
-                    INNER JOIN temas t ON (pt.temas_id = t.temas_id)
-                    WHERE m.materias_id = " . $datos['materia'] . "
-                            AND t.sw_estado = '1'
-                            AND p.periodo_id = " . $datos['periodo'] . ";";
+            $sql = "
+select m.materias_id
+	,m.descripcion AS materia
+	,p.periodo_id
+	,p.descripcion AS periodo	
+	,t.temas_id
+	,t.titulo AS titulo_tema
+	,t.sw_estado	
+from materias_periodos mp 
+inner join materias m on (m.materias_id=mp.materias_id)
+inner join periodo p on (p.periodo_id=mp.periodo_id)
+inner join periodos_temas pt on (pt.periodo_id=mp.periodo_id)
+inner join temas t on (t.temas_id=pt.temas_id and t.materias_id=m.materias_id)
+where mp.materias_id = " . $datos['materia'] . "
+and mp.periodo_id = " . $datos['periodo'] . "
+and t.sw_estado='1';";
+//        echo"<pre><br>sql:";
+//        print_r($sql);
+//        echo"</pre><br>";
+////        die();            
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -116,10 +122,6 @@ class Respuestas {
     }
 
     public function insertNotas($datos, $nDef, $idusuario) {
-//        echo"<pre><br>sql:";
-//        print_r($datos);
-//        echo"</pre><br>";
-//        die();
 
         $tema_id = $datos['tema_id'];
 

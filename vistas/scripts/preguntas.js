@@ -78,6 +78,16 @@ insertarPreguntas = function () {
 
     var datos = $('#registroPreguntas').serialize();
     var ruta = $('#ruta').val();
+    
+    
+//    var menu = $("#menuActivo").val();
+//    var submenu1 = $("#subMenuActivo").val();
+//    var materia = $("#materia").val();
+//    var periodo = $("#periodo").val();
+////    var ruta = $("#ruta").val();
+////    var perfil = $("#perfil").val();
+//
+//    datos = {menu: menu, submenu: submenu1, materia: materia, periodo: periodo};    
 
     var url = ruta + "ajax/preguntas.php?op=insert";
     $.ajax({

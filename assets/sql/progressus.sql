@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2019 a las 08:44:59
+-- Tiempo de generación: 29-05-2019 a las 08:09:37
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -256,7 +256,6 @@ INSERT INTO `perfil_menu` (`perfil_menu_id`, `perfil_id`, `menu_id`) VALUES
 
 CREATE TABLE `periodo` (
   `periodo_id` int(11) NOT NULL,
-  `materias_id` int(11) NOT NULL,
   `descripcion` varchar(30) NOT NULL,
   `sw_estado` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -265,11 +264,11 @@ CREATE TABLE `periodo` (
 -- Volcado de datos para la tabla `periodo`
 --
 
-INSERT INTO `periodo` (`periodo_id`, `materias_id`, `descripcion`, `sw_estado`) VALUES
-(1, 1, 'periodo 1', '1'),
-(2, 1, 'periodo 2', '1'),
-(3, 1, 'periodo 3', '1'),
-(4, 1, 'periodo 4', '1');
+INSERT INTO `periodo` (`periodo_id`, `descripcion`, `sw_estado`) VALUES
+(1, 'periodo 1', '1'),
+(2, 'periodo 2', '1'),
+(3, 'periodo 3', '1'),
+(4, 'periodo 4', '1');
 
 -- --------------------------------------------------------
 
@@ -283,6 +282,29 @@ CREATE TABLE `periodos_temas` (
   `periodo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `periodos_temas`
+--
+
+INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VALUES
+(1, 1, 1),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 2),
+(5, 5, 3),
+(6, 6, 4),
+(7, 7, 1),
+(8, 8, 2),
+(9, 9, 4),
+(10, 10, 3),
+(11, 11, 4),
+(12, 12, 1),
+(13, 13, 2),
+(14, 14, 3),
+(15, 15, 4),
+(16, 16, 3),
+(17, 17, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -295,6 +317,29 @@ CREATE TABLE `preguntas` (
   `descripcion` varchar(255) NOT NULL,
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `preguntas`
+--
+
+INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_estado`) VALUES
+(1, 1, 'M 6 p 1', '1'),
+(2, 2, 'M 7 P 1', '1'),
+(3, 3, 'M 6 P 2', '1'),
+(4, 4, 'M 6 P 2', '1'),
+(5, 5, 'M 6 P 3', '1'),
+(6, 6, 'M 6 P 4', '1'),
+(7, 7, 'S 6 P 1', '1'),
+(8, 8, 'S 6 P 2', '1'),
+(9, 9, 'S 6 P 4', '1'),
+(10, 10, 'M 7 P 3', '1'),
+(11, 11, 'M 7 P 4', '1'),
+(12, 12, 'S 7 P 1', '1'),
+(13, 13, 'S 7 P 2', '1'),
+(14, 14, 'S 7 P 3', '1'),
+(15, 15, 'S 7 P 4', '1'),
+(16, 16, 'S 6 P 3', '1'),
+(17, 17, 'S 6 1 P 3', '1');
 
 -- --------------------------------------------------------
 
@@ -310,6 +355,80 @@ CREATE TABLE `pregunta_detalle` (
   `sw_estado` varchar(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `pregunta_detalle`
+--
+
+INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripcion`, `respuesta`, `sw_estado`) VALUES
+(1, 1, '1', '1', '1'),
+(2, 1, '2', '0', '1'),
+(3, 1, '3', '0', '1'),
+(4, 1, '4', '0', '1'),
+(5, 2, '1', '0', '1'),
+(6, 2, '2', '0', '1'),
+(7, 2, '3', '0', '1'),
+(8, 2, '4', '1', '1'),
+(9, 3, '1', '0', '1'),
+(10, 3, '2', '0', '1'),
+(11, 3, '3', '0', '1'),
+(12, 3, '4', '1', '1'),
+(13, 4, '1', '1', '1'),
+(14, 4, '2', '0', '1'),
+(15, 4, '3', '0', '1'),
+(16, 4, '4', '0', '1'),
+(17, 5, '1', '0', '1'),
+(18, 5, '2', '0', '1'),
+(19, 5, '3', '1', '1'),
+(20, 5, '6', '0', '1'),
+(21, 6, '1', '1', '1'),
+(22, 6, '2', '0', '1'),
+(23, 6, '3', '0', '1'),
+(24, 6, '4', '0', '1'),
+(25, 7, '1', '0', '1'),
+(26, 7, '2', '0', '1'),
+(27, 7, '3', '0', '1'),
+(28, 7, '4', '1', '1'),
+(29, 8, '1', '0', '1'),
+(30, 8, '2', '0', '1'),
+(31, 8, '4', '0', '1'),
+(32, 8, '3', '1', '1'),
+(33, 9, '1', '1', '1'),
+(34, 9, '2', '0', '1'),
+(35, 9, '3', '0', '1'),
+(36, 9, '4', '0', '1'),
+(37, 10, '1', '0', '1'),
+(38, 10, '2', '0', '1'),
+(39, 10, '3', '0', '1'),
+(40, 10, '4', '1', '1'),
+(41, 11, '1', '0', '1'),
+(42, 11, '2', '0', '1'),
+(43, 11, '3', '0', '1'),
+(44, 11, '4', '1', '1'),
+(45, 12, '1', '0', '1'),
+(46, 12, '2', '0', '1'),
+(47, 12, '3', '0', '1'),
+(48, 12, '4', '1', '1'),
+(49, 13, '1', '0', '1'),
+(50, 13, '1', '0', '1'),
+(51, 13, '1', '0', '1'),
+(52, 13, '1', '1', '1'),
+(53, 14, '1', '0', '1'),
+(54, 14, '2', '0', '1'),
+(55, 14, '3', '0', '1'),
+(56, 14, '4', '1', '1'),
+(57, 15, '1', '0', '1'),
+(58, 15, '2', '0', '1'),
+(59, 15, '3', '0', '1'),
+(60, 15, '4', '1', '1'),
+(61, 16, '1', '0', '1'),
+(62, 16, '2', '0', '1'),
+(63, 16, '3', '0', '1'),
+(64, 16, '4', '1', '1'),
+(65, 17, '1', '0', '1'),
+(66, 17, '2', '0', '1'),
+(67, 17, '3', '0', '1'),
+(68, 17, '4', '1', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -322,6 +441,29 @@ CREATE TABLE `respuestas` (
   `pregunta_detalle_id` int(11) NOT NULL,
   `temas_notas_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
+(1, 2, 5, 1),
+(2, 3, 12, 2),
+(3, 10, 40, 3),
+(4, 11, 43, 4),
+(5, 12, 45, 5),
+(6, 13, 52, 6),
+(7, 14, 56, 7),
+(8, 15, 60, 8),
+(9, 1, 4, 9),
+(10, 4, 16, 10),
+(11, 5, 20, 11),
+(12, 6, 24, 12),
+(13, 7, 25, 13),
+(14, 8, 32, 14),
+(15, 9, 33, 15),
+(16, 16, 61, 16),
+(17, 17, 68, 17);
 
 -- --------------------------------------------------------
 
@@ -402,7 +544,7 @@ INSERT INTO `system_variables` (`variable_id`, `descripcion`, `valor`) VALUES
 CREATE TABLE `temas` (
   `temas_id` int(11) NOT NULL,
   `titulo` varchar(100) NOT NULL,
-  `foto` varchar(100) DEFAULT NULL,
+  `materias_id` int(11) DEFAULT NULL,
   `descripcion` mediumtext NOT NULL,
   `sw_estado` varchar(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -411,20 +553,24 @@ CREATE TABLE `temas` (
 -- Volcado de datos para la tabla `temas`
 --
 
-INSERT INTO `temas` (`temas_id`, `titulo`, `foto`, `descripcion`, `sw_estado`) VALUES
-(1, 'titulo del tema 1 periodo 1', NULL, 'Este libro de texto que tienes en tus manos es una herramienta muy importante para que puedas desarrollar los aprendizajes de la mejor manera. Un libro de texto no debe ser la única fuente de investiga- ción y de descubrimiento, pero siempre es un buen aliado que te permite descubrir por ti mismo la maravilla de aprender. El Ministerio de Educación ha realizado un ajuste curricular que busca mejores oportunidades de aprendizaje para todos los estudiantes del país en el marco de un proyecto que propicia su desarrollo personal pleno y su integración en una sociedad guiada por los principios del Buen Vivir, la participación democrática y la convivencia armónica.', '1'),
-(2, 'tema del periodo 2 de matematicas', NULL, 'tema tema ', '1'),
-(3, 'tema 2 periodo 1', NULL, 'tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1tema 2 periodo 1', '1'),
-(4, 'Las mitocondrias ', NULL, 'Las mitocondrias son orgÃ¡nulos celulares encargados de suministrar la mayor parte de la energÃ­a necesaria para la actividad celular (respiraciÃ³n celular).â€‹ ActÃºan como centrales energÃ©ticas de la cÃ©lula y sintetizan ATP a expensas de los carburantes metabÃ³licos (glucosa, Ã¡cidos grasos y aminoÃ¡cidos).', '1'),
-(5, 'matemÃ¡ticas suma y resta', NULL, 'en este tema se evaluar las operaciones de suma y resta', '1'),
-(6, 'matemÃ¡tica suma y resta', NULL, 'en este tema se evaluar las operaciones de suma y resta', '1'),
-(7, 'matematicas ', NULL, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '1'),
-(8, 'mate g 6 ', NULL, 'ssssssssssssssssss', '1'),
-(9, 'sociales 1 p', NULL, 'dddddddddddd', '1'),
-(10, 'sociales capital del valle', NULL, 'bgfhhhhhhhhhhh', '1'),
-(11, 'Centro del valle', NULL, 'xxxxxxxxxxxxxxxxxxxxxx', '1'),
-(12, 'hogar del seÃ±or de los milagros', NULL, 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', '1'),
-(13, 'sociales', NULL, 'xxxxxxxxxxxxxxxxx', '1');
+INSERT INTO `temas` (`temas_id`, `titulo`, `materias_id`, `descripcion`, `sw_estado`) VALUES
+(1, 'M 6 p 1', 1, 'xxxxxxxxxx', '1'),
+(2, 'M 7 P 1', 4, 'xxxxxx', '1'),
+(3, 'M 6 P 2', 4, 'xxxxxxxxxxxxxxxxxxx', '1'),
+(4, 'M 6 P 2', 1, 'xxxxxxxxxxxxxxxxx', '1'),
+(5, 'M 6 P 3', 1, 'xxxxxxxxxxxxxxxxxxx', '1'),
+(6, 'M 6 P 4', 1, 'xxxxxxxxxxxxxxxxxxxxxxxx', '1'),
+(7, 'S 6 P 1', 2, 'xxxxxxxxxxxxxxxxxxxxx', '1'),
+(8, 'S 6 P 2', 2, 'xxxxxxxxxxxxxx', '1'),
+(9, 'S 6 P 4', 2, 'xxxxxxxxxxxxxx', '1'),
+(10, 'M 7 P 3', 4, 'xxxxxxxxxxx', '1'),
+(11, 'M 7 P 4', 4, 'xxxxxxxxxxxx', '1'),
+(12, 'S 7 P 1', 5, 'xxxxxxxxxxxxxxxx', '1'),
+(13, 'S 7 P 2', 5, 'xxxxxxxxxxxxxxxxxxxxx', '1'),
+(14, 'S 7 P 3', 5, 'xxxxxxxxxx', '1'),
+(15, 'S 7 P 4', 5, 'xxxxxxxxxxx', '1'),
+(16, 'S 6 P 3', 2, 'xxxxxxxxxxxxxxxxx', '1'),
+(17, 'S 6 1 P 3', 2, 'xxxxxxxxxxxxxxxxx', '1');
 
 -- --------------------------------------------------------
 
@@ -438,6 +584,29 @@ CREATE TABLE `temas_notas` (
   `nota` decimal(10,1) NOT NULL,
   `idusuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `temas_notas`
+--
+
+INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
+(1, 2, '0.0', 38),
+(2, 3, '5.0', 38),
+(3, 10, '5.0', 38),
+(4, 11, '0.0', 38),
+(5, 12, '0.0', 38),
+(6, 13, '5.0', 38),
+(7, 14, '5.0', 38),
+(8, 15, '5.0', 38),
+(9, 1, '0.0', 39),
+(10, 4, '0.0', 39),
+(11, 5, '0.0', 39),
+(12, 6, '0.0', 39),
+(13, 7, '0.0', 39),
+(14, 8, '5.0', 39),
+(15, 9, '5.0', 39),
+(16, 16, '0.0', 39),
+(17, 17, '5.0', 39);
 
 -- --------------------------------------------------------
 
@@ -472,7 +641,9 @@ INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`,
 (34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
 (38, 'sebastian villada', 'TI', '23456789087654', 'cali', '4354687', 'sebas@gmail.com', 'sebas', '1', 1),
 (39, 'stevan', 'TI', '10058765', 'calle34a', '124635', 'stevan@gmail.com', 'stevan23', '1', 1),
-(40, 'julio', 'CC', '56898765', 'calle34', '8586868494', 'julio.24@gmail.com', 'julio67', '1', 1);
+(40, 'julio', 'CC', '56898765', 'calle34', '8586868494', 'julio.24@gmail.com', 'julio67', '1', 1),
+(41, 'alexander', 'CC', '55556215', 'cali', '8454554', 'alex@gmail.com', 'alex', '1', 1),
+(42, 'abel lucumi', 'CC', '4564869', 'cali', '8454645', 'abel@gmail.com', 'abel', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -494,9 +665,11 @@ INSERT INTO `usuario_perfil` (`usuario_perfil_id`, `idusuario`, `perfil_id`) VAL
 (1, 32, 1),
 (2, 31, 2),
 (3, 34, 4),
-(7, 38, 3),
-(8, 39, 8),
-(9, 40, 2);
+(7, 38, 4),
+(8, 39, 3),
+(9, 40, 2),
+(10, 41, 3),
+(11, 42, 4);
 
 --
 -- Índices para tablas volcadas
@@ -549,8 +722,7 @@ ALTER TABLE `perfil_menu`
 -- Indices de la tabla `periodo`
 --
 ALTER TABLE `periodo`
-  ADD PRIMARY KEY (`periodo_id`),
-  ADD KEY `materias_periodo_fk` (`materias_id`);
+  ADD PRIMARY KEY (`periodo_id`);
 
 --
 -- Indices de la tabla `periodos_temas`
@@ -606,7 +778,8 @@ ALTER TABLE `system_variables`
 -- Indices de la tabla `temas`
 --
 ALTER TABLE `temas`
-  ADD PRIMARY KEY (`temas_id`);
+  ADD PRIMARY KEY (`temas_id`),
+  ADD KEY `temas_fk` (`materias_id`);
 
 --
 -- Indices de la tabla `temas_notas`
@@ -675,31 +848,31 @@ ALTER TABLE `perfil_menu`
 -- AUTO_INCREMENT de la tabla `periodo`
 --
 ALTER TABLE `periodo`
-  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `periodos_temas`
 --
 ALTER TABLE `periodos_temas`
-  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -723,25 +896,25 @@ ALTER TABLE `system_variables`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_perfil`
 --
 ALTER TABLE `usuario_perfil`
-  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `usuario_perfil_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -800,6 +973,12 @@ ALTER TABLE `respuestas`
 ALTER TABLE `submenu_materias`
   ADD CONSTRAINT `materias_submenu_materias_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `submenu_submenu_materias_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `temas`
+--
+ALTER TABLE `temas`
+  ADD CONSTRAINT `temas_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`);
 
 --
 -- Filtros para la tabla `temas_notas`

@@ -17,19 +17,24 @@ class Preguntas {
 
     public function loadPreguntas($datos) {
         try {
-            $sql = "SELECT m.materias_id
+            $sql = "
+                    SELECT m.materias_id
                             ,m.descripcion AS materia
                             ,p.periodo_id
                             ,p.descripcion AS periodo
                             ,t.temas_id
                             ,t.titulo AS titulo_tema
                             ,t.sw_estado
-                    FROM materias m
-                    INNER JOIN periodo p ON (m.materias_id = p.materias_id)
-                    INNER JOIN periodos_temas pt ON (p.periodo_id = pt.periodo_id)
-                    INNER JOIN temas t ON (pt.temas_id = t.temas_id)
-                    WHERE m.materias_id = " . $datos['materia'] . "
-                            AND p.periodo_id = " . $datos['periodo'] . ";";
+                    FROM materias_periodos mp
+                    INNER JOIN materias m ON (m.materias_id = mp.materias_id)
+                    INNER JOIN periodo p ON (p.periodo_id = mp.periodo_id)
+                    INNER JOIN periodos_temas pt ON (pt.periodo_id = mp.periodo_id)
+                    INNER JOIN temas t ON (
+                                    t.temas_id = pt.temas_id
+                                    AND t.materias_id = m.materias_id
+                                    )
+                    WHERE mp.materias_id = " . $datos['materia'] . "
+                            AND mp.periodo_id = " . $datos['periodo'] . ";";
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -86,13 +91,19 @@ class Preguntas {
         try {
             $sql = "INSERT INTO temas (
                                     titulo
+                                    ,materias_id
                                     ,descripcion
                                     )
                             VALUES (
                                     '" . $datos['tituloTema'] . "'
+                                    ," . $datos['materia1'] . "
                                     ,'" . $datos['temaTextarea'] . "'
                                     );";
 
+//echo"sql:<pre>";
+//print_r($sql);
+//echo"</pre>";
+//die();
             $query = $this->con->prepare($sql);
             $query->execute();
             $temas_id = $this->con->lastInsertId();
