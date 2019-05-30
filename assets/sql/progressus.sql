@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2019 a las 08:09:37
+-- Tiempo de generación: 30-05-2019 a las 09:37:34
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -170,6 +170,42 @@ INSERT INTO `menu_submenu` (`menu_submenu_id`, `menu_id`, `submenu_id`, `perfil_
 (31, 5, 8, 8),
 (32, 5, 8, 1),
 (33, 5, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nota_materia_periodo`
+--
+
+CREATE TABLE `nota_materia_periodo` (
+  `nota_materia_periodo_id` int(11) NOT NULL,
+  `periodo_id` int(11) NOT NULL,
+  `materias_id` int(11) NOT NULL,
+  `nota_periodo` decimal(10,1) NOT NULL,
+  `idusuario` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `nota_materia_periodo`
+--
+
+INSERT INTO `nota_materia_periodo` (`nota_materia_periodo_id`, `periodo_id`, `materias_id`, `nota_periodo`, `idusuario`) VALUES
+(1, 1, 4, '0.0', 38),
+(2, 3, 4, '5.0', 38),
+(3, 4, 4, '0.0', 38),
+(4, 2, 4, '5.0', 38),
+(5, 1, 5, '0.0', 38),
+(6, 3, 5, '5.0', 38),
+(7, 4, 5, '5.0', 38),
+(8, 2, 5, '5.0', 38),
+(9, 1, 1, '0.0', 39),
+(10, 2, 1, '0.0', 39),
+(11, 3, 1, '0.0', 39),
+(12, 4, 1, '0.0', 39),
+(13, 1, 2, '0.0', 39),
+(14, 2, 2, '5.0', 39),
+(15, 3, 2, '4.0', 39),
+(16, 4, 2, '5.0', 39);
 
 -- --------------------------------------------------------
 
@@ -463,7 +499,11 @@ INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`,
 (14, 8, 32, 14),
 (15, 9, 33, 15),
 (16, 16, 61, 16),
-(17, 17, 68, 17);
+(17, 17, 68, 17),
+(18, 16, 61, 18),
+(19, 17, 68, 19),
+(20, 16, 64, 20),
+(21, 7, 28, 21);
 
 -- --------------------------------------------------------
 
@@ -554,23 +594,23 @@ CREATE TABLE `temas` (
 --
 
 INSERT INTO `temas` (`temas_id`, `titulo`, `materias_id`, `descripcion`, `sw_estado`) VALUES
-(1, 'M 6 p 1', 1, 'xxxxxxxxxx', '1'),
-(2, 'M 7 P 1', 4, 'xxxxxx', '1'),
-(3, 'M 6 P 2', 4, 'xxxxxxxxxxxxxxxxxxx', '1'),
-(4, 'M 6 P 2', 1, 'xxxxxxxxxxxxxxxxx', '1'),
-(5, 'M 6 P 3', 1, 'xxxxxxxxxxxxxxxxxxx', '1'),
-(6, 'M 6 P 4', 1, 'xxxxxxxxxxxxxxxxxxxxxxxx', '1'),
-(7, 'S 6 P 1', 2, 'xxxxxxxxxxxxxxxxxxxxx', '1'),
-(8, 'S 6 P 2', 2, 'xxxxxxxxxxxxxx', '1'),
-(9, 'S 6 P 4', 2, 'xxxxxxxxxxxxxx', '1'),
-(10, 'M 7 P 3', 4, 'xxxxxxxxxxx', '1'),
-(11, 'M 7 P 4', 4, 'xxxxxxxxxxxx', '1'),
-(12, 'S 7 P 1', 5, 'xxxxxxxxxxxxxxxx', '1'),
-(13, 'S 7 P 2', 5, 'xxxxxxxxxxxxxxxxxxxxx', '1'),
-(14, 'S 7 P 3', 5, 'xxxxxxxxxx', '1'),
-(15, 'S 7 P 4', 5, 'xxxxxxxxxxx', '1'),
-(16, 'S 6 P 3', 2, 'xxxxxxxxxxxxxxxxx', '1'),
-(17, 'S 6 1 P 3', 2, 'xxxxxxxxxxxxxxxxx', '1');
+(1, 'M 6 p 1', 1, 'tema 1', '1'),
+(2, 'M 7 P 1', 4, 'tema 2', '1'),
+(3, 'M 6 P 2', 4, 'tema 3', '1'),
+(4, 'M 6 P 2', 1, 'tema 4', '1'),
+(5, 'M 6 P 3', 1, 'tema 5', '1'),
+(6, 'M 6 P 4', 1, 'tema 6', '1'),
+(7, 'S 6 P 1', 2, 'tema 7', '1'),
+(8, 'S 6 P 2', 2, 'tema 8', '1'),
+(9, 'S 6 P 4', 2, 'tema 9', '1'),
+(10, 'M 7 P 3', 4, 'tema 10', '1'),
+(11, 'M 7 P 4', 4, 'tema 11', '1'),
+(12, 'S 7 P 1', 5, 'tema 12', '1'),
+(13, 'S 7 P 2', 5, 'tema 13', '1'),
+(14, 'S 7 P 3', 5, 'tema 14', '1'),
+(15, 'S 7 P 4', 5, 'tema 15', '1'),
+(16, 'S 6 P 3', 2, 'tema 16', '1'),
+(17, 'S 6 1 P 3', 2, 'tema 17', '1');
 
 -- --------------------------------------------------------
 
@@ -605,8 +645,12 @@ INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VA
 (13, 7, '0.0', 39),
 (14, 8, '5.0', 39),
 (15, 9, '5.0', 39),
-(16, 16, '0.0', 39),
-(17, 17, '5.0', 39);
+(16, 16, '3.0', 39),
+(17, 17, '5.0', 39),
+(18, 16, '0.0', 32),
+(19, 17, '5.0', 32),
+(20, 16, '5.0', 32),
+(21, 7, '5.0', 32);
 
 -- --------------------------------------------------------
 
@@ -703,6 +747,15 @@ ALTER TABLE `menu_submenu`
   ADD KEY `submenu_menu_submenu_fk` (`submenu_id`),
   ADD KEY `menu_menu_submenu_fk` (`menu_id`),
   ADD KEY `menu_submenu_fk` (`perfil_id`);
+
+--
+-- Indices de la tabla `nota_materia_periodo`
+--
+ALTER TABLE `nota_materia_periodo`
+  ADD PRIMARY KEY (`nota_materia_periodo_id`),
+  ADD KEY `materias_nota_materia_periodo_fk` (`materias_id`),
+  ADD KEY `periodo_nota_materia_periodo_fk` (`periodo_id`),
+  ADD KEY `nota_materia_periodo_fk` (`idusuario`);
 
 --
 -- Indices de la tabla `perfil`
@@ -833,6 +886,12 @@ ALTER TABLE `menu_submenu`
   MODIFY `menu_submenu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT de la tabla `nota_materia_periodo`
+--
+ALTER TABLE `nota_materia_periodo`
+  MODIFY `nota_materia_periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT de la tabla `perfil`
 --
 ALTER TABLE `perfil`
@@ -872,7 +931,7 @@ ALTER TABLE `pregunta_detalle`
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -902,7 +961,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -933,6 +992,14 @@ ALTER TABLE `materias_periodos`
 ALTER TABLE `menu_submenu`
   ADD CONSTRAINT `menu_menu_submenu_fk` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`menu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `submenu_menu_submenu_fk` FOREIGN KEY (`submenu_id`) REFERENCES `submenu` (`submenu_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `nota_materia_periodo`
+--
+ALTER TABLE `nota_materia_periodo`
+  ADD CONSTRAINT `materias_nota_materia_periodo_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`),
+  ADD CONSTRAINT `nota_materia_periodo_fk` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`),
+  ADD CONSTRAINT `periodo_nota_materia_periodo_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`);
 
 --
 -- Filtros para la tabla `perfil_menu`

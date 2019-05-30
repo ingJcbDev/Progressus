@@ -91,7 +91,12 @@ menuActivo = function (menu, submenu, materia, periodo) {
 modalParaRespuestas = function (temas_id) {
     var ruta = $("#ruta").val();
     var data_tr = null;
-    datos = {temas_id: temas_id};
+    
+    
+    var materia = $("#materia").val();
+    var periodo = $("#periodo").val();
+    
+    datos = {temas_id: temas_id, materia1: materia, periodo1: periodo};
 
 
     $.ajax({

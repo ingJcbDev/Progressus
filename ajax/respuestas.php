@@ -37,6 +37,7 @@ switch ($_GET["op"]) {
         $datos = $_REQUEST;
         $idusuario=$_SESSION['dataUser']['idusuario'];
         $rspta = $respuestas->temaRegistrado($datos, $idusuario);
+        $rs = $respuestas->insertNotaFinPeriodo($datos, $idusuario);
         $rspta = utf8_string_array_encode($rspta);
         echo json_encode($rspta);
         break;
@@ -65,12 +66,14 @@ switch ($_GET["op"]) {
             }
         }
         $nDef = number_format($nDef, 1, '.', '');
-
+        
         $rspta = $respuestas->insertNotas($datos, $nDef, $idusuario);
+
+        $rs = $respuestas->insertNotaFinPeriodo($datos, $idusuario);
         
         $res['status'] = $rspta;
         $res['calificacion'] = $nDef;
-        $res['message'] = ($rspta == true) ? "Datos actualizados satisfactoriamente." : "Error al actualizar los datos.";  
+        $res['message'] = ($rspta == true && $res == true) ? "Datos actualizados satisfactoriamente." : "Error al actualizar los datos.";  
        
 //        echo"-->:<pre><br>";
 //        var_dump($res);

@@ -19,12 +19,40 @@ echo'<input type="hidden" name="perfil" id="perfil" value="' . $_SESSION['dataUs
 echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 ?>
 
-<h1>Reporte Estudiante</h1>
+<div class="container box">
+    <div class="card">
+        <div class="card-header">
+            <center><h5><div id="titulo" name="titulo">Reporte Estudiante</div></h5></center>
+        </div>
+        <div class="card-body">
+            <br>
+            <table id="reporteEstudiantes" name="reporteEstudiantes" class="table display" style='width:100%; font-size:11px;'>
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Periodo 1</th>
+                        <th>Periodo 2</th>
+                        <th>Periodo 3</th>
+                        <th>Periodo 4</th>
+                        <th>Nota Final</th>
+                    </tr>
+                </thead>
+            </table>
+
+        </div>
+    <br>
+    </div>
+
+
+</div>
+
+
+
 
 <?php
 require 'structure/footer.php';
 ?>
 
-<!--<script type="text/javascript" src="scripts/preguntas.js" ></script>-->
+<script type="text/javascript" src="scripts/reporte_estudiante.js"></script>
 
 

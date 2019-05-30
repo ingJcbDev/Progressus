@@ -57,8 +57,10 @@ echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
             <div class="modal-body">
 
                 <form id="formCalificarRespuestas" name="formCalificarRespuestas" method="POST" onsubmit="return calificarRespuestas();" autocomplete="off">
-
-
+                    <?php
+                    echo'<input type="hidden" name="materia1" id="materia1" value="' . $_SESSION['dataUser']['M']['materia'] . '" />';
+                    echo'<input type="hidden" name="periodo1" id="periodo1" value="' . $_SESSION['dataUser']['M']['periodo'] . '" />';
+                    ?>                    
                     <div class="card w-100">
                         <div class="card-body">
                             <div class="container">
