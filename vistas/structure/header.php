@@ -47,6 +47,8 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
         <link rel="stylesheet" href="' . $host . 'assets/dataTablesUi/css/jquery-ui.css"/>
         <!-- bootstrap datatable css-->
         <link rel="stylesheet" href="' . $host . 'assets/dataTablesUi/css/dataTables.jqueryui.min.css"/>
+           
+        <link rel="stylesheet" type="text/css" href="' . $host . 'assets/dataTablesUi/css/buttons.dataTables.min.css"/>    
 
         <!-- bootstrap icons -->
         <link rel="stylesheet" href="' . $host . 'assets/font-awesome-4.7.0/css/font-awesome.css">    

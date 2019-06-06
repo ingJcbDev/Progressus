@@ -17,22 +17,10 @@ class Reporte_estudiantes {
 
     public function allNotas($datos, $idusuario) {
         try {
-            $sql = "SELECT m.materias_id
-                            ,m.descripcion AS materia
-                            ,p.periodo_id
-                            ,p.descripcion AS periodo
-                            ,nmp.nota_periodo
-                            ,nmp.idusuario
-                    FROM materias m
-                    INNER JOIN materias_periodos mp ON (m.materias_id = mp.materias_id)
-                    INNER JOIN periodo p ON (p.periodo_id = mp.periodo_id)
-                    INNER JOIN nota_materia_periodo nmp ON (
-                                    nmp.materias_id = m.materias_id
-                                    AND nmp.periodo_id = p.periodo_id
-                                    )
-                    WHERE nmp.idusuario = $idusuario
-                    ORDER BY materias_id
-                            ,periodo_id;";
+            $sql = "select m.*,nmp.*
+                        from nota_materia_periodo nmp 
+                        inner join materias m on (nmp.materias_id=m.materias_id)
+                        where nmp.idusuario = $idusuario;";
 //        echo"<pre><br>sql:";
 //        print_r($sql);
 //        echo"</pre><br>";

@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    
+    
+    $('#reporteEstudiantes').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );    
 
 loadNotas();
 
@@ -6,6 +14,7 @@ loadNotas();
 
 loadNotas = function () {
     var ruta = $("#ruta").val();
+    var nombre = $("#nombre").val();
     
 //    datos = {menu: menu, submenu: submenu1, materia: materia, periodo: periodo};
     var response = null;
@@ -21,8 +30,36 @@ loadNotas = function () {
         success: function (result)
         {
             response = result.data;
+            
             console.log(response);
+            
             tabla = $('#reporteEstudiantes').DataTable({
+                    dom: 'Bfrtip',
+//                    buttons: [
+//                        'copy', 'csv', 'excel', 'pdf', 'print'
+//                    ],                
+                    buttons: [
+            {
+                extend: 'copy',
+                title: 'Reporte de Notas del Estudiante -> '+nombre
+            },
+            {
+                extend: 'csv',
+                title: 'Reporte de Notas del Estudiante -> '+nombre
+            },
+            {
+                extend: 'excel',
+                title: 'Reporte de Notas del Estudiante -> '+nombre
+            },
+            {
+                extend: 'pdf',
+                title: 'Reporte de Notas del Estudiante -> '+nombre
+            },
+            {
+                extend: 'print',
+                title: 'Reporte de Notas del Estudiante -> '+nombre
+            }
+                    ],                
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
@@ -51,15 +88,14 @@ loadNotas = function () {
                 "order": [[0, "desc"]],
                 data: response,
                 "columns": [
-                    {"data": "materia"},
-                    {data: null, render: function (data, type, row) {
-                            if(true){
-                                
-                            }
-                            return  data.periodo_id === '1' ? data.nota_periodo:'xx';
-                        }, className: "center"
-                    }
+                    {"data": "descripcion"},
+                    {"data": "nota_periodo_1"},
+                    {"data": "nota_periodo_2"},
+                    {"data": "nota_periodo_3"},
+                    {"data": "nota_periodo_4"},
+                    {"data": "nota_final"},
                 ]
+                
             });
         },
         error: function (response) {

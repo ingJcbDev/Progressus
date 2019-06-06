@@ -179,7 +179,7 @@ and t.sw_estado='1';";
     }
 
     public function insertNotaFinPeriodo($datos, $idusuario) {
-        
+
         $materia1 = $datos['materia1'];
         $periodo1 = $datos['periodo1'];
 
@@ -210,63 +210,104 @@ and t.sw_estado='1';";
             echo $e->getMessage();
         }
 
+
+
         $cant = count($resData);
         $nF = 0;
-        
-        foreach ($resData as $key => $value) {
-            $nF = $value['nota'] + $nF;
-        }
-        $nF = $nF / $cant;
-        $nF = number_format($nF, 1, '.', '');
 
-        try {
-            $sql = "SELECT *
-                    FROM nota_materia_periodo
-                    WHERE periodo_id = $periodo1
-                            AND materias_id = $materia1
-                            AND idusuario = $idusuario;";
-            $query = $this->con->prepare($sql);
-            $query->execute();
-            $resData1 = $query->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        if ($cant > 0) {
 
-        if (!empty($resData1)) {
-            try {
-                $sql = "UPDATE progressus.nota_materia_periodo
-                        SET nota_periodo=$nF
-                        WHERE nota_materia_periodo_id=" . $resData1['nota_materia_periodo_id'] . ";
-                    ";
 
-                $query = $this->con->prepare($sql);
-                $query->execute();
-            } catch (PDOException $e) {
-                $this->con->rollback();
-                echo $e->getMessage();
-                return false;
+
+            foreach ($resData as $key => $value) {
+                $nF = $value['nota'] + $nF;
             }
-        } else {
+            $nF = $nF / $cant;
+            $nF = number_format($nF, 1, '.', '');
+
+
             try {
-                $sql = "INSERT INTO progressus.nota_materia_periodo (
-                                    periodo_id
-                                    ,materias_id
-                                    ,nota_periodo
-                                    ,idusuario
-                                    )
-                            VALUES (
-                                    $periodo1
-                                    ,$materia1
-                                    ,$nF
-                                    ,$idusuario    
-                                    );
-                    ";
+                $sql = "SELECT *
+                    FROM nota_materia_periodo
+                    WHERE materias_id = $materia1
+                            AND idusuario = $idusuario;";
+
                 $query = $this->con->prepare($sql);
                 $query->execute();
+                $resData1 = $query->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                $this->con->rollback();
                 echo $e->getMessage();
-                return false;
+            }
+
+
+            if (!empty($resData1)) {
+//                    echo"-->:<pre><br>";
+//                    print_r($resData1);
+//                    echo"</pre><br>";
+
+                $nota_periodo_1 = ($periodo1 === '1') ? $nF : $resData1['nota_periodo_1'];
+                $nota_periodo_2 = ($periodo1 === '2') ? $nF : $resData1['nota_periodo_2'];
+                $nota_periodo_3 = ($periodo1 === '3') ? $nF : $resData1['nota_periodo_3'];
+                $nota_periodo_4 = ($periodo1 === '4') ? $nF : $resData1['nota_periodo_4'];
+                $nota_final = (($nota_periodo_1 * 0.2) + ($nota_periodo_2 * 0.2) + ($nota_periodo_3 * 0.2) + ($nota_periodo_4 * 0.4));
+                
+                $set = "";
+                $set = ($periodo1 === '1') ? ",nota_periodo_1=$nota_periodo_1" : $set;
+                $set = ($periodo1 === '2') ? ",nota_periodo_2=$nota_periodo_2" : $set;
+                $set = ($periodo1 === '3') ? ",nota_periodo_3=$nota_periodo_3" : $set;
+                $set = ($periodo1 === '4') ? ",nota_periodo_4=$nota_periodo_4" : $set;
+                
+                try {
+                    $sql = "UPDATE progressus.nota_materia_periodo
+              SET nota_final=$nota_final $set  
+              WHERE nota_materia_periodo_id=" . $resData1['nota_materia_periodo_id'] . ";
+              ";
+
+//                    echo"-->:<pre><br>";
+//                    print_r($sql);
+//                    echo"</pre><br>";
+//                    die();
+                    $query = $this->con->prepare($sql);
+                    $query->execute();
+                } catch (PDOException $e) {
+                    $this->con->rollback();
+                    echo $e->getMessage();
+                    return false;
+                }
+            } else {
+
+                $nota_periodo_1 = ($periodo1 === '1') ? $nF : 0.0;
+                $nota_periodo_2 = ($periodo1 === '2') ? $nF : 0.0;
+                $nota_periodo_3 = ($periodo1 === '3') ? $nF : 0.0;
+                $nota_periodo_4 = ($periodo1 === '4') ? $nF : 0.0;
+                $nota_final = (($nota_periodo_1 * 0.2) + ($nota_periodo_2 * 0.2) + ($nota_periodo_3 * 0.2) + ($nota_periodo_4 * 0.4));
+                try {
+                    $sql = "INSERT INTO progressus.nota_materia_periodo (
+                                            materias_id
+                                            ,idusuario
+                                            ,nota_periodo_1
+                                            ,nota_periodo_2
+                                            ,nota_periodo_3
+                                            ,nota_periodo_4
+                                            ,nota_final
+                                            )
+                                    VALUES (
+                                            $materia1
+                                            ,$idusuario
+                                            ,$nota_periodo_1
+                                            ,$nota_periodo_2
+                                            ,$nota_periodo_3
+                                            ,$nota_periodo_4
+                                            ,$nota_final
+                                            );
+                    ";
+                    $query = $this->con->prepare($sql);
+                    $query->execute();
+                } catch (PDOException $e) {
+                    $this->con->rollback();
+                    echo $e->getMessage();
+                    return false;
+                }
             }
         }
 

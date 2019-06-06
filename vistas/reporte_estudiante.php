@@ -5,7 +5,7 @@ require 'structure/header.php';
 
 <?php
 //echo"<pre><br>  menuActivo-->";
-//print_r($_SESSION['dataUser']['M']);
+//print_r($_SESSION['dataUser']['nombre']);
 //echo"</pre><br>";
 //echo"<pre><br>  -->";
 //print_r($_SESSION['cantidadPreguntas']);
@@ -16,13 +16,14 @@ echo'<input type="hidden" name="subMenuActivo" id="subMenuActivo" value="' . $_S
 //echo'<input type="hidden" name="materia" id="materia" value="' . $_SESSION['dataUser']['M']['materia'] . '" />';
 //echo'<input type="hidden" name="periodo" id="periodo" value="' . $_SESSION['dataUser']['M']['periodo'] . '" />';
 echo'<input type="hidden" name="perfil" id="perfil" value="' . $_SESSION['dataUser']['perfil_id'] . '" />';
+echo'<input type="hidden" name="perfil" id="nombre" value="' . $_SESSION['dataUser']['nombre'] . '" />';
 echo'<input type="hidden" name="ruta" id="ruta" value="' . $host . '" />';
 ?>
 
 <div class="container box">
     <div class="card">
         <div class="card-header">
-            <center><h5><div id="titulo" name="titulo">Reporte Estudiante</div></h5></center>
+            <center><h5><div id="titulo" name="titulo">Notas Estudiantes</div></h5></center>
         </div>
         <div class="card-body">
             <br>

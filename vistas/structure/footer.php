@@ -78,8 +78,18 @@ echo'
     <script src="'.$host.'assets/bootstrap4/js/bootstrap.min.js"></script>
     <!-- bootstrap datatable JS-->
     <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/jquery.dataTables.min.js"></script> 
-    <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.jqueryui.min.js"></script> 		
+    <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.jqueryui.min.js"></script> 	
         
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/buttons.flash.min.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/jszip.min.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/pdfmake.min.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/vfs_fonts.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="'.$host.'assets/dataTablesUi/js/buttons.print.min.js"></script>
+        
+
+
     <!-- login js -->
     <script src="'.$host.'vistas/structure/scripts/login.js"></script>
         
