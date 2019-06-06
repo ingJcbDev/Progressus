@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2019 a las 09:37:34
+-- Tiempo de generación: 06-06-2019 a las 06:51:39
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -179,33 +179,22 @@ INSERT INTO `menu_submenu` (`menu_submenu_id`, `menu_id`, `submenu_id`, `perfil_
 
 CREATE TABLE `nota_materia_periodo` (
   `nota_materia_periodo_id` int(11) NOT NULL,
-  `periodo_id` int(11) NOT NULL,
   `materias_id` int(11) NOT NULL,
-  `nota_periodo` decimal(10,1) NOT NULL,
-  `idusuario` int(11) DEFAULT NULL
+  `idusuario` int(11) DEFAULT NULL,
+  `nota_periodo_1` decimal(10,1) NOT NULL,
+  `nota_periodo_2` decimal(10,1) NOT NULL,
+  `nota_periodo_3` decimal(10,1) NOT NULL,
+  `nota_periodo_4` decimal(10,1) NOT NULL,
+  `nota_final` decimal(10,1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `nota_materia_periodo`
 --
 
-INSERT INTO `nota_materia_periodo` (`nota_materia_periodo_id`, `periodo_id`, `materias_id`, `nota_periodo`, `idusuario`) VALUES
-(1, 1, 4, '0.0', 38),
-(2, 3, 4, '5.0', 38),
-(3, 4, 4, '0.0', 38),
-(4, 2, 4, '5.0', 38),
-(5, 1, 5, '0.0', 38),
-(6, 3, 5, '5.0', 38),
-(7, 4, 5, '5.0', 38),
-(8, 2, 5, '5.0', 38),
-(9, 1, 1, '0.0', 39),
-(10, 2, 1, '0.0', 39),
-(11, 3, 1, '0.0', 39),
-(12, 4, 1, '0.0', 39),
-(13, 1, 2, '0.0', 39),
-(14, 2, 2, '5.0', 39),
-(15, 3, 2, '4.0', 39),
-(16, 4, 2, '5.0', 39);
+INSERT INTO `nota_materia_periodo` (`nota_materia_periodo_id`, `materias_id`, `idusuario`, `nota_periodo_1`, `nota_periodo_2`, `nota_periodo_3`, `nota_periodo_4`, `nota_final`) VALUES
+(1, 2, 39, '5.0', '0.0', '2.5', '5.0', '3.5'),
+(2, 1, 39, '0.0', '0.0', '0.0', '0.0', '0.0');
 
 -- --------------------------------------------------------
 
@@ -339,7 +328,8 @@ INSERT INTO `periodos_temas` (`periodos_temas_id`, `temas_id`, `periodo_id`) VAL
 (14, 14, 3),
 (15, 15, 4),
 (16, 16, 3),
-(17, 17, 3);
+(17, 17, 3),
+(18, 18, 1);
 
 -- --------------------------------------------------------
 
@@ -375,7 +365,9 @@ INSERT INTO `preguntas` (`pregunta_id`, `periodos_temas_id`, `descripcion`, `sw_
 (14, 14, 'S 7 P 3', '1'),
 (15, 15, 'S 7 P 4', '1'),
 (16, 16, 'S 6 P 3', '1'),
-(17, 17, 'S 6 1 P 3', '1');
+(17, 17, 'S 6 1 P 3', '1'),
+(18, 18, 'Principalmente que estudia la quÃ­mica ', '1'),
+(19, 18, 'La quÃ­mica se ocupa principalmente agrupaciones de ?', '1');
 
 -- --------------------------------------------------------
 
@@ -463,7 +455,15 @@ INSERT INTO `pregunta_detalle` (`pregunta_detalle_id`, `pregunta_id`, `descripci
 (65, 17, '1', '0', '1'),
 (66, 17, '2', '0', '1'),
 (67, 17, '3', '0', '1'),
-(68, 17, '4', '1', '1');
+(68, 17, '4', '1', '1'),
+(69, 18, 'Numeros', '0', '1'),
+(70, 18, 'El mapa', '0', '1'),
+(71, 18, 'composiciÃ³n, estructura y propiedades de la materia', '1', '1'),
+(72, 18, 'La luna', '0', '1'),
+(73, 19, 'fÃºtbol ', '0', '1'),
+(74, 19, 'supraatÃ³micas', '1', '1'),
+(75, 19, 'tenis ', '0', '1'),
+(76, 19, 'musica', '0', '1');
 
 -- --------------------------------------------------------
 
@@ -483,27 +483,15 @@ CREATE TABLE `respuestas` (
 --
 
 INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`, `temas_notas_id`) VALUES
-(1, 2, 5, 1),
-(2, 3, 12, 2),
-(3, 10, 40, 3),
-(4, 11, 43, 4),
-(5, 12, 45, 5),
-(6, 13, 52, 6),
-(7, 14, 56, 7),
-(8, 15, 60, 8),
-(9, 1, 4, 9),
-(10, 4, 16, 10),
-(11, 5, 20, 11),
-(12, 6, 24, 12),
-(13, 7, 25, 13),
-(14, 8, 32, 14),
-(15, 9, 33, 15),
-(16, 16, 61, 16),
-(17, 17, 68, 17),
-(18, 16, 61, 18),
-(19, 17, 68, 19),
-(20, 16, 64, 20),
-(21, 7, 28, 21);
+(1, 16, 64, 1),
+(2, 17, 66, 2),
+(3, 7, 28, 3),
+(4, 8, 31, 4),
+(5, 9, 33, 5),
+(6, 1, 4, 6),
+(7, 4, 16, 7),
+(8, 5, 20, 8),
+(9, 6, 24, 9);
 
 -- --------------------------------------------------------
 
@@ -610,7 +598,8 @@ INSERT INTO `temas` (`temas_id`, `titulo`, `materias_id`, `descripcion`, `sw_est
 (14, 'S 7 P 3', 5, 'tema 14', '1'),
 (15, 'S 7 P 4', 5, 'tema 15', '1'),
 (16, 'S 6 P 3', 2, 'tema 16', '1'),
-(17, 'S 6 1 P 3', 2, 'tema 17', '1');
+(17, 'S 6 1 P 3', 2, 'tema 17', '1'),
+(18, 'Quimina periodo 1 ', 3, 'La quÃ­mica es la ciencia que estudia la composiciÃ³n, estructura y propiedades de la materia, asÃ­ como los cambios que esta experimenta durante las reacciones quÃ­micas y su relaciÃ³n con la energÃ­a.1â€‹ Linus Pauling la define como la ciencia que estudia las sustancias, su estructura (tipos y formas de acomodo de los Ã¡tomos), sus propiedades y las reacciones que las transforman en otras sustancias en referencia con el tiempo.2â€‹ La quÃ­mica se ocupa principalmente de las agrupaciones supraatÃ³micas, como son los gases, las molÃ©culas, los cristales y los metales, estudiando su composiciÃ³n, propiedades estadÃ­sticas, transformaciones y reacciones. La quÃ­mica tambiÃ©n incluye la comprensiÃ³n de las propiedades e interacciones de la materia a escala atÃ³mica.', '1');
 
 -- --------------------------------------------------------
 
@@ -630,27 +619,15 @@ CREATE TABLE `temas_notas` (
 --
 
 INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VALUES
-(1, 2, '0.0', 38),
-(2, 3, '5.0', 38),
-(3, 10, '5.0', 38),
-(4, 11, '0.0', 38),
-(5, 12, '0.0', 38),
-(6, 13, '5.0', 38),
-(7, 14, '5.0', 38),
-(8, 15, '5.0', 38),
-(9, 1, '0.0', 39),
-(10, 4, '0.0', 39),
-(11, 5, '0.0', 39),
-(12, 6, '0.0', 39),
-(13, 7, '0.0', 39),
-(14, 8, '5.0', 39),
-(15, 9, '5.0', 39),
-(16, 16, '3.0', 39),
-(17, 17, '5.0', 39),
-(18, 16, '0.0', 32),
-(19, 17, '5.0', 32),
-(20, 16, '5.0', 32),
-(21, 7, '5.0', 32);
+(1, 16, '5.0', 39),
+(2, 17, '0.0', 39),
+(3, 7, '5.0', 39),
+(4, 8, '0.0', 39),
+(5, 9, '5.0', 39),
+(6, 1, '0.0', 39),
+(7, 4, '0.0', 39),
+(8, 5, '0.0', 39),
+(9, 6, '0.0', 39);
 
 -- --------------------------------------------------------
 
@@ -754,7 +731,6 @@ ALTER TABLE `menu_submenu`
 ALTER TABLE `nota_materia_periodo`
   ADD PRIMARY KEY (`nota_materia_periodo_id`),
   ADD KEY `materias_nota_materia_periodo_fk` (`materias_id`),
-  ADD KEY `periodo_nota_materia_periodo_fk` (`periodo_id`),
   ADD KEY `nota_materia_periodo_fk` (`idusuario`);
 
 --
@@ -889,7 +865,7 @@ ALTER TABLE `menu_submenu`
 -- AUTO_INCREMENT de la tabla `nota_materia_periodo`
 --
 ALTER TABLE `nota_materia_periodo`
-  MODIFY `nota_materia_periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `nota_materia_periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -913,25 +889,25 @@ ALTER TABLE `periodo`
 -- AUTO_INCREMENT de la tabla `periodos_temas`
 --
 ALTER TABLE `periodos_temas`
-  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `periodos_temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `preguntas`
 --
 ALTER TABLE `preguntas`
-  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `pregunta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta_detalle`
 --
 ALTER TABLE `pregunta_detalle`
-  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `pregunta_detalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -955,13 +931,13 @@ ALTER TABLE `system_variables`
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `temas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -998,8 +974,7 @@ ALTER TABLE `menu_submenu`
 --
 ALTER TABLE `nota_materia_periodo`
   ADD CONSTRAINT `materias_nota_materia_periodo_fk` FOREIGN KEY (`materias_id`) REFERENCES `materias` (`materias_id`),
-  ADD CONSTRAINT `nota_materia_periodo_fk` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`),
-  ADD CONSTRAINT `periodo_nota_materia_periodo_fk` FOREIGN KEY (`periodo_id`) REFERENCES `periodo` (`periodo_id`);
+  ADD CONSTRAINT `nota_materia_periodo_fk` FOREIGN KEY (`idusuario`) REFERENCES `usuario` (`idusuario`);
 
 --
 -- Filtros para la tabla `perfil_menu`
