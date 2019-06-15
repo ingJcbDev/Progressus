@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-06-2019 a las 06:51:39
+-- Tiempo de generación: 15-06-2019 a las 17:26:37
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.3.3
 
@@ -44,7 +44,8 @@ INSERT INTO `materias` (`materias_id`, `descripcion`) VALUES
 (4, 'Matematicas grado 7'),
 (5, 'Sociales grado 7'),
 (6, 'Quimica grado 7'),
-(7, 'Biologia Grado 11');
+(7, 'Biologia Grado 11'),
+(8, 'Matematicas Grado 11');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,11 @@ INSERT INTO `materias_periodos` (`matrias_periodos_id`, `periodo_id`, `materias_
 (25, 1, 7),
 (26, 2, 7),
 (27, 3, 7),
-(28, 4, 7);
+(28, 4, 7),
+(29, 1, 8),
+(30, 2, 8),
+(31, 3, 8),
+(32, 4, 8);
 
 -- --------------------------------------------------------
 
@@ -194,7 +199,10 @@ CREATE TABLE `nota_materia_periodo` (
 
 INSERT INTO `nota_materia_periodo` (`nota_materia_periodo_id`, `materias_id`, `idusuario`, `nota_periodo_1`, `nota_periodo_2`, `nota_periodo_3`, `nota_periodo_4`, `nota_final`) VALUES
 (1, 2, 39, '5.0', '0.0', '2.5', '5.0', '3.5'),
-(2, 1, 39, '0.0', '0.0', '0.0', '0.0', '0.0');
+(2, 1, 39, '0.0', '0.0', '0.0', '0.0', '0.0'),
+(3, 1, 32, '0.0', '0.0', '0.0', '0.0', '0.0'),
+(4, 4, 42, '5.0', '0.0', '0.0', '0.0', '1.0'),
+(5, 5, 42, '5.0', '0.0', '0.0', '0.0', '1.0');
 
 -- --------------------------------------------------------
 
@@ -246,7 +254,6 @@ INSERT INTO `perfil_menu` (`perfil_menu_id`, `perfil_id`, `menu_id`) VALUES
 (6, 1, 4),
 (7, 2, 6),
 (8, 2, 2),
-(9, 2, 5),
 (10, 2, 4),
 (11, 3, 6),
 (12, 3, 3),
@@ -491,7 +498,15 @@ INSERT INTO `respuestas` (`respuestas_id`, `pregunta_id`, `pregunta_detalle_id`,
 (6, 1, 4, 6),
 (7, 4, 16, 7),
 (8, 5, 20, 8),
-(9, 6, 24, 9);
+(9, 6, 24, 9),
+(10, 1, 4, 10),
+(11, 4, 14, 11),
+(12, 5, 20, 12),
+(13, 5, 20, 13),
+(14, 5, 20, 14),
+(15, 5, 20, 15),
+(16, 2, 8, 16),
+(17, 12, 48, 17);
 
 -- --------------------------------------------------------
 
@@ -542,7 +557,8 @@ INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_
 (4, 2, 4),
 (5, 2, 5),
 (6, 2, 6),
-(7, 6, 7);
+(7, 6, 7),
+(8, 6, 8);
 
 -- --------------------------------------------------------
 
@@ -553,15 +569,17 @@ INSERT INTO `submenu_materias` (`submenu_marterias_id`, `submenu_id`, `materias_
 CREATE TABLE `system_variables` (
   `variable_id` int(11) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
-  `valor` varchar(100) NOT NULL
+  `valor` varchar(100) NOT NULL,
+  `detalle` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `system_variables`
 --
 
-INSERT INTO `system_variables` (`variable_id`, `descripcion`, `valor`) VALUES
-(1, 'cantidadPreguntas', '3');
+INSERT INTO `system_variables` (`variable_id`, `descripcion`, `valor`, `detalle`) VALUES
+(1, 'cantidadPreguntas', '3', NULL),
+(2, 'porcentaje_notas', '0.2|0.2|0.2|0.4', 'porcentaje de las cada nota separados por un | deben ser solo 4 parametros -nota1,nota2,nota3,nota4-');
 
 -- --------------------------------------------------------
 
@@ -627,7 +645,15 @@ INSERT INTO `temas_notas` (`temas_notas_id`, `temas_id`, `nota`, `idusuario`) VA
 (6, 1, '0.0', 39),
 (7, 4, '0.0', 39),
 (8, 5, '0.0', 39),
-(9, 6, '0.0', 39);
+(9, 6, '0.0', 39),
+(10, 1, '0.0', 32),
+(11, 4, '0.0', 32),
+(12, 5, '0.0', 32),
+(13, 5, '0.0', 32),
+(14, 5, '0.0', 32),
+(15, 5, '0.0', 32),
+(16, 2, '5.0', 42),
+(17, 12, '5.0', 42);
 
 -- --------------------------------------------------------
 
@@ -653,12 +679,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idusuario`, `nombre`, `tipo_documento`, `num_documento`, `direccion`, `telefono`, `email`, `login`, `clave`, `condicion`) VALUES
-(26, 'stevan fernandez', 'TI', '1005893728', 'calle 72a #4-35', '4867597', 'fer.s29@hotmail.com', 'stevan1', 'stevan', 1),
-(29, 'katherine', 'CC', '122335555555', 'yumbo', '6666666', 'katherine@gmail.com', 'katherine', '1', 1),
-(30, 'dario cabrera cardenas', 'CC', '333333333337', 'cauca seco', '55347837', 'dario@gmail.com', 'dario', '1', 1),
 (31, 'andres', 'TI', '33333333', 'palmira', '34356789', 'andres@gmail.com', 'andres', '1', 1),
 (32, 'admin a.', 'CC', '2344343434', 'cauca seco', '547646656', 'admin', 'admin', '1', 1),
-(33, 'tania gutierrez', 'CC', '34567890', 'yumbo', '3456543543', 'tania@gmail.com', 'tania', '1', 0),
 (34, 'jacobo gutierrez', 'RC', '356453656345', 'yumbo', '32143424534', 'jacobo@gmail.com', 'jacobo', '1', 1),
 (38, 'sebastian villada', 'TI', '23456789087654', 'cali', '4354687', 'sebas@gmail.com', 'sebas', '1', 1),
 (39, 'stevan', 'TI', '10058765', 'calle34a', '124635', 'stevan@gmail.com', 'stevan23', '1', 1),
@@ -841,13 +863,13 @@ ALTER TABLE `usuario_perfil`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `materias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `materias_periodos`
 --
 ALTER TABLE `materias_periodos`
-  MODIFY `matrias_periodos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `matrias_periodos_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -865,7 +887,7 @@ ALTER TABLE `menu_submenu`
 -- AUTO_INCREMENT de la tabla `nota_materia_periodo`
 --
 ALTER TABLE `nota_materia_periodo`
-  MODIFY `nota_materia_periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `nota_materia_periodo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `perfil`
@@ -907,7 +929,7 @@ ALTER TABLE `pregunta_detalle`
 -- AUTO_INCREMENT de la tabla `respuestas`
 --
 ALTER TABLE `respuestas`
-  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `respuestas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `submenu`
@@ -919,13 +941,13 @@ ALTER TABLE `submenu`
 -- AUTO_INCREMENT de la tabla `submenu_materias`
 --
 ALTER TABLE `submenu_materias`
-  MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `submenu_marterias_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `system_variables`
 --
 ALTER TABLE `system_variables`
-  MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `variable_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
@@ -937,7 +959,7 @@ ALTER TABLE `temas`
 -- AUTO_INCREMENT de la tabla `temas_notas`
 --
 ALTER TABLE `temas_notas`
-  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `temas_notas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

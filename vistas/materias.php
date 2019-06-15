@@ -7,6 +7,10 @@ require 'structure/header.php';
 //        echo"<pre><br>  menuActivo-->";
 //        print_r($_SESSION['dataUser']['M']);
 //        echo"</pre><br>";
+if (!isset($_SESSION['dataUser']['M']['menuActivo']) || !isset($_SESSION['dataUser']['M']['subMenuActivo'])){
+    echo"<script>location.reload();</script>";
+}
+
         
 echo'<input type="hidden" name="menuActivo" id="menuActivo" value="'.$_SESSION['dataUser']['M']['menuActivo'].'" />';
 echo'<input type="hidden" name="subMenuActivo" id="subMenuActivo" value="'.$_SESSION['dataUser']['M']['subMenuActivo'].'" />';

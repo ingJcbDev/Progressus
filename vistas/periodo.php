@@ -11,6 +11,11 @@ require 'structure/header.php';
 //print_r($_SESSION['dataUser']);
 //echo"</pre><br>";
 
+if (!isset($_SESSION['dataUser']['M']['menuActivo']) || !isset($_SESSION['dataUser']['M']['subMenuActivo']) || !isset($_SESSION['dataUser']['M']['materia']) || !isset($_SESSION['dataUser']['perfil_id'])){
+    echo"<script>location.reload();</script>";
+}
+
+
 echo'<input type="hidden" name="menuActivo" id="menuActivo" value="' . $_SESSION['dataUser']['M']['menuActivo'] . '" />';
 echo'<input type="hidden" name="subMenuActivo" id="subMenuActivo" value="' . $_SESSION['dataUser']['M']['subMenuActivo'] . '" />';
 echo'<input type="hidden" name="materia" id="materia" value="' . $_SESSION['dataUser']['M']['materia'] . '" />';

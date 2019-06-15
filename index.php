@@ -8,7 +8,7 @@ require_once "vistas/structure/header.php";
 require_once "vistas/structure/slaider.php";
 ?>
 
-<!-- Este es el pie de pagina  -->
+<!-- Este es el cuerpo de pagina  -->
 <?php
 require_once "vistas/structure/body.php";
 ?>

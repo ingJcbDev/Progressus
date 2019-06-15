@@ -85,9 +85,9 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="' . $host . 'index.php">
-                <img src="' . $host . 'assets/images/biologia/png/021-laboratory.png" width="35" height="35"
+                <img src="' . $host . 'assets/images/biologia/png/021-laboratory.png" width="80" height="75"
                     class="d-inline-block align-top" alt="">
-                Biologia
+                 La Biolo-gia
             </a>
         </nav>
 
@@ -188,7 +188,7 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
         <!-- Image and text -->
         <nav class="navbar navbar-dark bg-dark
             <a class="navbar-brand" href="index.php">
-                <img src="' . $host . 'assets/images/logocol.png" width="35" height="35" class="d-inline-block align-top" alt="">
+                <img src="' . $host . 'assets/images/logocol.png" width="80" height="75" class="d-inline-block align-top" alt="">
             </a>
             &nbsp; 
             &nbsp; 
@@ -196,13 +196,13 @@ $host = ($host == 'http://localhost/Progressus/') ? $host : "http://localhost/Pr
         ';
         if (!isset($_SESSION['dataUser'])) {
             echo'     
-                <img src="' . $host . 'assets/images/login.png" width="35" height="35" class="d-inline-block align-top" alt="" title="Login" data-toggle="modal" data-target="#loginModal" onclick="clearLogin();">
+                <img src="' . $host . 'assets/images/login.png" width="80" height="75" class="d-inline-block align-top" alt="" title="Login" data-toggle="modal" data-target="#loginModal" onclick="clearLogin();">
             ';
         } else {
             echo' 
                 <div>
                     <label style="color: ghostwhite;">
-                        <img src="' . $host . 'assets/images/logueado.png" width="35" height="35" class="d-inline-block align-top" alt="" title="Cerrar Sesion" onclick="loginclose()">
+                        <img src="' . $host . 'assets/images/logueado1.png" width="80" height="75" class="d-inline-block align-top" alt="" title="Cerrar Sesion" onclick="loginclose()">
                         ' . $_SESSION['dataUser']['login'] . '
                     </label>
                 </div>

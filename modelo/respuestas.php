@@ -36,7 +36,7 @@ and t.sw_estado='1';";
 //        echo"<pre><br>sql:";
 //        print_r($sql);
 //        echo"</pre><br>";
-////        die();            
+//        die();            
             $query = $this->con->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -238,18 +238,38 @@ and t.sw_estado='1';";
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
+            
+            try {
+                $sql = "SELECT *
+                    FROM system_variables
+                    WHERE descripcion = 'porcentaje_notas'";
 
+                $query = $this->con->prepare($sql);
+                $query->execute();
+                $porcentajeNota = $query->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+            
+            
+            $pn = explode("|", $porcentajeNota['valor']);
+            $np1 =  $pn['0']; 
+            $np2 =  $pn['1']; 
+            $np3 =  $pn['2']; 
+            $np4 =  $pn['3']; 
+
+//                    echo"-->:<pre><br>";
+//                    var_dump($np1);
+//                    echo"</pre><br>";
+//                    die();
 
             if (!empty($resData1)) {
-//                    echo"-->:<pre><br>";
-//                    print_r($resData1);
-//                    echo"</pre><br>";
 
                 $nota_periodo_1 = ($periodo1 === '1') ? $nF : $resData1['nota_periodo_1'];
                 $nota_periodo_2 = ($periodo1 === '2') ? $nF : $resData1['nota_periodo_2'];
                 $nota_periodo_3 = ($periodo1 === '3') ? $nF : $resData1['nota_periodo_3'];
                 $nota_periodo_4 = ($periodo1 === '4') ? $nF : $resData1['nota_periodo_4'];
-                $nota_final = (($nota_periodo_1 * 0.2) + ($nota_periodo_2 * 0.2) + ($nota_periodo_3 * 0.2) + ($nota_periodo_4 * 0.4));
+                $nota_final = (($nota_periodo_1 * $np1) + ($nota_periodo_2 * $np2) + ($nota_periodo_3 * $np3) + ($nota_periodo_4 * $np4));
                 
                 $set = "";
                 $set = ($periodo1 === '1') ? ",nota_periodo_1=$nota_periodo_1" : $set;
@@ -280,7 +300,7 @@ and t.sw_estado='1';";
                 $nota_periodo_2 = ($periodo1 === '2') ? $nF : 0.0;
                 $nota_periodo_3 = ($periodo1 === '3') ? $nF : 0.0;
                 $nota_periodo_4 = ($periodo1 === '4') ? $nF : 0.0;
-                $nota_final = (($nota_periodo_1 * 0.2) + ($nota_periodo_2 * 0.2) + ($nota_periodo_3 * 0.2) + ($nota_periodo_4 * 0.4));
+                $nota_final = (($nota_periodo_1 * $np1) + ($nota_periodo_2 * $np2) + ($nota_periodo_3 * $np3) + ($nota_periodo_4 * $np4));
                 try {
                     $sql = "INSERT INTO progressus.nota_materia_periodo (
                                             materias_id

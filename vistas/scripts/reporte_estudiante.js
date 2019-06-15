@@ -39,14 +39,14 @@ loadNotas = function () {
 //                        'copy', 'csv', 'excel', 'pdf', 'print'
 //                    ],                
                     buttons: [
-            {
-                extend: 'copy',
-                title: 'Reporte de Notas del Estudiante -> '+nombre
-            },
-            {
-                extend: 'csv',
-                title: 'Reporte de Notas del Estudiante -> '+nombre
-            },
+//            {
+//                extend: 'copy',
+//                title: 'Reporte de Notas del Estudiante -> '+nombre
+//            },
+//            {
+//                extend: 'csv',
+//                title: 'Reporte de Notas del Estudiante -> '+nombre
+//            },
             {
                 extend: 'excel',
                 title: 'Reporte de Notas del Estudiante -> '+nombre
